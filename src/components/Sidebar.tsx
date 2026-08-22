@@ -1,0 +1,133 @@
+import { useMemo } from "react";
+import { X } from "lucide-react";
+import { groups, lessonSummaries, type LessonSummary } from "../curriculum";
+
+export function Brand() {
+  return (
+    <div className="brand">
+      <span className="brand-mark">N</span>
+      <span>
+        vim<span>Dojo</span>
+      </span>
+    </div>
+  );
+}
+
+function sidebarKeys(lesson: LessonSummary) {
+  return lesson.keys
+    .slice(0, 3)
+    .map((key) => key.replace("<leader>", "Space "));
+}
+
+function ShortcutBadge({ shortcut }: { shortcut: string }) {
+  const isLong = shortcut.length > 16;
+  const fitsOneLine = shortcut === ":lua vim.diagnostic.open_float()";
+  const breakAt = isLong && !fitsOneLine ? shortcut.indexOf(" ") : -1;
+  const label =
+    breakAt > 0
+      ? `${shortcut.slice(0, breakAt)}\n${shortcut.slice(breakAt + 1)}`
+      : shortcut;
+
+  return (
+    <kbd
+      className={`shortcut-badge ${shortcut.length === 1 ? "is-single" : ""} ${isLong ? "is-long" : ""} ${fitsOneLine ? "fits-one-line" : ""}`}
+      aria-label={shortcut}
+      title={isLong ? shortcut : undefined}
+    >
+      {label}
+    </kbd>
+  );
+}
+
+export function Sidebar({
+  current,
+  query,
+  onQueryChange,
+  onSelect,
+  onClose,
+}: {
+  current: number;
+  query: string;
+  onQueryChange: (query: string) => void;
+  onSelect: (index: number) => void;
+  onClose: () => void;
+}) {
+  const normalized = query.trim().toLowerCase();
+  const groupedMatches = useMemo(() => {
+    const matches = lessonSummaries.filter(
+      (lesson) =>
+        !normalized ||
+        `${lesson.title} ${lesson.group} ${lesson.keys.join(" ")} ${lesson.searchText || ""}`
+          .toLowerCase()
+          .includes(normalized),
+    );
+    return new Map(
+      groups.map((group) => [
+        group,
+        matches.filter((lesson) => lesson.group === group),
+      ]),
+    );
+  }, [normalized]);
+  return (
+    <aside className="sidebar" aria-label="Course lessons">
+      <div className="side-head">
+        <Brand />
+        <button type="button" aria-label="Close lessons" onClick={onClose}>
+          <X size={19} />
+        </button>
+      </div>
+      <label className="lesson-search">
+        <span aria-hidden="true">/</span>
+        <input
+          value={query}
+          onChange={(event) => onQueryChange(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              onQueryChange("");
+              event.currentTarget.blur();
+            }
+          }}
+          placeholder="Find lessons or commands"
+        />
+        <kbd>Esc</kbd>
+      </label>
+      <nav className="lesson-list">
+        {groups.map((group) => {
+          const matches = groupedMatches.get(group) || [];
+          if (!matches.length) return null;
+          return (
+            <section key={group}>
+              <div className="group">{group}</div>
+              {matches.map((lesson) => {
+                const keys = sidebarKeys(lesson);
+                return (
+                  <button
+                    type="button"
+                    key={lesson.id}
+                    className={`lesson-link ${lesson.index === current ? "active" : ""}`}
+                    aria-current={lesson.index === current ? "page" : undefined}
+                    onClick={() => onSelect(lesson.index)}
+                  >
+                    <span className="lesson-title">{lesson.title}</span>
+                    {lesson.kind === "review" ? (
+                      <span className="review-chip">Review</span>
+                    ) : (
+                      <span className="side-key-row">
+                        {keys.map((key, keyIndex) => (
+                          <ShortcutBadge
+                            shortcut={key}
+                            key={`${key}-${keyIndex}`}
+                          />
+                        ))}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </section>
+          );
+        })}
+      </nav>
+    </aside>
+  );
+}
