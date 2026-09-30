@@ -26,8 +26,8 @@ const lessons = [
     "id": "toggle-terminal-splits",
     "title": "Toggle reusable split terminals",
     "eyebrow": "Terminal Workflow",
-    "summary": "Alt+h and Alt+v show or hide persistent horizontal and vertical terminals.",
-    "detail": "Alt+h and Alt+v show or hide persistent horizontal and vertical terminals.",
+    "summary": "Alt+h and Alt+v show or hide persistent horizontal and vertical terminals when the host terminal forwards those Alt chords.",
+    "detail": "NVChad defines these mappings in Normal and Terminal modes, but terminal or operating-system shortcuts can intercept Alt combinations before Neovim receives them.",
     "keys": [
       "Alt+h",
       "Alt+v"
@@ -46,8 +46,8 @@ const lessons = [
     "id": "terminal",
     "title": "Toggle a floating terminal",
     "eyebrow": "Terminal Workflow",
-    "summary": "Alt+i opens or hides NVChad's reusable floating terminal.",
-    "detail": "The same shortcut restores the same toggleable terminal; it does not start a fresh shell each time.",
+    "summary": "Alt+i opens or hides NVChad's reusable floating terminal when the host terminal forwards that Alt chord.",
+    "detail": "The same shortcut restores the same toggleable terminal; configure the host terminal if Neovim never receives Alt+i.",
     "keys": [
       "Alt+i"
     ],
@@ -161,17 +161,17 @@ const lessons = [
       },
       {
         "key": "Alt+h",
-        "description": "Alt+h and Alt+v show or hide persistent horizontal and vertical terminals.",
+        "description": "Alt+h toggles the horizontal terminal when the host terminal forwards the chord.",
         "sequence": "<A-h><A-v>"
       },
       {
         "key": "Alt+v",
-        "description": "Alt+h and Alt+v show or hide persistent horizontal and vertical terminals.",
+        "description": "Alt+v toggles the vertical terminal when the host terminal forwards the chord.",
         "sequence": "<A-h><A-v>"
       },
       {
         "key": "Alt+i",
-        "description": "Alt+i opens or hides NVChad's reusable floating terminal.",
+        "description": "Alt+i toggles NVChad's floating terminal when the host terminal forwards the chord.",
         "sequence": "<A-i>"
       },
       {

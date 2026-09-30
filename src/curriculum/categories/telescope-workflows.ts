@@ -7,12 +7,12 @@ const lessons = [
     "title": "Find any file",
     "eyebrow": "Telescope Workflows",
     "summary": "Space f f opens Telescope's file picker. Space is the default leader.",
-    "detail": "Space f f opens Telescope's file picker. Space is the default leader.",
+    "detail": "After the picker opens, filter if needed and press Enter to open the selected file in the current window.",
     "keys": [
       "Space ff"
     ],
-    "task": "Open the file finder.",
-    "sequence": "<Space>ff",
+    "task": "Open the file finder and open the selected file.",
+    "sequence": "<Space>ff<Enter>",
     "code": [
       "> Find Files",
       "  lua/chadrc.lua",
@@ -27,12 +27,12 @@ const lessons = [
     "title": "Search the whole project",
     "eyebrow": "Telescope Workflows",
     "summary": "Space f w runs Telescope live grep. Ripgrep must be installed.",
-    "detail": "Space f w runs Telescope live grep. Ripgrep must be installed.",
+    "detail": "After live grep opens, type a query, choose a match, and press Enter. Ripgrep must be installed and available on PATH.",
     "keys": [
       "Space fw"
     ],
-    "task": "Open project-wide live grep.",
-    "sequence": "<Space>fw",
+    "task": "Open project-wide live grep, search for config, and open the selected match.",
+    "sequence": "<Space>fwconfig<Enter>",
     "code": [
       "> Live Grep",
       "  search every tracked file",
@@ -46,12 +46,12 @@ const lessons = [
     "title": "Search hidden and ignored files",
     "eyebrow": "Telescope Workflows",
     "summary": "Space f a searches hidden and ignored paths when the ordinary Space f f picker is intentionally narrower.",
-    "detail": "Space f a searches hidden and ignored paths when the ordinary Space f f picker is intentionally narrower.",
+    "detail": "Space f a includes hidden and ignored paths; press Enter to open the selected result in the current window.",
     "keys": [
       "Space fa"
     ],
-    "task": "Open the all-files picker.",
-    "sequence": "<Space>fa",
+    "task": "Open the all-files picker and open the selected result.",
+    "sequence": "<Space>fa<Enter>",
     "code": [
       "> Find All Files",
       "  .env.example",
@@ -65,12 +65,12 @@ const lessons = [
     "title": "Switch through open buffers",
     "eyebrow": "Telescope Workflows",
     "summary": "Space f b opens a searchable list of buffers without walking the filesystem.",
-    "detail": "Space f b opens a searchable list of buffers without walking the filesystem.",
+    "detail": "Space f b opens a searchable list of buffers; press Enter to switch to the selected buffer.",
     "keys": [
       "Space fb"
     ],
-    "task": "Open the buffer picker.",
-    "sequence": "<Space>fb",
+    "task": "Open the buffer picker and switch to the selected buffer.",
+    "sequence": "<Space>fb<Enter>",
     "code": [
       "> Buffers",
       "  App.tsx",
@@ -90,8 +90,8 @@ const lessons = [
       "Space fo",
       "Space ma"
     ],
-    "task": "Open the recent-file picker.",
-    "sequence": "<Space>fo",
+    "task": "Open the recent-file picker and reopen the selected file.",
+    "sequence": "<Space>fo<Enter>",
     "code": [
       "> Old Files",
       "  src/App.tsx",
@@ -111,8 +111,8 @@ const lessons = [
       "Space cm",
       "Space fz"
     ],
-    "task": "Open Telescope Git status.",
-    "sequence": "<Space>gt",
+    "task": "Open Telescope Git status and open the selected changed file.",
+    "sequence": "<Space>gt<Enter>",
     "code": [
       "> Git Status",
       " M src/lessons.ts",
@@ -214,7 +214,7 @@ const lessons = [
       "Ctrl+q"
     ],
     "task": "",
-    "sequence": "<Space>ff",
+    "sequence": "<Space>ff<Enter>",
     "code": [
       "> Find Files",
       "  lua/chadrc.lua",
@@ -227,52 +227,52 @@ const lessons = [
       {
         "key": "Space ff",
         "description": "Space f f opens Telescope's file picker. Space is the default leader.",
-        "sequence": "<Space>ff"
+        "sequence": "<Space>ff<Enter>"
       },
       {
         "key": "Space fw",
         "description": "Space f w runs Telescope live grep. Ripgrep must be installed.",
-        "sequence": "<Space>fw"
+        "sequence": "<Space>fwconfig<Enter>"
       },
       {
         "key": "Space fa",
         "description": "Space f a searches hidden and ignored paths when the ordinary Space f f picker is intentionally narrower.",
-        "sequence": "<Space>fa"
+        "sequence": "<Space>fa<Enter>"
       },
       {
         "key": "Space fb",
         "description": "Space f b opens a searchable list of buffers without walking the filesystem.",
-        "sequence": "<Space>fb"
+        "sequence": "<Space>fb<Enter>"
       },
       {
         "key": "Space fh",
         "description": "Space f h searches help, Space f o reopens old files, and Space m a lists marks.",
-        "sequence": "<Space>fo"
+        "sequence": "<Space>fo<Enter>"
       },
       {
         "key": "Space fo",
         "description": "Space f h searches help, Space f o reopens old files, and Space m a lists marks.",
-        "sequence": "<Space>fo"
+        "sequence": "<Space>fo<Enter>"
       },
       {
         "key": "Space ma",
         "description": "Space f h searches help, Space f o reopens old files, and Space m a lists marks.",
-        "sequence": "<Space>fo"
+        "sequence": "<Space>fo<Enter>"
       },
       {
         "key": "Space gt",
         "description": "Space g t shows Git status, Space c m shows commits, and Space f z searches within the current buffer.",
-        "sequence": "<Space>gt"
+        "sequence": "<Space>gt<Enter>"
       },
       {
         "key": "Space cm",
         "description": "Space g t shows Git status, Space c m shows commits, and Space f z searches within the current buffer.",
-        "sequence": "<Space>gt"
+        "sequence": "<Space>gt<Enter>"
       },
       {
         "key": "Space fz",
         "description": "Space g t shows Git status, Space c m shows commits, and Space f z searches within the current buffer.",
-        "sequence": "<Space>gt"
+        "sequence": "<Space>gt<Enter>"
       },
       {
         "key": "Ctrl+n",

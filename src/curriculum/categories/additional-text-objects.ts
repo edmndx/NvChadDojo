@@ -210,34 +210,34 @@ const lessons = [
     "task": "Change inside, then delete around a sentence.",
     "sequence": "cis<Esc>das",
     "code": [
-      "call(first, second)",
-      "local values = [one, two]",
-      "return values"
+      "Review this setting. Keep this sentence.",
+      "Update this option. Preserve this sentence.",
+      "Finish this review. Leave this sentence."
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Change inside, then delete around a sentence. · repetition 1 of 3",
         "code": [
-          "call(first, second)",
-          "local values = [one, two]",
-          "return values"
+          "Review this setting. Keep this sentence.",
+          "Update this option. Preserve this sentence.",
+          "Finish this review. Leave this sentence."
         ]
       },
       {
         "goal": "Change inside, then delete around a sentence. · repetition 2 of 3",
         "code": [
-          "<Button>Save changes</Button>",
-          "<p>Helpful sentence.</p>",
-          "return view"
+          "Save these changes. Keep a backup.",
+          "Review this message. Keep it concise.",
+          "Publish the result. Notify the team."
         ]
       },
       {
         "goal": "Change inside, then delete around a sentence. · repetition 3 of 3",
         "code": [
-          "notify(user.name)",
-          "local tuple = [left, right]",
-          "return tuple"
+          "Check the user name. Keep the identifier.",
+          "Validate the tuple. Preserve its order.",
+          "Return the result. Record the outcome."
         ]
       }
     ],
@@ -276,10 +276,14 @@ const lessons = [
     ],
     "task": "",
     "sequence": "ci(<Esc>da(",
+    "cursor": [
+      1,
+      18
+    ],
     "code": [
-      "call(first, second)",
-      "local values = [one, two]",
-      "return values"
+      "([<Panel>Intro. Review this value. Keep this sentence.</Panel>])",
+      "([<Panel>Intro. Update this value. Preserve this sentence.</Panel>])",
+      "([<Panel>Intro. Finish this value. Retain this sentence.</Panel>])"
     ],
     "tip": "Return to any command in Additional Text Objects that still requires conscious recall.",
     "reviewOnly": true,
@@ -317,12 +321,12 @@ const lessons = [
       {
         "key": "is",
         "description": "Sentence objects operate on prose bounded by punctuation and whitespace.",
-        "sequence": "cis<Esc>das"
+        "sequence": "cis<Esc>"
       },
       {
         "key": "as",
         "description": "Sentence objects operate on prose bounded by punctuation and whitespace.",
-        "sequence": "cis<Esc>das"
+        "sequence": "das"
       }
     ]
   }

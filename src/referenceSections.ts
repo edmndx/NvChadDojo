@@ -337,7 +337,7 @@ export const referenceSections: readonly ReferenceSection[] = [
       ["Preview / select hunk", "Space hp / ih"],
       ["Blame current line", "Space hb"],
       ["Working tree / HEAD diff", "Space hd / Space hD"],
-      ["Undo latest hunk stage", "Space hu"],
+      ["Unstage current staged hunk", "Space hu"],
       ["Partial hunk action", "Visual then Space hs or hr"],
     ],
   },

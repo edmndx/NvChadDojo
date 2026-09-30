@@ -1,5 +1,55 @@
 export type LessonKind = "practice" | "review" | "reference";
 
+export type PracticeSurface =
+  | "editor"
+  | "workspace"
+  | "terminal"
+  | "nvimtree"
+  | "telescope"
+  | "completion"
+  | "diagnostics"
+  | "lsp"
+  | "gitsigns"
+  | "lazygit"
+  | "trouble"
+  | "configuration";
+
+export type PracticeContext = {
+  mode: string;
+  surface: PracticeSurface;
+  prerequisites?: readonly string[];
+};
+
+export type PracticeStep = {
+  prompt: string;
+  context: PracticeContext;
+  acceptedSequences: readonly string[];
+  expected: {
+    state: string;
+    trace: readonly string[];
+  };
+  sourceCommandIds?: readonly string[];
+};
+
+export type LessonPractice =
+  | {
+      kind: "vim";
+      initial?: {
+        search?: string;
+        register?: string;
+        macro?: string;
+        mark?: [number, number];
+      };
+      steps: readonly PracticeStep[];
+    }
+  | {
+      kind: "scenario";
+      surface: PracticeSurface;
+      seed: string;
+      steps: readonly PracticeStep[];
+    }
+  | { kind: "reference" };
+
 export type LessonSummary = {
   id: string;
   group: string;
@@ -37,6 +87,7 @@ export type Lesson = {
     alternatives?: string[];
     success: string;
   };
+  practice?: LessonPractice;
 };
 
 export type CurriculumModule = { default: readonly Lesson[] };

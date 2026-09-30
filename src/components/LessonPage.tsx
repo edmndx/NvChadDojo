@@ -1,16 +1,20 @@
 import { useState, type CSSProperties } from "react";
 import type { Lesson } from "../curriculum";
-import { applyVimCommand } from "../vimEngine";
+import { applyVimCommand, applyVimTokens } from "../vimEngine";
 import {
   canonicalPracticeSequence,
   commandTokens,
   displayKey,
+  tokenizeSequence,
 } from "../keyboard";
+import { commandState, startingCursor } from "../lessonRuntime";
 import {
-  commandState,
-  startingCursor,
-  supportsOutcomeValidation,
-} from "../lessonRuntime";
+  createLessonVimState,
+  isIntegrationSimulation,
+  resolveLessonPractice,
+  runScenario,
+  scenarioAsVimState,
+} from "../practiceModel";
 import { syntaxLine } from "./CodeLine";
 
 const meanings: Record<string, string> = {
@@ -80,6 +84,16 @@ const meanings: Record<string, string> = {
 };
 
 const contextualMeanings: Record<string, Record<string, string>> = {
+  "Visual Editing": {
+    o: "move to the opposite end of the Visual selection",
+    d: "delete the Visual selection",
+    c: "change the Visual selection",
+    y: "yank the Visual selection",
+  },
+  "Text Objects - Bracket Pairs": {
+    i: "select inside the text object's delimiters",
+    a: "select around the text object, including delimiters",
+  },
   "Windows, Buffers & Tabs": {
     ":ls": "list loaded buffers",
     ":tabs": "list native tab pages",
@@ -189,7 +203,7 @@ const contextualMeanings: Record<string, Record<string, string>> = {
     "Space hr": "reset the selected hunk or range",
     "Space hd": "diff working tree against the index",
     "Space hD": "diff the buffer against HEAD",
-    "Space hu": "undo the latest hunk stage",
+    "Space hu": "unstage the current staged hunk with stage_hunk",
     M: "open LazyGit conflict options",
     h: "go to the previous conflict",
     l: "go to the next conflict",
@@ -229,6 +243,18 @@ const contextualMeanings: Record<string, Record<string, string>> = {
 function describeKey(lesson: Lesson, key: string) {
   if (contextualMeanings[lesson.group]?.[key])
     return contextualMeanings[lesson.group][key];
+  if (
+    key.length === 1 &&
+    [
+      "Practical LSP Actions",
+      "NVChad Workflow",
+      "Coding Intelligence",
+      "Macros",
+      "Substitution",
+      "Advanced Visual Block",
+    ].includes(lesson.group)
+  )
+    return lesson.summary.replace(/[.]$/, "").toLowerCase();
   if (meanings[key]) return meanings[key];
   if (/^[dcya][iwap{"(]/.test(key))
     return `${key[0] === "d" ? "delete" : key[0] === "c" ? "change" : key[0] === "y" ? "yank" : "select"} ${key[1] === "i" ? "inside" : "around"} the target text object`;
@@ -319,8 +345,26 @@ function Example({
     index % (lesson.drills?.length || 1)
   ];
   const cursor = startingCursor(lesson, drill.code);
-  const result = applyVimCommand(drill.code, cursor, sequence);
-  const simulated = supportsOutcomeValidation(lesson);
+  const practice = resolveLessonPractice(lesson);
+  const initial = createLessonVimState(lesson, drill.code, cursor);
+  const result =
+    lesson.id === "text-objects-mega-review"
+      ? applyVimCommand(drill.code, cursor, sequence)
+      : practice.kind === "vim"
+        ? applyVimTokens(initial, tokenizeSequence(sequence))
+        : practice.kind === "scenario"
+          ? scenarioAsVimState(initial, runScenario(lesson, sequence))
+          : initial;
+  const simulated = practice.kind !== "reference";
+  const integrationSimulation = isIntegrationSimulation(lesson);
+  const modeLabel = simulated
+    ? result.mode.toUpperCase()
+    : commandState(sequence, lesson);
+  const message = integrationSimulation
+    ? `${result.message}. NVChad v2.5 simulation.`
+    : result.message === modeLabel
+      ? ""
+      : result.message || "Command applied to the buffer.";
   const tokens = commandTokens(sequence, lesson.challenge?.replacement);
   const sequenceDelay = Math.min(3.2, 0.42 + tokens.length * 0.19);
   return (
@@ -396,16 +440,8 @@ function Example({
         </pre>
       </div>
       <div className="example-mode">
-        <b>
-          {simulated
-            ? result.mode.toUpperCase()
-            : commandState(sequence, lesson)}
-        </b>
-        <span>
-          {simulated
-            ? result.message || "Command applied to the buffer."
-            : "NVChad or plugin action invoked; the practice buffer stays open."}
-        </span>
+        <b>{modeLabel}</b>
+        {message && <span>{message}</span>}
       </div>
     </div>
   );
@@ -425,38 +461,50 @@ export function LessonKeyGuide({ lesson }: { lesson: Lesson }) {
     }));
   return (
     <div className="key-guide">
-      {items.map((item, index) => (
-        <div
-          className={`key-guide-item ${open === index ? "expanded" : ""}`}
-          key={`${item.key}-${index}`}
-        >
-          <div className="key-guide-row">
-            <kbd>{item.key}</kbd>
-            <span>–</span>
-            <p>
-              {meanings[item.key]
-                ? describeKey(lesson, item.key)
-                : item.description || describeKey(lesson, item.key)}
-            </p>
-            <button
-              type="button"
-              aria-expanded={open === index}
-              onClick={() => setOpen(open === index ? null : index)}
-            >
-              {open === index ? "■ hide example" : "▶ show example"}
-            </button>
+      {items.map((item, index) => {
+        const keySequence = canonicalPracticeSequence(item.key);
+        const concreteShortcut =
+          /^(?:Ctrl\+|Alt\+|Space(?: |$)|Tab$|Shift\+Tab$|Enter$|Esc$)/.test(
+            item.key,
+          );
+        const sequence =
+          concreteShortcut && !item.sequence.includes(keySequence)
+            ? keySequence
+            : item.sequence;
+        const relatedExample = !sequence.includes(keySequence);
+        return (
+          <div
+            className={`key-guide-item ${open === index ? "expanded" : ""}`}
+            key={`${item.key}-${index}`}
+          >
+            <div className="key-guide-row">
+              <kbd>{item.key}</kbd>
+              <span>–</span>
+              <p>{item.description || describeKey(lesson, item.key)}</p>
+              <button
+                type="button"
+                aria-expanded={open === index}
+                onClick={() => setOpen(open === index ? null : index)}
+              >
+                {open === index
+                  ? "■ hide example"
+                  : relatedExample
+                    ? "▶ show related example"
+                    : "▶ show example"}
+              </button>
+            </div>
+            {open === index && (
+              <Example
+                lesson={lesson}
+                index={index}
+                sequence={sequence}
+                replay={replay}
+                onReplay={() => setReplay((value) => value + 1)}
+              />
+            )}
           </div>
-          {open === index && (
-            <Example
-              lesson={lesson}
-              index={index}
-              sequence={item.sequence}
-              replay={replay}
-              onReplay={() => setReplay((value) => value + 1)}
-            />
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

@@ -132,50 +132,51 @@ const lessons = [
     "id": "find-character",
     "title": "Find Character",
     "eyebrow": "Essential Motions",
-    "summary": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
-    "detail": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
+    "summary": "f and F find a character forward or backward; ; repeats that direction and , repeats it in reverse.",
+    "detail": "The target character is part of the command. Repeating with ; keeps the last direction, while , deliberately reverses it.",
     "keys": [
       "f",
       "F",
-      ";"
+      ";",
+      ","
     ],
-    "task": "Find ( forward, backward, then repeat twice.",
-    "sequence": "f(F(;;",
+    "task": "Find commas forward, backward, and in both repeat directions.",
+    "sequence": "f,;F,;,",
     "code": [
-      "require('nvchad.configs.lspconfig').defaults()",
-      "vim.lsp.enable({ 'html', 'cssls' })",
-      "return true"
+      "local values = collect(alpha, beta, gamma, delta)",
+      "notify(one, two, three, four)",
+      "return values"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Find ( forward, backward, then repeat twice. · repetition 1 of 3",
+        "goal": "Find commas forward, backward, and in both repeat directions. · repetition 1 of 3",
         "code": [
-          "require('nvchad.configs.lspconfig').defaults()",
-          "vim.lsp.enable({ 'html', 'cssls' })",
-          "return true"
+          "local values = collect(alpha, beta, gamma, delta)",
+          "notify(one, two, three, four)",
+          "return values"
         ]
       },
       {
-        "goal": "Find ( forward, backward, then repeat twice. · repetition 2 of 3",
+        "goal": "Find commas forward, backward, and in both repeat directions. · repetition 2 of 3",
         "code": [
-          "local result = transform(input, options)",
-          "local label = 'ready:production'",
+          "local result = transform(input, options, cache, logger)",
+          "emit(name, status, duration, retries)",
           "return result"
         ]
       },
       {
-        "goal": "Find ( forward, backward, then repeat twice. · repetition 3 of 3",
+        "goal": "Find commas forward, backward, and in both repeat directions. · repetition 3 of 3",
         "code": [
-          "map('<leader>ff', telescope.find_files)",
-          "map('<leader>fw', telescope.live_grep)",
+          "map('n', 'ff', telescope.find_files, opts)",
+          "map('n', 'fw', telescope.live_grep, opts)",
           "return telescope"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Find ( forward, backward, then repeat twice.",
+      "instruction": "Find commas forward with f and ;, backward with F and ;, then reverse once with ,.",
       "cursor": [
         1,
         0
@@ -183,7 +184,7 @@ const lessons = [
       "hints": [
         "Begin with f.",
         "Use only the keys introduced in Essential Motions.",
-        "Compose the command from: f, F, ;."
+        "Use ; for the same direction and , for the opposite direction."
       ],
       "success": "Find Character produced the requested buffer and cursor state."
     }
@@ -193,50 +194,51 @@ const lessons = [
     "id": "till-character",
     "title": "Till Character",
     "eyebrow": "Essential Motions",
-    "summary": "t and T stop just before a target character; semicolon repeats the motion.",
-    "detail": "t and T stop just before a target character; semicolon repeats the motion.",
+    "summary": "t and T stop just before a target character; ; repeats that direction and , reverses it.",
+    "detail": "Unlike f and F, till motions leave the cursor adjacent to the target. Their repeat direction is still controlled by ; and ,.",
     "keys": [
       "t",
       "T",
-      ";"
+      ";",
+      ","
     ],
-    "task": "Move till ( forward, backward, then repeat twice.",
-    "sequence": "t(T(;;",
+    "task": "Move till commas forward, backward, and in both repeat directions.",
+    "sequence": "t,;T,;,",
     "code": [
-      "require('nvchad.configs.lspconfig').defaults()",
-      "vim.lsp.enable({ 'html', 'cssls' })",
-      "return true"
+      "local values = collect(alpha, beta, gamma, delta)",
+      "notify(one, two, three, four)",
+      "return values"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Move till ( forward, backward, then repeat twice. · repetition 1 of 3",
+        "goal": "Move till commas forward, backward, and in both repeat directions. · repetition 1 of 3",
         "code": [
-          "require('nvchad.configs.lspconfig').defaults()",
-          "vim.lsp.enable({ 'html', 'cssls' })",
-          "return true"
+          "local values = collect(alpha, beta, gamma, delta)",
+          "notify(one, two, three, four)",
+          "return values"
         ]
       },
       {
-        "goal": "Move till ( forward, backward, then repeat twice. · repetition 2 of 3",
+        "goal": "Move till commas forward, backward, and in both repeat directions. · repetition 2 of 3",
         "code": [
-          "local result = transform(input, options)",
-          "local label = 'ready:production'",
+          "local result = transform(input, options, cache, logger)",
+          "emit(name, status, duration, retries)",
           "return result"
         ]
       },
       {
-        "goal": "Move till ( forward, backward, then repeat twice. · repetition 3 of 3",
+        "goal": "Move till commas forward, backward, and in both repeat directions. · repetition 3 of 3",
         "code": [
-          "map('<leader>ff', telescope.find_files)",
-          "map('<leader>fw', telescope.live_grep)",
+          "map('n', 'ff', telescope.find_files, opts)",
+          "map('n', 'fw', telescope.live_grep, opts)",
           "return telescope"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Move till ( forward, backward, then repeat twice.",
+      "instruction": "Move till commas forward with t and ;, backward with T and ;, then reverse once with ,.",
       "cursor": [
         1,
         0
@@ -244,7 +246,7 @@ const lessons = [
       "hints": [
         "Begin with t.",
         "Use only the keys introduced in Essential Motions.",
-        "Compose the command from: t, T, ;."
+        "Use ; for the same direction and , for the opposite direction."
       ],
       "success": "Till Character produced the requested buffer and cursor state."
     }
@@ -267,7 +269,8 @@ const lessons = [
       "F",
       ";",
       "t",
-      "T"
+      "T",
+      ","
     ],
     "task": "",
     "sequence": "WEB",
@@ -311,28 +314,33 @@ const lessons = [
       },
       {
         "key": "f",
-        "description": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
-        "sequence": "f(F(;;"
+        "description": "f finds forward; ; repeats in that direction and , repeats in reverse.",
+        "sequence": "f,;F,;,"
       },
       {
         "key": "F",
-        "description": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
-        "sequence": "f(F(;;"
+        "description": "F finds backward; ; repeats in that direction and , repeats in reverse.",
+        "sequence": "f,;F,;,"
       },
       {
         "key": ";",
-        "description": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
-        "sequence": "f(F(;;"
+        "description": "; repeats the latest f, F, t, or T motion in the same direction.",
+        "sequence": "f,;F,;,"
       },
       {
         "key": "t",
-        "description": "t and T stop just before a target character; semicolon repeats the motion.",
-        "sequence": "t(T(;;"
+        "description": "t stops before a target ahead; ; repeats and , reverses the direction.",
+        "sequence": "t,;T,;,"
       },
       {
         "key": "T",
-        "description": "t and T stop just before a target character; semicolon repeats the motion.",
-        "sequence": "t(T(;;"
+        "description": "T stops after a target behind; ; repeats and , reverses the direction.",
+        "sequence": "t,;T,;,"
+      },
+      {
+        "key": ",",
+        "description": ", repeats the latest character-find motion in the opposite direction.",
+        "sequence": "f,;F,;,"
       }
     ]
   }

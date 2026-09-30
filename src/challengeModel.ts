@@ -1,9 +1,12 @@
 import {
-  applyVimCommand,
+  applyVimTokens,
+  cloneVimState,
+  createVimState,
   sameOutcome,
   type VimCursor,
   type VimState,
 } from "./vimEngine";
+import { tokenizeCommand } from "./vimEngine";
 
 export type ChallengeDefinition = {
   initialBuffer: string[];
@@ -11,6 +14,7 @@ export type ChallengeDefinition = {
   instruction: string;
   acceptedCommands: string[];
   expectedOutcomes: VimState[];
+  initialState: VimState;
 };
 
 export function createChallengeDefinition(
@@ -18,14 +22,16 @@ export function createChallengeDefinition(
   initialCursor: VimCursor,
   instruction: string,
   acceptedCommands: string[],
+  initialState = createVimState(initialBuffer, initialCursor),
 ): ChallengeDefinition {
   return {
     initialBuffer: [...initialBuffer],
     initialCursor: { ...initialCursor },
     instruction,
     acceptedCommands,
+    initialState: cloneVimState(initialState),
     expectedOutcomes: acceptedCommands.map((command) =>
-      applyVimCommand(initialBuffer, initialCursor, command),
+      applyVimTokens(cloneVimState(initialState), tokenizeCommand(command)),
     ),
   };
 }
@@ -34,9 +40,7 @@ export function challengeReached(
   definition: ChallengeDefinition,
   state: VimState,
 ) {
-  return (
-    state.mode === "normal" &&
-    !state.pending &&
-    definition.expectedOutcomes.some((expected) => sameOutcome(state, expected))
+  return definition.expectedOutcomes.some((expected) =>
+    sameOutcome(state, expected),
   );
 }

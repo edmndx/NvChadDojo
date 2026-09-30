@@ -1,5 +1,10 @@
 import type { Lesson } from "../curriculum";
-import { createVimState, type VimCursor, type VimState } from "../vimEngine";
+import {
+  cloneVimState,
+  createVimState,
+  type VimCursor,
+  type VimState,
+} from "../vimEngine";
 
 export type TrainerTab = "challenge" | "minigame" | "settings";
 
@@ -44,6 +49,8 @@ export function createTrainerSession(
   lesson: Lesson,
   code: string[],
   cursor: VimCursor,
+  initialState?: VimState,
+  gameTarget = lesson.sequence,
 ): TrainerSession {
   return {
     typed: "",
@@ -55,12 +62,14 @@ export function createTrainerSession(
     step: 0,
     tab: "challenge",
     hint: 0,
-    engine: createVimState(code, cursor),
+    engine: initialState
+      ? cloneVimState(initialState)
+      : createVimState(code, cursor),
     streak: 0,
     gameIndex: 0,
     gameMisses: 0,
     gameRounds: 0,
-    gameTarget: lesson.sequence,
+    gameTarget,
     remapPending: "",
   };
 }

@@ -144,15 +144,15 @@ const lessons = [
     "id": "lazygit-stage-commit",
     "title": "Stage and commit in LazyGit",
     "eyebrow": "Git Workflows",
-    "summary": "Space toggles the selected file, a stages all files, and c opens the commit prompt.",
-    "detail": "Space toggles the selected file, a stages all files, and c opens the commit prompt.",
+    "summary": "Space toggles the selected file, a stages all files, and c opens the commit-message prompt.",
+    "detail": "A commit is not created until you enter a non-empty message and confirm it; this exercise stages the selected file and commits it with a message.",
     "keys": [
       "Space",
       "a",
       "c"
     ],
-    "task": "Stage the selected file and open the commit prompt.",
-    "sequence": "<Space>c",
+    "task": "Stage the selected file and commit it with the message fix trainer.",
+    "sequence": "<Space>cfix<Space>trainer<Enter>",
     "code": [
       "[x] src/lessons.ts",
       "[ ] src/App.tsx",
@@ -282,18 +282,18 @@ const lessons = [
       },
       {
         "key": "Space",
-        "description": "Space toggles the selected file, a stages all files, and c opens the commit prompt.",
-        "sequence": "<Space>c"
+        "description": "Space stages the selected file; c opens the commit prompt, which still requires a message and confirmation.",
+        "sequence": "<Space>cfix<Space>trainer<Enter>"
       },
       {
         "key": "a",
-        "description": "Space toggles the selected file, a stages all files, and c opens the commit prompt.",
-        "sequence": "<Space>c"
+        "description": "Space stages the selected file; c opens the commit prompt, which still requires a message and confirmation.",
+        "sequence": "<Space>cfix<Space>trainer<Enter>"
       },
       {
         "key": "c",
-        "description": "Space toggles the selected file, a stages all files, and c opens the commit prompt.",
-        "sequence": "<Space>c"
+        "description": "Space stages the selected file; c opens the commit prompt, which still requires a message and confirmation.",
+        "sequence": "<Space>cfix<Space>trainer<Enter>"
       },
       {
         "key": "p",

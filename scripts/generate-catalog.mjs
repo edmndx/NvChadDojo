@@ -75,6 +75,34 @@ const indexed = summaries.map(
     index,
   }),
 );
+if (orderedLessons && !process.argv.includes("--allow-identity-change")) {
+  const previousIdentity = orderedLessons.map(({ id, group, title }) => ({
+    id,
+    group,
+    title,
+  }));
+  const nextIdentity = indexed.map(({ id, group, title }) => ({
+    id,
+    group,
+    title,
+  }));
+  const changes = nextIdentity.flatMap((lesson, index) => {
+    const previousLesson = previousIdentity[index];
+    return JSON.stringify(previousLesson) === JSON.stringify(lesson)
+      ? []
+      : [
+          `index ${index}: ${JSON.stringify(previousLesson)} -> ${JSON.stringify(lesson)}`,
+        ];
+  });
+  if (previousIdentity.length !== nextIdentity.length)
+    changes.unshift(
+      `lesson count: ${previousIdentity.length} -> ${nextIdentity.length}`,
+    );
+  if (changes.length)
+    throw new Error(
+      `Curriculum identities, titles, groups, or order changed. Preserve the public contract or rerun explicitly with --allow-identity-change.\n${changes.join("\n")}`,
+    );
+}
 const source = [
   'import type { LessonSummary } from "./schema";',
   "",

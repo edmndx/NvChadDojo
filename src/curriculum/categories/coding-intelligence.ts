@@ -6,8 +6,8 @@ const lessons = [
     "id": "lsp-definition",
     "title": "Go to definition",
     "eyebrow": "Coding Intelligence",
-    "summary": "With an attached LSP, gd jumps to the symbol definition.",
-    "detail": "With an attached LSP, gd jumps to the symbol definition.",
+    "summary": "With an attached LSP, NVChad v2.5 maps gd to the symbol definition.",
+    "detail": "gd is supplied by NVChad's buffer-local LSP setup at this pinned baseline; it requires an attached server that supports definitions.",
     "keys": [
       "g",
       "d"
@@ -110,12 +110,12 @@ const lessons = [
     "reviewItems": [
       {
         "key": "g",
-        "description": "With an attached LSP, gd jumps to the symbol definition.",
+        "description": "NVChad v2.5 maps gd to definition in an LSP-attached buffer.",
         "sequence": "gd"
       },
       {
         "key": "d",
-        "description": "With an attached LSP, gd jumps to the symbol definition.",
+        "description": "NVChad v2.5 maps gd to definition in an LSP-attached buffer.",
         "sequence": "gd"
       },
       {

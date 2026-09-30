@@ -10,22 +10,29 @@ import {
 import { Command, RotateCcw } from "lucide-react";
 import type { Lesson } from "../curriculum";
 import { challengeReached, createChallengeDefinition } from "../challengeModel";
-import { applyVimKey, createVimState } from "../vimEngine";
+import { applyVimKey } from "../vimEngine";
 import {
-  acceptedCommands,
   challengeInstruction,
-  challengeSteps,
   commandState,
   startingCursor,
-  supportsOutcomeValidation,
 } from "../lessonRuntime";
 import {
-  canonicalPracticeSequence,
   commandTokens,
   displayKey,
+  matchAcceptedInput,
   normalizeKey,
+  shouldCancelPendingInput,
   tokenizeSequence,
 } from "../keyboard";
+import {
+  createLessonVimState,
+  miniGameTargets,
+  practiceContextLabel,
+  resolveLessonPractice,
+  runScenario,
+  scenarioAsVimState,
+  scenarioReached,
+} from "../practiceModel";
 import {
   defaultPreferences,
   defaultRemaps,
@@ -275,9 +282,21 @@ function SettingsPanel({
 export function Trainer({ lesson }: { lesson: Lesson }) {
   const drills = lesson.drills || [{ goal: lesson.task, code: lesson.code }];
   const firstCursor = startingCursor(lesson, drills[0].code);
+  const practice = useMemo(() => resolveLessonPractice(lesson), [lesson]);
+  const gameTargets = useMemo(() => miniGameTargets(lesson), [lesson]);
+  const firstState = useMemo(
+    () => createLessonVimState(lesson, drills[0].code, firstCursor),
+    [lesson, drills, firstCursor.line, firstCursor.col],
+  );
   const [session, dispatch] = useReducer(
     reduceTrainerSession,
-    createTrainerSession(lesson, drills[0].code, firstCursor),
+    createTrainerSession(
+      lesson,
+      drills[0].code,
+      firstCursor,
+      firstState,
+      gameTargets[0] || lesson.sequence,
+    ),
   );
   const [preferences, setPreferences] = useState<TrainerPreferences>(
     loadTrainerPreferences,
@@ -293,17 +312,33 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
   const resultTimer = useRef<number | undefined>(undefined);
   const shortTimers = useRef<number[]>([]);
   const drill = drills[Math.min(session.round, drills.length - 1)];
-  const steps = useMemo(() => challengeSteps(lesson), [lesson]);
-  const required = steps[Math.min(session.step, steps.length - 1)];
-  const accepted = useMemo(
-    () => acceptedCommands(lesson, required),
-    [lesson, required],
+  const steps = useMemo(
+    () =>
+      practice.kind === "reference"
+        ? []
+        : practice.steps.map(
+            (step) => step.acceptedSequences[0] || lesson.sequence,
+          ),
+    [lesson.sequence, practice],
   );
+  const required = steps[Math.min(session.step, steps.length - 1)];
+  const accepted = useMemo(() => {
+    if (practice.kind === "reference") return [];
+    return [
+      ...(practice.steps[Math.min(session.step, practice.steps.length - 1)]
+        ?.acceptedSequences || [required]),
+    ];
+  }, [practice, required, session.step]);
   const initialCursor = useMemo(
     () => startingCursor(lesson, drill.code),
     [lesson, drill.code],
   );
-  const outcomeEnabled = supportsOutcomeValidation(lesson);
+  const initialState = useMemo(
+    () => createLessonVimState(lesson, drill.code, initialCursor),
+    [drill.code, initialCursor, lesson],
+  );
+  const outcomeEnabled = practice.kind === "vim";
+  const scenarioEnabled = practice.kind === "scenario";
   const challengeDefinition = useMemo(
     () =>
       outcomeEnabled
@@ -312,22 +347,19 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
             initialCursor,
             drill.goal,
             accepted,
+            initialState,
           )
         : null,
-    [accepted, drill.code, drill.goal, initialCursor, outcomeEnabled],
+    [
+      accepted,
+      drill.code,
+      drill.goal,
+      initialCursor,
+      initialState,
+      outcomeEnabled,
+    ],
   );
   const shownState = session.result || session.engine;
-  const gameTargets = useMemo(
-    () => [
-      ...new Set([
-        lesson.sequence,
-        ...lesson.keys
-          .map(canonicalPracticeSequence)
-          .filter((value) => value && !/[{}]/.test(value)),
-      ]),
-    ],
-    [lesson],
-  );
   const gameKeys = tokenizeSequence(session.gameTarget);
 
   const reset = () => {
@@ -338,6 +370,12 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
         lesson,
         drills[0].code,
         startingCursor(lesson, drills[0].code),
+        createLessonVimState(
+          lesson,
+          drills[0].code,
+          startingCursor(lesson, drills[0].code),
+        ),
+        gameTargets[0] || lesson.sequence,
       ),
     });
     setClockKey((value) => value + 1);
@@ -365,18 +403,21 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
       if (!token || !gameKeys.length) return;
       if (token === gameKeys[session.gameIndex]) {
         if (session.gameIndex + 1 === gameKeys.length) {
-          const alternatives = gameTargets.filter(
-            (target) => target !== session.gameTarget,
+          const currentTarget = Math.max(
+            0,
+            gameTargets.indexOf(session.gameTarget),
           );
+          const nextTarget = gameTargets.length
+            ? gameTargets[(currentTarget + 1) % gameTargets.length]
+            : session.gameTarget;
           dispatch({
             type: "patch",
             value: {
               gameRounds: session.gameRounds + 1,
               streak: session.streak + 1,
               gameIndex: 0,
-              gameTarget: alternatives.length
-                ? alternatives[Math.floor(Math.random() * alternatives.length)]
-                : session.gameTarget,
+              gameTarget: nextTarget,
+              engine: createLessonVimState(lesson, drill.code, initialCursor),
             },
           });
         } else
@@ -464,9 +505,14 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
         : session.engine;
     } else if (activeRemaps[rawToken]) token = activeRemaps[rawToken];
     if (
-      token === "<Esc>" &&
-      session.engine.mode === "normal" &&
-      (session.engine.pending || session.typed)
+      shouldCancelPendingInput(
+        token,
+        session.engine.mode,
+        session.engine.pending,
+        session.typed,
+        session.remapPending,
+        accepted,
+      )
     ) {
       dispatch({
         type: "patch",
@@ -474,20 +520,42 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
           typed: "",
           remapPending: "",
           feedback: "Pending command cancelled. Normal mode restored.",
-          engine: createVimState(drill.code, initialCursor),
+          engine: createLessonVimState(lesson, drill.code, initialCursor),
         },
       });
       return;
     }
-    const nextTyped = session.typed + typedPrefix + token;
+    const matchedInput = matchAcceptedInput(
+      session.typed,
+      typedPrefix,
+      token,
+      accepted,
+    );
+    const nextTyped = matchedInput.value;
     const nextEngine = outcomeEnabled
       ? applyVimKey(engineBase, token)
       : session.engine;
     const completeCommand = accepted.includes(nextTyped);
+    const expectedScenario =
+      scenarioEnabled && completeCommand
+        ? runScenario(
+            lesson,
+            accepted.find((option) => option === nextTyped)!,
+          )
+        : null;
+    const actualScenario =
+      scenarioEnabled && completeCommand
+        ? runScenario(lesson, nextTyped)
+        : null;
     const reached = challengeDefinition
       ? completeCommand && challengeReached(challengeDefinition, nextEngine)
-      : completeCommand;
-    const viable = accepted.some((option) => option.startsWith(nextTyped));
+      : expectedScenario && actualScenario
+        ? scenarioReached(expectedScenario, actualScenario)
+        : completeCommand;
+    const resultState = actualScenario
+      ? scenarioAsVimState(nextEngine, actualScenario)
+      : nextEngine;
+    const viable = matchedInput.viable;
     if (viable || reached) {
       dispatch({
         type: "patch",
@@ -499,14 +567,14 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
           engine: nextEngine,
         },
       });
-      if (reached || accepted.includes(nextTyped)) {
+      if (reached) {
         const moreSteps = session.step + 1 < steps.length;
         dispatch({
           type: "patch",
           value: {
             typed: "",
             hint: 0,
-            result: nextEngine,
+            result: resultState,
             feedback: moreSteps
               ? `Good. Step ${session.step + 1} worked.`
               : lesson.challenge?.success || "Target state reached.",
@@ -526,7 +594,8 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
                 step: nextStep,
                 round: nextRound,
                 result: null,
-                engine: createVimState(
+                engine: createLessonVimState(
+                  lesson,
                   nextDrill.code,
                   startingCursor(lesson, nextDrill.code),
                 ),
@@ -562,7 +631,7 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
               value: {
                 wrong: false,
                 typed: "",
-                engine: createVimState(drill.code, initialCursor),
+                engine: createLessonVimState(lesson, drill.code, initialCursor),
               },
             }),
           650,
@@ -602,9 +671,13 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
       const col = Math.min(shownState.cursor.col, line.length);
       content = (
         <>
-          {syntaxLine(line.slice(0, col))}
-          <i className="sim-cursor inline" />
-          {syntaxLine(line.slice(col))}
+          {col > 0 && syntaxLine(line.slice(0, col))}
+          <span
+            className={`sim-cursor inline ${shownState.mode === "insert" ? "insert" : ""}`}
+          >
+            {line[col] || " "}
+          </span>
+          {col + 1 < line.length && syntaxLine(line.slice(col + 1))}
         </>
       );
     }
@@ -697,9 +770,14 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
             <strong>
               {outcomeEnabled
                 ? `${session.engine.mode.toUpperCase().replace("-", " ")}${session.engine.pending ? " · PENDING" : ""}`
-                : commandState(session.typed, lesson)}
+                : practiceContextLabel(lesson) ||
+                  commandState(session.typed, lesson)}
             </strong>
-            <span>Lua</span>
+            <span>
+              {practice.kind === "scenario" && practice.surface !== "editor"
+                ? "NVChad v2.5 simulation"
+                : "Lua"}
+            </span>
             <span className="status-spacer" />
             <span>
               Ln {shownState.cursor.line + 1}, Col {shownState.cursor.col + 1}
@@ -771,7 +849,10 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
         <div className="trainer-panel minigame-panel">
           <small>KEY SEQUENCE SPRINT</small>
           <h3>Type the highlighted command</h3>
-          <p>Each completed round chooses another command from this lesson.</p>
+          <p>
+            Context: {practiceContextLabel(lesson)}. Each completed round uses
+            another complete action from this lesson.
+          </p>
           <div className="game-sequence">
             {gameKeys.map((key, index) => (
               <kbd

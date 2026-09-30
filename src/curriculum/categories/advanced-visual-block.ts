@@ -13,8 +13,8 @@ const lessons = [
       "I",
       "Esc"
     ],
-    "task": "Select two rows and insert at the start of the block.",
-    "sequence": "<C-v>jI<Esc>",
+    "task": "Select two rows and insert -- at the start of the block.",
+    "sequence": "<C-v>jI--<Space><Esc>",
     "code": [
       "alpha = true",
       "beta = true",
@@ -23,7 +23,7 @@ const lessons = [
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Select two rows and insert at the start of the block. · repetition 1 of 3",
+        "goal": "Select two rows and insert -- at the start of the block. · repetition 1 of 3",
         "code": [
           "alpha = true",
           "beta = true",
@@ -31,7 +31,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Select two rows and insert at the start of the block. · repetition 2 of 3",
+        "goal": "Select two rows and insert -- at the start of the block. · repetition 2 of 3",
         "code": [
           "'one'",
           "'two'",
@@ -39,7 +39,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Select two rows and insert at the start of the block. · repetition 3 of 3",
+        "goal": "Select two rows and insert -- at the start of the block. · repetition 3 of 3",
         "code": [
           "TODO first",
           "TODO second",
@@ -49,7 +49,8 @@ const lessons = [
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Select two rows and insert at the start of the block.",
+      "instruction": "Select two rows, press I, type -- followed by a space, then press Esc.",
+      "replacement": "-- ",
       "cursor": [
         1,
         0
@@ -74,8 +75,8 @@ const lessons = [
       "A",
       "Esc"
     ],
-    "task": "Select two rows and append to the block.",
-    "sequence": "<C-v>jA<Esc>",
+    "task": "Select two rows and append -- to the block.",
+    "sequence": "<C-v>jA<Space>--<Esc>",
     "code": [
       "alpha = true",
       "beta = true",
@@ -84,7 +85,7 @@ const lessons = [
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Select two rows and append to the block. · repetition 1 of 3",
+        "goal": "Select two rows and append -- to the block. · repetition 1 of 3",
         "code": [
           "alpha = true",
           "beta = true",
@@ -92,7 +93,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Select two rows and append to the block. · repetition 2 of 3",
+        "goal": "Select two rows and append -- to the block. · repetition 2 of 3",
         "code": [
           "'one'",
           "'two'",
@@ -100,7 +101,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Select two rows and append to the block. · repetition 3 of 3",
+        "goal": "Select two rows and append -- to the block. · repetition 3 of 3",
         "code": [
           "TODO first",
           "TODO second",
@@ -110,7 +111,8 @@ const lessons = [
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Select two rows and append to the block.",
+      "instruction": "Select two rows, press A, type a space followed by --, then press Esc.",
+      "replacement": " --",
       "cursor": [
         1,
         0
@@ -198,7 +200,7 @@ const lessons = [
       "r"
     ],
     "task": "",
-    "sequence": "<C-v>jI<Esc>",
+    "sequence": "<C-v>jI--<Space><Esc>",
     "code": [
       "alpha = true",
       "beta = true",
@@ -210,22 +212,22 @@ const lessons = [
       {
         "key": "Ctrl+v",
         "description": "Visual Block plus I inserts the same prefix at the start of every selected line.",
-        "sequence": "<C-v>jI<Esc>"
+        "sequence": "<C-v>jI--<Space><Esc>"
       },
       {
         "key": "I",
         "description": "Visual Block plus I inserts the same prefix at the start of every selected line.",
-        "sequence": "<C-v>jI<Esc>"
+        "sequence": "<C-v>jI--<Space><Esc>"
       },
       {
         "key": "Esc",
         "description": "Visual Block plus I inserts the same prefix at the start of every selected line.",
-        "sequence": "<C-v>jI<Esc>"
+        "sequence": "<C-v>jI--<Space><Esc>"
       },
       {
         "key": "A",
         "description": "Visual Block plus A appends the same text to each selected row.",
-        "sequence": "<C-v>jA<Esc>"
+        "sequence": "<C-v>jA<Space>--<Esc>"
       },
       {
         "key": "r",

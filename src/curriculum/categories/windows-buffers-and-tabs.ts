@@ -111,8 +111,8 @@ const lessons = [
     "id": "buffers",
     "title": "Manage tabufline buffers",
     "eyebrow": "Windows, Buffers & Tabs",
-    "summary": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
-    "detail": "Space b creates a buffer, Tab and Shift+Tab cycle, and Space x closes the selected buffer.",
+    "summary": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+    "detail": "With tabufline enabled, Space b creates a buffer, Tab and Shift+Tab cycle, and Space x closes the selected buffer; these mappings are not created when tabufline is disabled.",
     "keys": [
       "Space b",
       "Tab",
@@ -269,22 +269,22 @@ const lessons = [
       },
       {
         "key": "Space b",
-        "description": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
+        "description": "When tabufline is enabled, NVChad exposes open buffers without turning them into native tab pages.",
         "sequence": "<Space>b<Tab><Space>x"
       },
       {
         "key": "Tab",
-        "description": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
+        "description": "These buffer-cycle mappings require NVChad's tabufline to be enabled.",
         "sequence": "<Space>b<Tab><Space>x"
       },
       {
         "key": "Shift+Tab",
-        "description": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
+        "description": "These buffer-cycle mappings require NVChad's tabufline to be enabled.",
         "sequence": "<Space>b<Tab><Space>x"
       },
       {
         "key": "Space x",
-        "description": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
+        "description": "Closing the selected buffer with Space x requires NVChad's tabufline to be enabled.",
         "sequence": "<Space>b<Tab><Space>x"
       },
       {

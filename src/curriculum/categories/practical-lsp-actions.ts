@@ -6,15 +6,15 @@ const lessons = [
     "id": "rename-symbol",
     "title": "Rename a Symbol",
     "eyebrow": "Practical LSP Actions",
-    "summary": "Neovim's LSP rename updates a symbol consistently across the project.",
-    "detail": "Neovim's LSP rename updates a symbol consistently across the project.",
+    "summary": "Neovim 0.11's grn default opens LSP rename for the symbol under the cursor when a capable server is attached.",
+    "detail": "Rename is not complete after grn alone: enter the new identifier in the prompt and confirm it with Enter.",
     "keys": [
       "g",
       "r",
       "n"
     ],
-    "task": "Rename the symbol under the cursor.",
-    "sequence": "grn",
+    "task": "Rename the symbol under the cursor to itemTotal and confirm it.",
+    "sequence": "grnitemTotal<Enter>",
     "code": [
       "local total = calculate(items)",
       "print(total)",
@@ -23,7 +23,7 @@ const lessons = [
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Rename the symbol under the cursor. · repetition 1 of 3",
+        "goal": "Rename the symbol under the cursor to itemTotal and confirm it. · repetition 1 of 3",
         "code": [
           "local total = calculate(items)",
           "print(total)",
@@ -31,7 +31,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Rename the symbol under the cursor. · repetition 2 of 3",
+        "goal": "Rename the symbol under the cursor to itemTotal and confirm it. · repetition 2 of 3",
         "code": [
           "function greet(name)",
           "  return 'Hello ' .. name",
@@ -39,7 +39,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Rename the symbol under the cursor. · repetition 3 of 3",
+        "goal": "Rename the symbol under the cursor to itemTotal and confirm it. · repetition 3 of 3",
         "code": [
           "local user = find_user(id)",
           "notify(user.name)",
@@ -49,7 +49,8 @@ const lessons = [
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Rename the symbol under the cursor.",
+      "instruction": "Press grn, enter itemTotal in the rename prompt, then confirm with Enter.",
+      "replacement": "itemTotal",
       "cursor": [
         1,
         0
@@ -67,8 +68,8 @@ const lessons = [
     "id": "find-references",
     "title": "Find References",
     "eyebrow": "Practical LSP Actions",
-    "summary": "LSP references lists every semantic use of the symbol under the cursor.",
-    "detail": "LSP references lists every semantic use of the symbol under the cursor.",
+    "summary": "Neovim 0.11's grr default requests semantic references for the symbol under the cursor.",
+    "detail": "A capable attached language server supplies the results; their presentation depends on the active LSP handler.",
     "keys": [
       "g",
       "r",
@@ -128,15 +129,15 @@ const lessons = [
     "id": "code-actions",
     "title": "Code Actions",
     "eyebrow": "Practical LSP Actions",
-    "summary": "Code actions expose supported refactors and quick fixes for the current position or selection.",
-    "detail": "Code actions expose supported refactors and quick fixes for the current position or selection.",
+    "summary": "Neovim 0.11's gra default requests supported refactors and quick fixes for the current position or Visual selection.",
+    "detail": "After the action menu opens, move to the intended action and press Enter; opening the menu alone does not apply a fix.",
     "keys": [
       "g",
       "r",
       "a"
     ],
-    "task": "Open the available code actions.",
-    "sequence": "gra",
+    "task": "Open the available code actions and choose the first action.",
+    "sequence": "gra<Enter>",
     "code": [
       "local total = calculate(items)",
       "print(total)",
@@ -145,7 +146,7 @@ const lessons = [
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Open the available code actions. · repetition 1 of 3",
+        "goal": "Open the available code actions and choose the first action. · repetition 1 of 3",
         "code": [
           "local total = calculate(items)",
           "print(total)",
@@ -153,7 +154,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Open the available code actions. · repetition 2 of 3",
+        "goal": "Open the available code actions and choose the first action. · repetition 2 of 3",
         "code": [
           "function greet(name)",
           "  return 'Hello ' .. name",
@@ -161,7 +162,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Open the available code actions. · repetition 3 of 3",
+        "goal": "Open the available code actions and choose the first action. · repetition 3 of 3",
         "code": [
           "local user = find_user(id)",
           "notify(user.name)",
@@ -171,7 +172,7 @@ const lessons = [
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Open the available code actions.",
+      "instruction": "Press gra to open code actions, then press Enter to choose the first available action.",
       "cursor": [
         1,
         0
@@ -190,12 +191,12 @@ const lessons = [
     "title": "Signature Help",
     "eyebrow": "Practical LSP Actions",
     "summary": "In Insert mode, Ctrl+s requests parameter and signature information from the attached language server.",
-    "detail": "In Insert mode, Ctrl+s requests parameter and signature information from the attached language server.",
+    "detail": "This is a Neovim 0.11 Insert-mode default. It only produces help when an attached language server supports signatureHelp for the current call.",
     "keys": [
       "Ctrl+s"
     ],
     "task": "Show signature help while entering function arguments.",
-    "sequence": "<C-s>",
+    "sequence": "i<C-s><Esc>",
     "code": [
       "local total = calculate(items)",
       "print(total)",
@@ -230,7 +231,7 @@ const lessons = [
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Show signature help while entering function arguments.",
+      "instruction": "Enter Insert mode, request signature help with Ctrl+s, then return to Normal mode.",
       "cursor": [
         1,
         0
@@ -270,27 +271,27 @@ const lessons = [
       {
         "key": "g",
         "description": "Neovim's LSP rename updates a symbol consistently across the project.",
-        "sequence": "grn"
+        "sequence": "grnitemTotal<Enter>"
       },
       {
         "key": "r",
         "description": "Neovim's LSP rename updates a symbol consistently across the project.",
-        "sequence": "grn"
+        "sequence": "grnitemTotal<Enter>"
       },
       {
         "key": "n",
         "description": "Neovim's LSP rename updates a symbol consistently across the project.",
-        "sequence": "grn"
+        "sequence": "grnitemTotal<Enter>"
       },
       {
         "key": "a",
         "description": "Code actions expose supported refactors and quick fixes for the current position or selection.",
-        "sequence": "gra"
+        "sequence": "gra<Enter>"
       },
       {
         "key": "Ctrl+s",
         "description": "In Insert mode, Ctrl+s requests parameter and signature information from the attached language server.",
-        "sequence": "<C-s>"
+        "sequence": "i<C-s><Esc>"
       }
     ]
   }

@@ -5,10 +5,20 @@ import { groups, lessonSummaries, type LessonSummary } from "../curriculum";
 export function Brand() {
   return (
     <div className="brand">
-      <span className="brand-mark">N</span>
-      <span>
-        vim<span>Dojo</span>
-      </span>
+      <img
+        className="brand-mark"
+        src="/logo.png?v=3"
+        width={52}
+        height={52}
+        alt=""
+      />
+      <img
+        className="brand-wordmark"
+        src="/wordmark.png"
+        width={106}
+        height={52}
+        alt="NvChadDojo"
+      />
     </div>
   );
 }
@@ -69,7 +79,7 @@ export function Sidebar({
     );
   }, [normalized]);
   return (
-    <aside className="sidebar" aria-label="Course lessons">
+    <aside id="course-sidebar" className="sidebar" aria-label="Course lessons">
       <div className="side-head">
         <Brand />
         <button type="button" aria-label="Close lessons" onClick={onClose}>

@@ -6,8 +6,8 @@ const lessons = [
     "id": "refactor-understand-symbol",
     "title": "Understand a symbol before editing",
     "eyebrow": "LSP Refactoring",
-    "summary": "Use gd for its definition, grr for references, and K for hover documentation before changing a shared symbol.",
-    "detail": "Use gd for its definition, grr for references, and K for hover documentation before changing a shared symbol.",
+    "summary": "Use NVChad's gd definition mapping, Neovim 0.11's grr references default, and buffer-local K hover before changing a shared symbol.",
+    "detail": "All three actions require an attached language server with the corresponding capability; gd is supplied by NVChad at this baseline, while grr is a Neovim 0.11 default.",
     "keys": [
       "gd",
       "grr",
@@ -27,14 +27,14 @@ const lessons = [
     "id": "refactor-rename-fix",
     "title": "Rename and apply a code action",
     "eyebrow": "LSP Refactoring",
-    "summary": "grn performs a semantic project rename and gra requests supported refactors or quick fixes.",
-    "detail": "grn performs a semantic project rename and gra requests supported refactors or quick fixes.",
+    "summary": "Neovim 0.11 defaults grn and gra to semantic rename and code actions when a capable language server is attached.",
+    "detail": "Enter and confirm the new name after grn, then choose an action from the menu opened by gra; the key prefixes alone do not apply either change.",
     "keys": [
       "grn",
       "gra"
     ],
-    "task": "Rename the symbol, then request a code action.",
-    "sequence": "grngra",
+    "task": "Rename the symbol to newName, then choose the first code action.",
+    "sequence": "grnnewName<Enter>gra<Enter>",
     "code": [
       "function oldName(value)",
       "  return value",
@@ -91,28 +91,28 @@ const lessons = [
     "reviewItems": [
       {
         "key": "gd",
-        "description": "Use gd for its definition, grr for references, and K for hover documentation before changing a shared symbol.",
+        "description": "NVChad v2.5 supplies gd in an LSP-attached buffer; grr is a Neovim 0.11 default.",
         "sequence": "gdgrrK"
       },
       {
         "key": "grr",
-        "description": "Use gd for its definition, grr for references, and K for hover documentation before changing a shared symbol.",
+        "description": "grr is a Neovim 0.11 default requiring a capable attached language server.",
         "sequence": "gdgrrK"
       },
       {
         "key": "K",
-        "description": "Use gd for its definition, grr for references, and K for hover documentation before changing a shared symbol.",
+        "description": "K shows hover documentation in an LSP-attached buffer unless keywordprg or another mapping overrides it.",
         "sequence": "gdgrrK"
       },
       {
         "key": "grn",
-        "description": "grn performs a semantic project rename and gra requests supported refactors or quick fixes.",
-        "sequence": "grngra"
+        "description": "grn opens rename; enter the new name and confirm before continuing.",
+        "sequence": "grnnewName<Enter>gra<Enter>"
       },
       {
         "key": "gra",
-        "description": "grn performs a semantic project rename and gra requests supported refactors or quick fixes.",
-        "sequence": "grngra"
+        "description": "gra opens code actions; select an action and confirm it with Enter.",
+        "sequence": "grnnewName<Enter>gra<Enter>"
       },
       {
         "key": "Space fm",

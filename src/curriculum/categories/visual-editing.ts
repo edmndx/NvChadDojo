@@ -13,8 +13,8 @@ const lessons = [
       "c",
       "y"
     ],
-    "task": "Select through a word and delete it.",
-    "sequence": "vwd",
+    "task": "Select exactly the current word and delete it.",
+    "sequence": "viwd",
     "code": [
       "vim.o.number = true",
       "vim.o.relativenumber = true",
@@ -23,7 +23,7 @@ const lessons = [
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Select through a word and delete it. · repetition 1 of 3",
+        "goal": "Select exactly the current word and delete it. · repetition 1 of 3",
         "code": [
           "vim.o.number = true",
           "vim.o.relativenumber = true",
@@ -31,7 +31,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Select through a word and delete it. · repetition 2 of 3",
+        "goal": "Select exactly the current word and delete it. · repetition 2 of 3",
         "code": [
           "local one = 1",
           "local two = 2",
@@ -39,7 +39,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Select through a word and delete it. · repetition 3 of 3",
+        "goal": "Select exactly the current word and delete it. · repetition 3 of 3",
         "code": [
           "map('n', 'j', 'gj')",
           "map('n', 'k', 'gk')",
@@ -49,7 +49,7 @@ const lessons = [
     ],
     "commonMistake": "Enter Visual mode before applying the motion or operator. Escape cancels a selection.",
     "challenge": {
-      "instruction": "Select through a word and delete it.",
+      "instruction": "Select exactly the current word with viw, then delete it.",
       "cursor": [
         1,
         0
@@ -73,8 +73,8 @@ const lessons = [
       "v",
       "o"
     ],
-    "task": "Select through a word, then switch ends.",
-    "sequence": "vwo",
+    "task": "Select the current word, then switch active ends.",
+    "sequence": "viwo",
     "code": [
       "vim.o.number = true",
       "vim.o.relativenumber = true",
@@ -83,7 +83,7 @@ const lessons = [
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Select through a word, then switch ends. · repetition 1 of 3",
+        "goal": "Select the current word, then switch active ends. · repetition 1 of 3",
         "code": [
           "vim.o.number = true",
           "vim.o.relativenumber = true",
@@ -91,7 +91,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Select through a word, then switch ends. · repetition 2 of 3",
+        "goal": "Select the current word, then switch active ends. · repetition 2 of 3",
         "code": [
           "local one = 1",
           "local two = 2",
@@ -99,7 +99,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Select through a word, then switch ends. · repetition 3 of 3",
+        "goal": "Select the current word, then switch active ends. · repetition 3 of 3",
         "code": [
           "map('n', 'j', 'gj')",
           "map('n', 'k', 'gk')",
@@ -109,7 +109,7 @@ const lessons = [
     ],
     "commonMistake": "Enter Visual mode before applying the motion or operator. Escape cancels a selection.",
     "challenge": {
-      "instruction": "Select through a word, then switch ends.",
+      "instruction": "Select the current word with viw, then switch active ends with o.",
       "cursor": [
         1,
         0
@@ -320,7 +320,7 @@ const lessons = [
       "Esc"
     ],
     "task": "",
-    "sequence": "vwd",
+    "sequence": "viwd",
     "code": [
       "vim.o.number = true",
       "vim.o.relativenumber = true",
@@ -332,27 +332,27 @@ const lessons = [
       {
         "key": "d",
         "description": "A visual selection can be deleted, changed, or yanked with d, c, and y.",
-        "sequence": "vwd"
+        "sequence": "viwd"
       },
       {
         "key": "c",
         "description": "A visual selection can be deleted, changed, or yanked with d, c, and y.",
-        "sequence": "vwd"
+        "sequence": "viwd"
       },
       {
         "key": "y",
         "description": "A visual selection can be deleted, changed, or yanked with d, c, and y.",
-        "sequence": "vwd"
+        "sequence": "viwd"
       },
       {
         "key": "v",
         "description": "While selecting, o moves the cursor to the opposite end of the selection.",
-        "sequence": "vwo"
+        "sequence": "viwo"
       },
       {
         "key": "o",
         "description": "While selecting, o moves the cursor to the opposite end of the selection.",
-        "sequence": "vwo"
+        "sequence": "viwo"
       },
       {
         "key": "V",

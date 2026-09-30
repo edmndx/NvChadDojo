@@ -11,8 +11,8 @@ const lessons = [
     "keys": [
       "a"
     ],
-    "task": "Open NvimTree's create prompt.",
-    "sequence": "a",
+    "task": "Create src/new-file.ts through NvimTree's prompt.",
+    "sequence": "asrc/new-file.ts<Enter>",
     "code": [
       "src/",
       "  components/",
@@ -26,13 +26,13 @@ const lessons = [
     "title": "Rename tree items",
     "eyebrow": "NvimTree File Operations",
     "summary": "r renames the selected path while e changes only its basename.",
-    "detail": "r renames the selected path while e changes only its basename.",
+    "detail": "Both commands open an input prompt. Edit the proposed path or basename and press Enter to apply the rename.",
     "keys": [
       "r",
       "e"
     ],
-    "task": "Rename the selected file.",
-    "sequence": "r",
+    "task": "Rename the selected file to new-name.ts and confirm it.",
+    "sequence": "rnew-name.ts<Enter>",
     "code": [
       "src/",
       "  old-name.ts  <- cursor",
@@ -46,14 +46,14 @@ const lessons = [
     "title": "Copy or move tree items",
     "eyebrow": "NvimTree File Operations",
     "summary": "c copies, x cuts, and p pastes at the selected destination.",
-    "detail": "c copies, x cuts, and p pastes at the selected destination.",
+    "detail": "After c or x, navigate to the destination directory before pressing p; copying or cutting alone does not move filesystem data.",
     "keys": [
       "c",
       "x",
       "p"
     ],
     "task": "Cut the selected item and paste it at a destination.",
-    "sequence": "xp",
+    "sequence": "xjp",
     "code": [
       "src/",
       "  draft.ts  <- cut",
@@ -72,8 +72,8 @@ const lessons = [
       "d",
       "D"
     ],
-    "task": "Open the delete confirmation for the selected file.",
-    "sequence": "d",
+    "task": "Delete the selected file and accept the confirmation.",
+    "sequence": "dy",
     "code": [
       "src/",
       "  obsolete.ts  <- cursor",
@@ -125,7 +125,7 @@ const lessons = [
       "Ctrl+s"
     ],
     "task": "",
-    "sequence": "a",
+    "sequence": "asrc/new-file.ts<Enter>",
     "code": [
       "src/",
       "  components/",
@@ -137,42 +137,42 @@ const lessons = [
       {
         "key": "a",
         "description": "Press a and enter a path; a trailing slash creates a directory.",
-        "sequence": "a"
+        "sequence": "asrc/new-file.ts<Enter>"
       },
       {
         "key": "r",
         "description": "r renames the selected path while e changes only its basename.",
-        "sequence": "r"
+        "sequence": "rnew-name.ts<Enter>"
       },
       {
         "key": "e",
         "description": "r renames the selected path while e changes only its basename.",
-        "sequence": "r"
+        "sequence": "rnew-name.ts<Enter>"
       },
       {
         "key": "c",
         "description": "c copies, x cuts, and p pastes at the selected destination.",
-        "sequence": "xp"
+        "sequence": "xjp"
       },
       {
         "key": "x",
         "description": "c copies, x cuts, and p pastes at the selected destination.",
-        "sequence": "xp"
+        "sequence": "xjp"
       },
       {
         "key": "p",
         "description": "c copies, x cuts, and p pastes at the selected destination.",
-        "sequence": "xp"
+        "sequence": "xjp"
       },
       {
         "key": "d",
         "description": "d deletes after confirmation while D uses the configured system trash integration.",
-        "sequence": "d"
+        "sequence": "dy"
       },
       {
         "key": "D",
         "description": "d deletes after confirmation while D uses the configured system trash integration.",
-        "sequence": "d"
+        "sequence": "dy"
       },
       {
         "key": "Enter",

@@ -115,7 +115,7 @@ const lessons = [
       "Space fm"
     ],
     "task": "Run the final sequence: find files, definition, change word, format.",
-    "sequence": "<Space>ffgdciw<Esc><Space>fm",
+    "sequence": "<Space>ff<Enter>gdciw<Esc><Space>fm",
     "code": [
       "-- You now have a working vocabulary.",
       "-- Use it in real projects today.",
@@ -203,22 +203,22 @@ const lessons = [
       {
         "key": "Space ff",
         "description": "Find, navigate, edit, format, diagnose, repeat. Speed arrives after accuracy.",
-        "sequence": "<Space>ffgdciw<Esc><Space>fm"
+        "sequence": "<Space>ff<Enter>gdciw<Esc><Space>fm"
       },
       {
         "key": "gd",
         "description": "Find, navigate, edit, format, diagnose, repeat. Speed arrives after accuracy.",
-        "sequence": "<Space>ffgdciw<Esc><Space>fm"
+        "sequence": "<Space>ff<Enter>gdciw<Esc><Space>fm"
       },
       {
         "key": "ciw",
         "description": "Find, navigate, edit, format, diagnose, repeat. Speed arrives after accuracy.",
-        "sequence": "<Space>ffgdciw<Esc><Space>fm"
+        "sequence": "<Space>ff<Enter>gdciw<Esc><Space>fm"
       },
       {
         "key": "Space fm",
         "description": "Find, navigate, edit, format, diagnose, repeat. Speed arrives after accuracy.",
-        "sequence": "<Space>ffgdciw<Esc><Space>fm"
+        "sequence": "<Space>ff<Enter>gdciw<Esc><Space>fm"
       }
     ]
   }

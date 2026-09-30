@@ -126,14 +126,19 @@ const lessons = [
     "id": "confirm-substitution",
     "title": "Confirm Replacements",
     "eyebrow": "Substitution",
-    "summary": "The c flag asks before each replacement so broad edits remain controlled.",
-    "detail": "The c flag asks before each replacement so broad edits remain controlled.",
+    "summary": "The c flag pauses at each match; y accepts, n skips, a accepts all, l accepts the last one, and q stops.",
+    "detail": "Submitting :%s with gc opens a confirmation stage instead of replacing immediately. This exercise accepts one match, skips one, then uses l to replace the current match and stop.",
     "keys": [
       ":%s",
-      "gc"
+      "gc",
+      "y",
+      "n",
+      "a",
+      "l",
+      "q"
     ],
-    "task": "Start a confirmed file-wide replacement.",
-    "sequence": ":%s/old/new/gc<Enter>",
+    "task": "Start a confirmed replacement, accept one match, skip one, then replace the last selected match and stop.",
+    "sequence": ":%s/old/new/gc<Enter>ynl",
     "code": [
       "local old = config.old",
       "notify('old value')",
@@ -142,7 +147,7 @@ const lessons = [
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Start a confirmed file-wide replacement. · repetition 1 of 3",
+        "goal": "Start a confirmed replacement, accept one match, skip one, then replace the last selected match and stop. · repetition 1 of 3",
         "code": [
           "local old = config.old",
           "notify('old value')",
@@ -150,7 +155,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Start a confirmed file-wide replacement. · repetition 2 of 3",
+        "goal": "Start a confirmed replacement, accept one match, skip one, then replace the last selected match and stop. · repetition 2 of 3",
         "code": [
           "old_name = old_value",
           "old_label = old_name",
@@ -158,7 +163,7 @@ const lessons = [
         ]
       },
       {
-        "goal": "Start a confirmed file-wide replacement. · repetition 3 of 3",
+        "goal": "Start a confirmed replacement, accept one match, skip one, then replace the last selected match and stop. · repetition 3 of 3",
         "code": [
           "theme = 'old'",
           "fallback = 'old'",
@@ -168,7 +173,7 @@ const lessons = [
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Start a confirmed file-wide replacement.",
+      "instruction": "Run the confirmed replacement, press y for the first match, n for the second, then l to replace the current match and stop.",
       "cursor": [
         1,
         0
@@ -176,7 +181,7 @@ const lessons = [
       "hints": [
         "Begin with :%s.",
         "Use only the keys introduced in Substitution.",
-        "Compose the command from: :%s, gc."
+        "After Enter, use y, n, then l at the confirmation prompts."
       ],
       "success": "Confirm Replacements produced the requested buffer and cursor state."
     }
@@ -254,6 +259,11 @@ const lessons = [
       ":%s",
       "g",
       "gc",
+      "y",
+      "n",
+      "a",
+      "l",
+      "q",
       ":%s//"
     ],
     "task": "",
@@ -288,8 +298,8 @@ const lessons = [
       },
       {
         "key": "gc",
-        "description": "The c flag asks before each replacement so broad edits remain controlled.",
-        "sequence": ":%s/old/new/gc<Enter>"
+        "description": "The c flag enters confirmation mode; y accepts, n skips, a accepts all, l accepts and stops, and q quits.",
+        "sequence": ":%s/old/new/gc<Enter>ynl"
       },
       {
         "key": ":%s//",

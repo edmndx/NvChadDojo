@@ -47,13 +47,13 @@ const lessons = [
     "id": "git-undo-stage",
     "title": "Undo the latest hunk stage",
     "eyebrow": "Advanced Git Workflows",
-    "summary": "Map Space h u to Gitsigns undo_stage_hunk when you need to reverse the last stage operation without discarding edits.",
-    "detail": "Map Space h u to Gitsigns undo_stage_hunk when you need to reverse the last stage operation without discarding edits.",
+    "summary": "Map Space h u to Gitsigns stage_hunk and invoke it on a staged sign to unstage that current hunk without discarding working-tree edits.",
+    "detail": "Gitsigns deprecates undo_stage_hunk. The current stage_hunk action toggles a staged hunk back to unstaged; it acts on the hunk under the cursor, not a global history of stage operations.",
     "keys": [
       "Space hu",
-      ":Gitsigns undo_stage_hunk"
+      ":Gitsigns stage_hunk"
     ],
-    "task": "Undo the latest hunk stage.",
+    "task": "Unstage the current staged hunk while keeping its working-tree edit.",
     "sequence": "<Space>hu",
     "code": [
       "staged -> unstaged",
@@ -141,7 +141,7 @@ const lessons = [
       "Space hd",
       "Space hD",
       "Space hu",
-      ":Gitsigns undo_stage_hunk",
+      ":Gitsigns stage_hunk",
       "M",
       "h",
       "l",
@@ -190,12 +190,12 @@ const lessons = [
       },
       {
         "key": "Space hu",
-        "description": "Map Space h u to Gitsigns undo_stage_hunk when you need to reverse the last stage operation without discarding edits.",
+        "description": "Map Space h u to stage_hunk; on a staged sign it unstages the current hunk without discarding the working-tree edit.",
         "sequence": "<Space>hu"
       },
       {
-        "key": ":Gitsigns undo_stage_hunk",
-        "description": "Map Space h u to Gitsigns undo_stage_hunk when you need to reverse the last stage operation without discarding edits.",
+        "key": ":Gitsigns stage_hunk",
+        "description": "Gitsigns deprecates undo_stage_hunk; use stage_hunk on a staged sign to unstage that current hunk.",
         "sequence": "<Space>hu"
       },
       {

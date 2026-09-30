@@ -36,7 +36,7 @@ const lessons = [
       "]d"
     ],
     "task": "Rename, inspect references, format, and check diagnostics.",
-    "sequence": "grngrr<Space>fm]d",
+    "sequence": "grnrenamed<Enter>grr<Space>fm]d",
     "code": [
       "src/cart.ts",
       "src/checkout.ts",
@@ -50,7 +50,7 @@ const lessons = [
     "title": "Review and commit a refactor",
     "eyebrow": "Multi-file Challenges",
     "summary": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
-    "detail": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+    "detail": "Preview changed hunks, stage the buffer, inspect Git status, open LazyGit, enter a commit message, and confirm it.",
     "keys": [
       "Space hp",
       "Space hS",
@@ -58,8 +58,8 @@ const lessons = [
       ":LazyGit",
       "c"
     ],
-    "task": "Preview, stage, inspect status, and open the commit workflow.",
-    "sequence": "<Space>hp<Space>hS<Space>gt:LazyGit<Enter>c",
+    "task": "Preview, stage, inspect status, and commit with the message refactor complete.",
+    "sequence": "<Space>hp<Space>hS<Space>gt:LazyGit<Enter>crefactor<Space>complete<Enter>",
     "code": [
       "M src/cart.ts",
       "M src/checkout.ts",
@@ -116,7 +116,7 @@ const lessons = [
       {
         "key": "grn",
         "description": "Rename a symbol semantically across the project.",
-        "sequence": "grn"
+        "sequence": "grnrenamed<Enter>"
       },
       {
         "key": "grr",
@@ -155,8 +155,8 @@ const lessons = [
       },
       {
         "key": "c",
-        "description": "Create a commit from the staged changes in LazyGit.",
-        "sequence": "c"
+        "description": "Open the commit prompt, enter a non-empty message, and confirm it.",
+        "sequence": "crefactor<Space>complete<Enter>"
       }
     ]
   }
