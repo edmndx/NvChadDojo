@@ -67,7 +67,7 @@ export function useTrainer(lesson: Lesson) {
   const handleKey = (event: ReactKeyboardEvent<HTMLDivElement>) => {
     if (session.tab === "settings") return;
     event.preventDefault();
-    const { actions, timers } = processTrainerKey(event.nativeEvent, {
+    const { actions, timers } = processTrainerKey(event, {
       ...exercise,
       lesson,
       session,

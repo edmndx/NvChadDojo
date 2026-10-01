@@ -31,7 +31,7 @@ export type TimedTrainerAction = {
   action: () => TrainerAction;
 };
 export function processTrainerKey(
-  event: KeyboardEvent,
+  event: { key: string; nativeEvent: KeyboardEvent },
   context: TrainerKeyContext,
 ) {
   const {
@@ -56,7 +56,7 @@ export function processTrainerKey(
   const output = { actions, timers };
 
   if (session.tab === "minigame") {
-    const token = normalizeKey(event);
+    const token = normalizeKey(event.nativeEvent);
     if (!token || !gameKeys.length) return output;
     if (token === gameKeys[session.gameIndex]) {
       if (session.gameIndex + 1 === gameKeys.length) {
@@ -130,7 +130,7 @@ export function processTrainerKey(
     });
     return output;
   }
-  const rawToken = arrowMap[event.key] || normalizeKey(event);
+  const rawToken = arrowMap[event.key] || normalizeKey(event.nativeEvent);
   if (!rawToken) return output;
   const activeRemaps =
     session.engine.mode === "insert" ? remaps.insert : remaps.normal;
