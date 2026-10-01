@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 import type { Lesson } from "../curriculum";
 import { createChallengeDefinition } from "../challengeModel";
-import { startingCursor } from "../lessonRuntime";
 import {
-  createLessonVimState,
+  createLessonFixture,
   miniGameTargets,
   resolveLessonPractice,
 } from "../practiceModel";
@@ -13,12 +12,12 @@ export function createLessonTrainerSession(lesson: Lesson) {
   const drill = (lesson.drills || [
     { goal: lesson.task, code: lesson.code },
   ])[0];
-  const cursor = startingCursor(lesson, drill.code);
+  const { cursor, state } = createLessonFixture(lesson, drill.code);
   return createTrainerSession(
     lesson,
     drill.code,
     cursor,
-    createLessonVimState(lesson, drill.code, cursor),
+    state,
     miniGameTargets(lesson)[0] || lesson.sequence,
   );
 }
@@ -45,13 +44,9 @@ export function useTrainerExercise(lesson: Lesson, session: TrainerSession) {
         ?.acceptedSequences || [required]),
     ];
   }, [practice, required, session.step]);
-  const initialCursor = useMemo(
-    () => startingCursor(lesson, drill.code),
+  const { cursor: initialCursor, state: initialState } = useMemo(
+    () => createLessonFixture(lesson, drill.code),
     [lesson, drill.code],
-  );
-  const initialState = useMemo(
-    () => createLessonVimState(lesson, drill.code, initialCursor),
-    [drill.code, initialCursor, lesson],
   );
   const outcomeEnabled = practice.kind === "vim";
   const scenarioEnabled = practice.kind === "scenario";
