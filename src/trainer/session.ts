@@ -28,7 +28,6 @@ export type TrainerSession = {
 };
 
 export type TrainerAction =
-  | { type: "update"; value: Partial<TrainerSession> }
   | { type: "patch"; value: Partial<TrainerSession> }
   | { type: "reset"; value: TrainerSession }
   | { type: "select-tab"; tab: TrainerTab }
