@@ -5,10 +5,15 @@ import {
   prefetchLesson,
   type Lesson,
 } from "../curriculum";
+const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
 function lessonIndexFromPath() {
   try {
     const id = decodeURIComponent(
-      window.location.pathname.replace(/^\/lessons\/?/, "").replace(/\/$/, ""),
+      window.location.pathname
+        .slice(basePath.length)
+        .replace(/^\/lessons\/?/, "")
+        .replace(/\/$/, ""),
     );
     const index = lessonSummaries.findIndex((lesson) => lesson.id === id);
     return index >= 0 ? index : 0;
@@ -27,7 +32,7 @@ export function useCourse() {
   const selectLesson = useCallback((index: number, replace = false) => {
     const safeIndex = Math.max(0, Math.min(lessonSummaries.length - 1, index));
     setCurrent(safeIndex);
-    const path = `/lessons/${lessonSummaries[safeIndex].id}`;
+    const path = `${basePath}/lessons/${lessonSummaries[safeIndex].id}`;
     if (window.location.pathname !== path)
       window.history[replace ? "replaceState" : "pushState"]({}, "", path);
     window.scrollTo(0, 0);
@@ -56,7 +61,7 @@ export function useCourse() {
   }, [current, summary.id]);
 
   useEffect(() => {
-    if (!window.location.pathname.startsWith("/lessons/"))
+    if (!window.location.pathname.startsWith(`${basePath}/lessons/`))
       selectLesson(current, true);
     const restore = () => {
       setCurrent(lessonIndexFromPath());

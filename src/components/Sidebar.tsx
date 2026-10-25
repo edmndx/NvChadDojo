@@ -12,14 +12,14 @@ export function Brand() {
     <div className="brand">
       <img
         className="brand-mark"
-        src="/logo.png?v=3"
+        src={`${import.meta.env.BASE_URL}logo.png?v=3`}
         width={52}
         height={52}
         alt=""
       />
       <img
         className="brand-wordmark"
-        src="/wordmark.png"
+        src={`${import.meta.env.BASE_URL}wordmark.png`}
         width={106}
         height={52}
         alt="NvChadDojo"

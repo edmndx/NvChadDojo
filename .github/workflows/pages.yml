@@ -1,0 +1,51 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build -- --base=/NvChadDojo/
+      - name: Add static lesson entry pages
+        run: |
+          node --experimental-strip-types --input-type=module <<'NODE'
+          import { copyFile, mkdir, writeFile } from "node:fs/promises";
+          import { lessonSummaries } from "./src/curriculum/catalog.generated.ts";
+
+          for (const { id } of lessonSummaries) {
+            const directory = `dist/lessons/${id}`;
+            await mkdir(directory, { recursive: true });
+            await copyFile("dist/index.html", `${directory}/index.html`);
+          }
+          await copyFile("dist/index.html", "dist/404.html");
+          await writeFile("dist/.nojekyll", "");
+          NODE
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v5
