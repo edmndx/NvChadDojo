@@ -10,22 +10,25 @@ import {
 import { Command, RotateCcw } from "lucide-react";
 import type { Lesson } from "../curriculum";
 import { challengeReached, createChallengeDefinition } from "../challengeModel";
-import { applyVimKey, createVimState } from "../vimEngine";
+import { applyVimTokens } from "../vimEngine";
+import { challengeInstruction, commandState } from "../lessonRuntime";
 import {
-  acceptedCommands,
-  challengeInstruction,
-  challengeSteps,
-  commandState,
-  startingCursor,
-  supportsOutcomeValidation,
-} from "../lessonRuntime";
-import {
-  canonicalPracticeSequence,
   commandTokens,
   displayKey,
+  matchAcceptedInput,
   normalizeKey,
+  shouldCancelPendingInput,
   tokenizeSequence,
 } from "../keyboard";
+import {
+  createLessonVimState,
+  miniGameTargets,
+  practiceContextLabel,
+  resolveLessonPractice,
+  runScenario,
+  scenarioAsVimState,
+  scenarioReached,
+} from "../practiceModel";
 import {
   defaultPreferences,
   defaultRemaps,
@@ -37,6 +40,7 @@ import {
   type TrainerPreferences,
 } from "../trainerSettings";
 import { createTrainerSession, reduceTrainerSession } from "../trainer/session";
+import { getPracticeFixture } from "../lessonExamples";
 import { syntaxLine } from "./CodeLine";
 
 function TrainerClock() {
@@ -274,10 +278,29 @@ function SettingsPanel({
 
 export function Trainer({ lesson }: { lesson: Lesson }) {
   const drills = lesson.drills || [{ goal: lesson.task, code: lesson.code }];
-  const firstCursor = startingCursor(lesson, drills[0].code);
+  const practice = useMemo(() => resolveLessonPractice(lesson), [lesson]);
+  const gameTargets = useMemo(() => miniGameTargets(lesson), [lesson]);
+  const firstFixture = getPracticeFixture(
+    lesson,
+    practice.kind === "reference"
+      ? lesson.sequence
+      : practice.steps[0]?.acceptedSequences[0] || lesson.sequence,
+    drills[0].code,
+  );
+  const firstCursor = firstFixture.cursor;
+  const firstState = useMemo(
+    () => createLessonVimState(lesson, firstFixture.code, firstCursor),
+    [lesson, firstFixture.code, firstCursor.line, firstCursor.col],
+  );
   const [session, dispatch] = useReducer(
     reduceTrainerSession,
-    createTrainerSession(lesson, drills[0].code, firstCursor),
+    createTrainerSession(
+      lesson,
+      firstFixture.code,
+      firstCursor,
+      firstState,
+      gameTargets[0] || lesson.sequence,
+    ),
   );
   const [preferences, setPreferences] = useState<TrainerPreferences>(
     loadTrainerPreferences,
@@ -292,18 +315,40 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
   const box = useRef<HTMLDivElement>(null);
   const resultTimer = useRef<number | undefined>(undefined);
   const shortTimers = useRef<number[]>([]);
-  const drill = drills[Math.min(session.round, drills.length - 1)];
-  const steps = useMemo(() => challengeSteps(lesson), [lesson]);
+  const roundDrill = drills[Math.min(session.round, drills.length - 1)];
+  const steps = useMemo(
+    () =>
+      practice.kind === "reference"
+        ? []
+        : practice.steps.map(
+            (step) => step.acceptedSequences[0] || lesson.sequence,
+          ),
+    [lesson.sequence, practice],
+  );
   const required = steps[Math.min(session.step, steps.length - 1)];
-  const accepted = useMemo(
-    () => acceptedCommands(lesson, required),
-    [lesson, required],
+  const fixture = getPracticeFixture(
+    lesson,
+    required || lesson.sequence,
+    roundDrill.code,
   );
+  const drill = { ...roundDrill, code: fixture.code };
+  const accepted = useMemo(() => {
+    if (practice.kind === "reference") return [];
+    return [
+      ...(practice.steps[Math.min(session.step, practice.steps.length - 1)]
+        ?.acceptedSequences || [required]),
+    ];
+  }, [practice, required, session.step]);
   const initialCursor = useMemo(
-    () => startingCursor(lesson, drill.code),
-    [lesson, drill.code],
+    () => fixture.cursor,
+    [fixture.cursor.line, fixture.cursor.col],
   );
-  const outcomeEnabled = supportsOutcomeValidation(lesson);
+  const initialState = useMemo(
+    () => createLessonVimState(lesson, drill.code, initialCursor),
+    [drill.code, initialCursor, lesson],
+  );
+  const outcomeEnabled = practice.kind === "vim";
+  const scenarioEnabled = practice.kind === "scenario";
   const challengeDefinition = useMemo(
     () =>
       outcomeEnabled
@@ -312,32 +357,62 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
             initialCursor,
             drill.goal,
             accepted,
+            initialState,
           )
         : null,
-    [accepted, drill.code, drill.goal, initialCursor, outcomeEnabled],
+    [
+      accepted,
+      drill.code,
+      drill.goal,
+      initialCursor,
+      initialState,
+      outcomeEnabled,
+    ],
   );
   const shownState = session.result || session.engine;
-  const gameTargets = useMemo(
-    () => [
-      ...new Set([
-        lesson.sequence,
-        ...lesson.keys
-          .map(canonicalPracticeSequence)
-          .filter((value) => value && !/[{}]/.test(value)),
-      ]),
-    ],
-    [lesson],
-  );
+  const language = fixture.language;
   const gameKeys = tokenizeSequence(session.gameTarget);
+  const moreSteps = session.step + 1 < steps.length;
+  const advance = () => {
+    const nextStep = moreSteps ? session.step + 1 : 0;
+    const nextRound = moreSteps
+      ? session.round
+      : (session.round + 1) % drills.length;
+    const nextDrill = drills[Math.min(nextRound, drills.length - 1)];
+    const nextFixture = getPracticeFixture(
+      lesson,
+      steps[nextStep],
+      nextDrill.code,
+    );
+    dispatch({
+      type: "patch",
+      value: {
+        step: nextStep,
+        round: nextRound,
+        result: null,
+        ...(scenarioEnabled ? { feedback: "", typed: "", hint: 0 } : {}),
+        engine: createLessonVimState(
+          lesson,
+          nextFixture.code,
+          nextFixture.cursor,
+        ),
+      },
+    });
+    if (scenarioEnabled) box.current?.focus();
+  };
 
   const reset = () => {
     window.clearTimeout(resultTimer.current);
+    shortTimers.current.forEach(window.clearTimeout);
+    shortTimers.current = [];
     dispatch({
       type: "reset",
       value: createTrainerSession(
         lesson,
-        drills[0].code,
-        startingCursor(lesson, drills[0].code),
+        firstFixture.code,
+        firstCursor,
+        createLessonVimState(lesson, firstFixture.code, firstCursor),
+        gameTargets[0] || lesson.sequence,
       ),
     });
     setClockKey((value) => value + 1);
@@ -359,24 +434,35 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
   }, [preferences, savedRemapText]);
 
   const handleKey = (event: ReactKeyboardEvent<HTMLDivElement>) => {
+    if (event.target !== event.currentTarget) return;
+    if (event.metaKey) return;
     if (session.tab === "minigame") {
-      event.preventDefault();
-      const token = normalizeKey(event.nativeEvent);
+      const token =
+        event.key === "Backspace" ? "<BS>" : normalizeKey(event.nativeEvent);
       if (!token || !gameKeys.length) return;
-      if (token === gameKeys[session.gameIndex]) {
+      const expected =
+        gameKeys[session.gameIndex] === " "
+          ? "<Space>"
+          : gameKeys[session.gameIndex];
+      if (event.key === "Tab" && token !== expected) return;
+      event.preventDefault();
+      if (token === expected) {
         if (session.gameIndex + 1 === gameKeys.length) {
-          const alternatives = gameTargets.filter(
-            (target) => target !== session.gameTarget,
+          const currentTarget = Math.max(
+            0,
+            gameTargets.indexOf(session.gameTarget),
           );
+          const nextTarget = gameTargets.length
+            ? gameTargets[(currentTarget + 1) % gameTargets.length]
+            : session.gameTarget;
           dispatch({
             type: "patch",
             value: {
               gameRounds: session.gameRounds + 1,
               streak: session.streak + 1,
               gameIndex: 0,
-              gameTarget: alternatives.length
-                ? alternatives[Math.floor(Math.random() * alternatives.length)]
-                : session.gameTarget,
+              gameTarget: nextTarget,
+              engine: createLessonVimState(lesson, drill.code, initialCursor),
             },
           });
         } else
@@ -385,6 +471,17 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
             value: { gameIndex: session.gameIndex + 1 },
           });
       } else {
+        if (token === "<Esc>" || event.key === "Backspace") {
+          dispatch({
+            type: "patch",
+            value: {
+              gameIndex:
+                token === "<Esc>" ? 0 : Math.max(0, session.gameIndex - 1),
+              wrong: false,
+            },
+          });
+          return;
+        }
         dispatch({
           type: "patch",
           value: {
@@ -404,6 +501,20 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
       return;
     }
     if (session.tab !== "challenge") return;
+    if (session.result && scenarioEnabled) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        advance();
+      }
+      return;
+    }
+    if (
+      event.key === "Tab" &&
+      !accepted.some((option) =>
+        option.startsWith(session.typed + normalizeKey(event.nativeEvent)),
+      )
+    )
+      return;
     event.preventDefault();
     if (session.result) return;
     if (event.key === "Backspace") {
@@ -411,8 +522,10 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
         type: "patch",
         value: {
           typed: "",
+          remapPending: "",
           wrong: false,
-          feedback: "Pending command cleared. You are back in Normal mode.",
+          feedback: "Attempt reset to its starting state.",
+          engine: createLessonVimState(lesson, drill.code, initialCursor),
         },
       });
       return;
@@ -460,34 +573,61 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
     } else if (session.remapPending) {
       typedPrefix = session.remapPending;
       engineBase = outcomeEnabled
-        ? applyVimKey(session.engine, session.remapPending)
+        ? applyVimTokens(session.engine, tokenizeSequence(session.remapPending))
         : session.engine;
     } else if (activeRemaps[rawToken]) token = activeRemaps[rawToken];
     if (
-      token === "<Esc>" &&
-      session.engine.mode === "normal" &&
-      (session.engine.pending || session.typed)
+      shouldCancelPendingInput(
+        token,
+        session.engine.mode,
+        session.engine.pending,
+        session.typed,
+        session.remapPending,
+        accepted,
+      )
     ) {
       dispatch({
         type: "patch",
         value: {
           typed: "",
           remapPending: "",
-          feedback: "Pending command cancelled. Normal mode restored.",
-          engine: createVimState(drill.code, initialCursor),
+          feedback: "Attempt cancelled and reset to its starting state.",
+          engine: createLessonVimState(lesson, drill.code, initialCursor),
         },
       });
       return;
     }
-    const nextTyped = session.typed + typedPrefix + token;
+    const matchedInput = matchAcceptedInput(
+      session.typed,
+      typedPrefix,
+      token,
+      accepted,
+    );
+    const nextTyped = matchedInput.value;
     const nextEngine = outcomeEnabled
-      ? applyVimKey(engineBase, token)
+      ? applyVimTokens(engineBase, tokenizeSequence(token))
       : session.engine;
     const completeCommand = accepted.includes(nextTyped);
+    const expectedScenario =
+      scenarioEnabled && completeCommand
+        ? runScenario(
+            lesson,
+            accepted.find((option) => option === nextTyped)!,
+          )
+        : null;
+    const actualScenario =
+      scenarioEnabled && completeCommand
+        ? runScenario(lesson, nextTyped)
+        : null;
     const reached = challengeDefinition
       ? completeCommand && challengeReached(challengeDefinition, nextEngine)
-      : completeCommand;
-    const viable = accepted.some((option) => option.startsWith(nextTyped));
+      : expectedScenario && actualScenario
+        ? scenarioReached(expectedScenario, actualScenario)
+        : completeCommand;
+    const resultState = actualScenario
+      ? scenarioAsVimState(nextEngine, actualScenario)
+      : nextEngine;
+    const viable = matchedInput.viable;
     if (viable || reached) {
       dispatch({
         type: "patch",
@@ -499,42 +639,28 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
           engine: nextEngine,
         },
       });
-      if (reached || accepted.includes(nextTyped)) {
-        const moreSteps = session.step + 1 < steps.length;
+      if (reached) {
         dispatch({
           type: "patch",
           value: {
             typed: "",
             hint: 0,
-            result: nextEngine,
-            feedback: moreSteps
-              ? `Good. Step ${session.step + 1} worked.`
-              : lesson.challenge?.success || "Target state reached.",
+            result: resultState,
+            feedback: scenarioEnabled
+              ? moreSteps
+                ? `Correct shortcut for step ${session.step + 1}.`
+                : "Correct shortcut."
+              : moreSteps
+                ? `Good. Step ${session.step + 1} worked.`
+                : lesson.challenge?.success || "Target state reached.",
             streak: moreSteps ? session.streak : session.streak + 1,
           },
         });
-        resultTimer.current = window.setTimeout(
-          () => {
-            const nextStep = moreSteps ? session.step + 1 : 0;
-            const nextRound = moreSteps
-              ? session.round
-              : (session.round + 1) % drills.length;
-            const nextDrill = drills[Math.min(nextRound, drills.length - 1)];
-            dispatch({
-              type: "patch",
-              value: {
-                step: nextStep,
-                round: nextRound,
-                result: null,
-                engine: createVimState(
-                  nextDrill.code,
-                  startingCursor(lesson, nextDrill.code),
-                ),
-              },
-            });
-          },
-          preferences.animateResults ? 1500 : 350,
-        );
+        if (!scenarioEnabled)
+          resultTimer.current = window.setTimeout(
+            advance,
+            preferences.animateResults ? 1500 : 350,
+          );
       }
     } else {
       const expected =
@@ -551,7 +677,9 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
           streak: 0,
           wrong: true,
           remapPending: "",
-          feedback: `That breaks the command. Expected ${displayKey(expected)}, not ${displayKey(token)}.`,
+          typed: "",
+          engine: createLessonVimState(lesson, drill.code, initialCursor),
+          feedback: `Expected ${displayKey(expected)}; received ${displayKey(token)}. Try the sequence again from the starting state.`,
         },
       });
       shortTimers.current.push(
@@ -561,8 +689,6 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
               type: "patch",
               value: {
                 wrong: false,
-                typed: "",
-                engine: createVimState(drill.code, initialCursor),
               },
             }),
           650,
@@ -597,14 +723,22 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
 
   const renderLine = (line: string, index: number) => {
     const active = index === shownState.cursor.line;
-    let content: ReactNode = syntaxLine(line);
+    const highlight = { language, lines: shownState.lines, lineIndex: index };
+    let content: ReactNode = syntaxLine(line, highlight);
     if (active) {
       const col = Math.min(shownState.cursor.col, line.length);
       content = (
         <>
-          {syntaxLine(line.slice(0, col))}
-          <i className="sim-cursor inline" />
-          {syntaxLine(line.slice(col))}
+          {col > 0 && syntaxLine(line, { ...highlight, end: col })}
+          <span
+            className={`sim-cursor inline ${shownState.mode === "insert" ? "insert" : ""}`}
+          >
+            {line[col]
+              ? syntaxLine(line, { ...highlight, start: col, end: col + 1 })
+              : " "}
+          </span>
+          {col + 1 < line.length &&
+            syntaxLine(line, { ...highlight, start: col + 1 })}
         </>
       );
     }
@@ -621,7 +755,14 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
       tabIndex={0}
       ref={box}
       onKeyDown={handleKey}
-      onClick={() => box.current?.focus()}
+      onClick={(event) => {
+        if (
+          !(event.target as HTMLElement).closest(
+            "input, textarea, select, button",
+          )
+        )
+          box.current?.focus();
+      }}
     >
       <div className="trainer-head">
         <div
@@ -635,7 +776,29 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
               role="tab"
               aria-selected={session.tab === tab}
               className={session.tab === tab ? "active" : ""}
-              onClick={() => dispatch({ type: "select-tab", tab })}
+              onClick={() => {
+                window.clearTimeout(resultTimer.current);
+                shortTimers.current.forEach(window.clearTimeout);
+                shortTimers.current = [];
+                dispatch({
+                  type: "patch",
+                  value: {
+                    tab,
+                    typed: "",
+                    remapPending: "",
+                    result: null,
+                    wrong: false,
+                    feedback: "",
+                    gameIndex: 0,
+                    engine: createLessonVimState(
+                      lesson,
+                      drill.code,
+                      initialCursor,
+                    ),
+                  },
+                });
+                if (tab !== "settings") box.current?.focus();
+              }}
               key={tab}
             >
               {tab === "minigame"
@@ -659,6 +822,12 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
       </div>
       {session.tab === "challenge" && (
         <>
+          {scenarioEnabled && (
+            <p className="shortcut-note">
+              Practice the shortcut here; use it in Neovim to perform the
+              action.
+            </p>
+          )}
           <div
             className={`code-area ${preferences.lineNumberMode === "none" ? "no-gutter" : ""}`}
           >
@@ -697,9 +866,16 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
             <strong>
               {outcomeEnabled
                 ? `${session.engine.mode.toUpperCase().replace("-", " ")}${session.engine.pending ? " · PENDING" : ""}`
-                : commandState(session.typed, lesson)}
+                : practiceContextLabel(lesson) ||
+                  commandState(session.typed, lesson)}
             </strong>
-            <span>Lua</span>
+            <span>
+              {scenarioEnabled
+                ? "Shortcut practice"
+                : language === "lua"
+                  ? "Lua"
+                  : "JavaScript"}
+            </span>
             <span className="status-spacer" />
             <span>
               Ln {shownState.cursor.line + 1}, Col {shownState.cursor.col + 1}
@@ -717,6 +893,7 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
                 {session.attempts ? ` · ${session.attempts} RETRIES` : ""}
               </small>
               <p>
+                {scenarioEnabled && "Practice this shortcut: "}
                 {challengeInstruction(
                   lesson,
                   required,
@@ -742,7 +919,10 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
               <div className="hint-actions">
                 <button
                   type="button"
-                  onClick={() => dispatch({ type: "next-hint" })}
+                  onClick={() => {
+                    dispatch({ type: "next-hint" });
+                    box.current?.focus();
+                  }}
                 >
                   {session.hint ? "next hint" : "hint"}
                 </button>
@@ -765,13 +945,35 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
               </div>
             )}
           </div>
+          {scenarioEnabled && session.result && (
+            <div className="scenario-result" role="status">
+              <strong>
+                {JSON.stringify(session.result.lines) !==
+                JSON.stringify(drill.code)
+                  ? "Example result"
+                  : "What this shortcut does"}
+              </strong>
+              <p>{session.result.message}</p>
+              <button type="button" onClick={advance}>
+                {moreSteps
+                  ? "Next step"
+                  : drills.length > 1
+                    ? "Try next example"
+                    : "Practice again"}
+              </button>
+            </div>
+          )}
         </>
       )}
       {session.tab === "minigame" && (
         <div className="trainer-panel minigame-panel">
           <small>KEY SEQUENCE SPRINT</small>
           <h3>Type the highlighted command</h3>
-          <p>Each completed round chooses another command from this lesson.</p>
+          <p>
+            Context: {practiceContextLabel(lesson)}. Each completed round uses
+            another complete action from this lesson.
+          </p>
+          {scenarioEnabled && <p>This game checks shortcut recall.</p>}
           <div className="game-sequence">
             {gameKeys.map((key, index) => (
               <kbd
@@ -823,11 +1025,14 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
           {session.feedback}
         </div>
       )}
-      {session.tab === "challenge" && !session.typed && (
-        <div className="focus-note">
-          Click here, then type the sequence · Esc cancels
-        </div>
-      )}
+      {session.tab === "challenge" &&
+        !scenarioEnabled &&
+        !session.typed &&
+        !session.result && (
+          <div className="focus-note">
+            Click here, then type the sequence · Esc cancels
+          </div>
+        )}
     </div>
   );
 }

@@ -7,20 +7,42 @@ const lessons = [
     "title": "Find and open a symbol in a split",
     "eyebrow": "Multi-file Challenges",
     "summary": "Search project text, choose a result, and open it in a vertical split without leaving the picker workflow.",
-    "detail": "Search project text, choose a result, and open it in a vertical split without leaving the picker workflow.",
+    "detail": "Ripgrep must be installed and the project must contain matches. Type the query and wait for results before moving or opening a split.",
     "keys": [
       "Space fw",
       "Ctrl+n",
       "Ctrl+v"
     ],
-    "task": "Open live grep, move to a result, and open it vertically.",
-    "sequence": "<Space>fw<C-n><C-v>",
+    "task": "Search for calculateTotal with live grep, choose the next result, and open it vertically.",
+    "sequence": "<Space>fwcalculateTotal<C-n><C-v>",
     "code": [
       "> Live Grep: calculateTotal",
       "  src/cart.ts",
       "  src/checkout.ts"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space fw",
+        "description": "Search project text, choose a result, and open it in a vertical split without leaving the picker workflow.",
+        "sequence": "<Space>fw"
+      },
+      {
+        "key": "Ctrl+n",
+        "description": "Search project text, choose a result, and open it in a vertical split without leaving the picker workflow.",
+        "sequence": "<C-n>"
+      },
+      {
+        "key": "Ctrl+v",
+        "description": "Search project text, choose a result, and open it in a vertical split without leaving the picker workflow.",
+        "sequence": "<C-v>"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Multi-file Challenges",
@@ -28,7 +50,7 @@ const lessons = [
     "title": "Refactor across several files",
     "eyebrow": "Multi-file Challenges",
     "summary": "Rename a symbol semantically, inspect references, format the result, and check the next diagnostic.",
-    "detail": "Rename a symbol semantically, inspect references, format the result, and check the next diagnostic.",
+    "detail": "Clear the prefilled rename prompt before entering renamed. Wait for rename and references; after the default references quickfix opens, Ctrl+w p returns to the editor before formatting. A diagnostic must exist to navigate to one.",
     "keys": [
       "grn",
       "grr",
@@ -36,13 +58,43 @@ const lessons = [
       "]d"
     ],
     "task": "Rename, inspect references, format, and check diagnostics.",
-    "sequence": "grngrr<Space>fm]d",
+    "sequence": "grn<C-u>renamed<Enter>grr<C-w>p<Space>fm]d",
     "code": [
-      "src/cart.ts",
-      "src/checkout.ts",
-      "tests/cart.test.ts"
+      "const total = calculateTotal([12, 8]);",
+      "console.log(total);",
+      "",
+      "function calculateTotal(items) {",
+      "  return items.reduce((sum, item) => sum + item, 0);",
+      "}"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "grn",
+        "description": "With a supporting LSP, clear the prefilled rename prompt, enter newName, and confirm.",
+        "sequence": "grn<C-u>newName<Enter>"
+      },
+      {
+        "key": "grr",
+        "description": "With a supporting LSP, request references. The default handler opens a quickfix list.",
+        "sequence": "grr"
+      },
+      {
+        "key": "Space fm",
+        "description": "In Normal or Visual mode, format through Conform with an available formatter or LSP fallback.",
+        "sequence": "<Space>fm"
+      },
+      {
+        "key": "]d",
+        "description": "Rename a symbol semantically, inspect references, format the result, and check the next diagnostic.",
+        "sequence": "]d"
+      }
+    ],
+    "cursor": [
+      0,
+      14
+    ],
+    "language": "javascript"
   },
   {
     "group": "Multi-file Challenges",
@@ -50,7 +102,7 @@ const lessons = [
     "title": "Review and commit a refactor",
     "eyebrow": "Multi-file Challenges",
     "summary": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
-    "detail": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+    "detail": "With the suggested Gitsigns mappings configured, preview and stage the current buffer. Inspect Telescope Git status, close its picker with Ctrl+c, then launch LazyGit and commit the staged work. Other changed buffers require separate review/staging.",
     "keys": [
       "Space hp",
       "Space hS",
@@ -58,14 +110,46 @@ const lessons = [
       ":LazyGit",
       "c"
     ],
-    "task": "Preview, stage, inspect status, and open the commit workflow.",
-    "sequence": "<Space>hp<Space>hS<Space>gt:LazyGit<Enter>c",
+    "task": "Preview, stage, inspect status, and commit with the message refactor complete.",
+    "sequence": "<Space>hp<Space>hS<Space>gt<C-c>:LazyGit<Enter>crefactor<Space>complete<Enter>",
     "code": [
       "M src/cart.ts",
       "M src/checkout.ts",
       "M tests/cart.test.ts"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space hp",
+        "description": "With the suggested Gitsigns mapping installed and a Git hunk available: Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": "<Space>hp"
+      },
+      {
+        "key": "Space hS",
+        "description": "With the suggested Gitsigns mapping installed and a Git hunk available: Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": "<Space>hS"
+      },
+      {
+        "key": "Space gt",
+        "description": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": "<Space>gt"
+      },
+      {
+        "key": ":LazyGit",
+        "description": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": ":LazyGit<Enter>"
+      },
+      {
+        "key": "c",
+        "description": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": "c"
+      }
+    ],
+    "cursor": [
+      0,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Multi-file Challenges",
@@ -91,74 +175,211 @@ const lessons = [
     "task": "",
     "sequence": "<Space>fw<C-n><C-v>",
     "code": [
-      "src/cart.ts",
-      "src/checkout.ts",
-      "tests/cart.test.ts"
+      "> Live Grep: calculateTotal",
+      "  src/cart.ts",
+      "  src/checkout.ts"
     ],
     "tip": "Return to any multi-file workflow that still requires conscious recall.",
     "reviewOnly": true,
     "reviewItems": [
       {
         "key": "Space fw",
-        "description": "Open live grep to search project text before choosing a destination.",
-        "sequence": "<Space>fw"
+        "description": "Search project text, choose a result, and open it in a vertical split without leaving the picker workflow.",
+        "sequence": "<Space>fw",
+        "code": [
+          "> Live Grep: calculateTotal",
+          "  src/cart.ts",
+          "  src/checkout.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+n",
-        "description": "Move to the next Telescope result while keeping the picker open.",
-        "sequence": "<C-n>"
+        "description": "Search project text, choose a result, and open it in a vertical split without leaving the picker workflow.",
+        "sequence": "<C-n>",
+        "code": [
+          "> Live Grep: calculateTotal",
+          "  src/cart.ts",
+          "  src/checkout.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+v",
-        "description": "Open the selected Telescope result in a vertical split.",
-        "sequence": "<C-v>"
+        "description": "Search project text, choose a result, and open it in a vertical split without leaving the picker workflow.",
+        "sequence": "<C-v>",
+        "code": [
+          "> Live Grep: calculateTotal",
+          "  src/cart.ts",
+          "  src/checkout.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "grn",
-        "description": "Rename a symbol semantically across the project.",
-        "sequence": "grn"
+        "description": "With a supporting LSP, clear the prefilled rename prompt, enter newName, and confirm.",
+        "sequence": "grn<C-u>newName<Enter>",
+        "code": [
+          "const total = calculateTotal([12, 8]);",
+          "console.log(total);",
+          "",
+          "function calculateTotal(items) {",
+          "  return items.reduce((sum, item) => sum + item, 0);",
+          "}"
+        ],
+        "cursor": [
+          0,
+          14
+        ],
+        "language": "javascript"
       },
       {
         "key": "grr",
-        "description": "Inspect every reference to the symbol after the rename.",
-        "sequence": "grr"
+        "description": "With a supporting LSP, request references. The default handler opens a quickfix list.",
+        "sequence": "grr",
+        "code": [
+          "const total = calculateTotal([12, 8]);",
+          "console.log(total);",
+          "",
+          "function calculateTotal(items) {",
+          "  return items.reduce((sum, item) => sum + item, 0);",
+          "}"
+        ],
+        "cursor": [
+          0,
+          14
+        ],
+        "language": "javascript"
       },
       {
         "key": "Space fm",
-        "description": "Format the edited buffer after the refactor.",
-        "sequence": "<Space>fm"
+        "description": "In Normal or Visual mode, format through Conform with an available formatter or LSP fallback.",
+        "sequence": "<Space>fm",
+        "code": [
+          "const total = calculateTotal([12, 8]);",
+          "console.log(total);",
+          "",
+          "function calculateTotal(items) {",
+          "  return items.reduce((sum, item) => sum + item, 0);",
+          "}"
+        ],
+        "cursor": [
+          0,
+          14
+        ],
+        "language": "javascript"
       },
       {
         "key": "]d",
-        "description": "Move to the next diagnostic and verify the refactor.",
-        "sequence": "]d"
+        "description": "Rename a symbol semantically, inspect references, format the result, and check the next diagnostic.",
+        "sequence": "]d",
+        "code": [
+          "const total = calculateTotal([12, 8]);",
+          "console.log(total);",
+          "",
+          "function calculateTotal(items) {",
+          "  return items.reduce((sum, item) => sum + item, 0);",
+          "}"
+        ],
+        "cursor": [
+          0,
+          14
+        ],
+        "language": "javascript"
       },
       {
         "key": "Space hp",
-        "description": "Preview the current Git hunk before staging it.",
-        "sequence": "<Space>hp"
+        "description": "With the suggested Gitsigns mapping installed and a Git hunk available: Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": "<Space>hp",
+        "code": [
+          "M src/cart.ts",
+          "M src/checkout.ts",
+          "M tests/cart.test.ts"
+        ],
+        "cursor": [
+          0,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space hS",
-        "description": "Stage all hunks in the current buffer.",
-        "sequence": "<Space>hS"
+        "description": "With the suggested Gitsigns mapping installed and a Git hunk available: Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": "<Space>hS",
+        "code": [
+          "M src/cart.ts",
+          "M src/checkout.ts",
+          "M tests/cart.test.ts"
+        ],
+        "cursor": [
+          0,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space gt",
-        "description": "Open Telescope Git status to inspect the working tree.",
-        "sequence": "<Space>gt"
+        "description": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": "<Space>gt",
+        "code": [
+          "M src/cart.ts",
+          "M src/checkout.ts",
+          "M tests/cart.test.ts"
+        ],
+        "cursor": [
+          0,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": ":LazyGit",
-        "description": "Launch LazyGit for the final repository review and commit workflow.",
-        "sequence": ":LazyGit<Enter>"
+        "description": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": ":LazyGit<Enter>",
+        "code": [
+          "M src/cart.ts",
+          "M src/checkout.ts",
+          "M tests/cart.test.ts"
+        ],
+        "cursor": [
+          0,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "c",
-        "description": "Create a commit from the staged changes in LazyGit.",
-        "sequence": "c"
+        "description": "Preview changed hunks, stage the buffer, inspect Git status, then open LazyGit to commit.",
+        "sequence": "c",
+        "code": [
+          "M src/cart.ts",
+          "M src/checkout.ts",
+          "M tests/cart.test.ts"
+        ],
+        "cursor": [
+          0,
+          2
+        ],
+        "language": "text"
       }
-    ]
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   }
 ] satisfies readonly Lesson[];
 

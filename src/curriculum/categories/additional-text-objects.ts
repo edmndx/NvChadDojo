@@ -12,55 +12,67 @@ const lessons = [
       "i(",
       "a("
     ],
-    "task": "Change inside, then delete around parentheses.",
-    "sequence": "ci(<Esc>da(",
+    "task": "Change the text inside the pair to options; in the next fresh fixture, delete the complete pair.",
+    "sequence": "ci(options<Esc>",
     "code": [
-      "call(first, second)",
-      "local values = [one, two]",
-      "return values"
+      "// Function arguments",
+      "call(first, second);",
+      "console.log(result);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Change inside, then delete around parentheses. · repetition 1 of 3",
+        "goal": "Change the text inside the pair to options; in the next fresh fixture, delete the complete pair. · repetition 1 of 3",
         "code": [
-          "call(first, second)",
-          "local values = [one, two]",
-          "return values"
+          "// Function arguments",
+          "call(first, second);",
+          "console.log(result);"
         ]
       },
       {
-        "goal": "Change inside, then delete around parentheses. · repetition 2 of 3",
+        "goal": "Change the text inside the pair to options; in the next fresh fixture, delete the complete pair. · repetition 2 of 3",
         "code": [
-          "<Button>Save changes</Button>",
-          "<p>Helpful sentence.</p>",
-          "return view"
+          "// Nested calls",
+          "call(left, right);",
+          "console.log(result);"
         ]
       },
       {
-        "goal": "Change inside, then delete around parentheses. · repetition 3 of 3",
+        "goal": "Change the text inside the pair to options; in the next fresh fixture, delete the complete pair. · repetition 3 of 3",
         "code": [
-          "notify(user.name)",
-          "local tuple = [left, right]",
-          "return tuple"
+          "// Notification",
+          "call(user.name);",
+          "console.log(result);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Change inside, then delete around parentheses. Enter “options” where text is requested.",
+      "instruction": "Change the text inside the pair to options; in the next fresh fixture, delete the complete pair.",
       "replacement": "options",
       "cursor": [
         1,
-        0
+        7
       ],
       "hints": [
-        "Begin with i(.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Enter “options” before returning to Normal mode."
       ],
       "success": "The buffer now contains “options” in the intended location."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "i(",
+        "description": "Change the contents of parentheses to options.",
+        "sequence": "ci(options<Esc>"
+      },
+      {
+        "key": "a(",
+        "description": "Delete the parentheses and their contents.",
+        "sequence": "da("
+      }
+    ]
   },
   {
     "group": "Additional Text Objects",
@@ -73,55 +85,67 @@ const lessons = [
       "i[",
       "a["
     ],
-    "task": "Change inside, then delete around square brackets.",
-    "sequence": "ci[<Esc>da[",
+    "task": "Change the text inside the pair to items; in the next fresh fixture, delete the complete pair.",
+    "sequence": "ci[items<Esc>",
     "code": [
-      "call(first, second)",
-      "local values = [one, two]",
-      "return values"
+      "// Index expressions",
+      "const values = [one, two];",
+      "console.log(values);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Change inside, then delete around square brackets. · repetition 1 of 3",
+        "goal": "Change the text inside the pair to items; in the next fresh fixture, delete the complete pair. · repetition 1 of 3",
         "code": [
-          "call(first, second)",
-          "local values = [one, two]",
-          "return values"
+          "// Index expressions",
+          "const values = [one, two];",
+          "console.log(values);"
         ]
       },
       {
-        "goal": "Change inside, then delete around square brackets. · repetition 2 of 3",
+        "goal": "Change the text inside the pair to items; in the next fresh fixture, delete the complete pair. · repetition 2 of 3",
         "code": [
-          "<Button>Save changes</Button>",
-          "<p>Helpful sentence.</p>",
-          "return view"
+          "// Selected entries",
+          "const values = [left, right];",
+          "console.log(values);"
         ]
       },
       {
-        "goal": "Change inside, then delete around square brackets. · repetition 3 of 3",
+        "goal": "Change the text inside the pair to items; in the next fresh fixture, delete the complete pair. · repetition 3 of 3",
         "code": [
-          "notify(user.name)",
-          "local tuple = [left, right]",
-          "return tuple"
+          "// Array fixture",
+          "const values = [alpha, beta];",
+          "console.log(values);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Change inside, then delete around square brackets. Enter “items” where text is requested.",
+      "instruction": "Change the text inside the pair to items; in the next fresh fixture, delete the complete pair.",
       "replacement": "items",
       "cursor": [
         1,
-        0
+        17
       ],
       "hints": [
-        "Begin with i[.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Enter “items” before returning to Normal mode."
       ],
       "success": "The buffer now contains “items” in the intended location."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "i[",
+        "description": "Change the contents of square brackets to items.",
+        "sequence": "ci[items<Esc>"
+      },
+      {
+        "key": "a[",
+        "description": "Delete square brackets and their contents.",
+        "sequence": "da["
+      }
+    ]
   },
   {
     "group": "Additional Text Objects",
@@ -137,34 +161,34 @@ const lessons = [
     "task": "First change the contents of a tag to Save. Then delete a complete tag pair.",
     "sequence": "citSave<Esc>",
     "code": [
-      "return (",
-      "  <Button>Save changes</Button>",
-      ")"
+      "const markup =",
+      "  '<button>Save changes</button>';",
+      "console.log(markup);"
     ],
     "tip": "Read cit as change inside tag and dat as delete around tag.",
     "drills": [
       {
         "goal": "Practice changing inside and deleting around an HTML or JSX tag. · repetition 1 of 3",
         "code": [
-          "return (",
-          "  <Button>Save changes</Button>",
-          ")"
+          "const markup =",
+          "  '<button>Save changes</button>';",
+          "console.log(markup);"
         ]
       },
       {
         "goal": "Practice changing inside and deleting around an HTML or JSX tag. · repetition 2 of 3",
         "code": [
-          "const help = (",
-          "  <p>Helpful sentence.</p>",
-          ")"
+          "const markup =",
+          "  '<button>Helpful text.</button>';",
+          "console.log(markup);"
         ]
       },
       {
         "goal": "Practice changing inside and deleting around an HTML or JSX tag. · repetition 3 of 3",
         "code": [
-          "return (",
-          "  <Alert>Old message</Alert>",
-          ")"
+          "const markup =",
+          "  '<button>Old message</button>';",
+          "console.log(markup);"
         ]
       }
     ],
@@ -174,11 +198,11 @@ const lessons = [
       "replacement": "Save",
       "cursor": [
         1,
-        2
+        12
       ],
       "hints": [
-        "Pair c with it to form cit.",
-        "Type Save, then press Esc to finish the change.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Pair d with at to form dat."
       ],
       "success": "You used both inside-tag and around-tag text objects successfully."
@@ -207,55 +231,75 @@ const lessons = [
       "is",
       "as"
     ],
-    "task": "Change inside, then delete around a sentence.",
-    "sequence": "cis<Esc>das",
+    "task": "Change the current sentence to Configuration updated.; in the next fresh fixture, delete around the original sentence.",
+    "sequence": "cisConfiguration updated.<Esc>",
     "code": [
-      "call(first, second)",
-      "local values = [one, two]",
-      "return values"
+      "/*",
+      "  Review this setting. Keep this sentence.",
+      "  Update this option. Preserve this sentence.",
+      "  Finish this review. Leave this sentence.",
+      "*/"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Change inside, then delete around a sentence. · repetition 1 of 3",
+        "goal": "Change the current sentence to Configuration updated.; in the next fresh fixture, delete around the original sentence. · repetition 1 of 3",
         "code": [
-          "call(first, second)",
-          "local values = [one, two]",
-          "return values"
+          "/*",
+          "  Review this setting. Keep this sentence.",
+          "  Update this option. Preserve this sentence.",
+          "  Finish this review. Leave this sentence.",
+          "*/"
         ]
       },
       {
-        "goal": "Change inside, then delete around a sentence. · repetition 2 of 3",
+        "goal": "Change the current sentence to Configuration updated.; in the next fresh fixture, delete around the original sentence. · repetition 2 of 3",
         "code": [
-          "<Button>Save changes</Button>",
-          "<p>Helpful sentence.</p>",
-          "return view"
+          "/*",
+          "  Save these changes. Keep a backup.",
+          "  Review this message. Keep it concise.",
+          "  Publish the result. Notify the team.",
+          "*/"
         ]
       },
       {
-        "goal": "Change inside, then delete around a sentence. · repetition 3 of 3",
+        "goal": "Change the current sentence to Configuration updated.; in the next fresh fixture, delete around the original sentence. · repetition 3 of 3",
         "code": [
-          "notify(user.name)",
-          "local tuple = [left, right]",
-          "return tuple"
+          "/*",
+          "  Check the user name. Keep the identifier.",
+          "  Validate the tuple. Preserve its order.",
+          "  Return the result. Record the outcome.",
+          "*/"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Change inside, then delete around a sentence. Enter “Configuration updated.” where text is requested.",
+      "instruction": "Change the current sentence to Configuration updated.; in the next fresh fixture, delete around the original sentence.",
       "replacement": "Configuration updated.",
       "cursor": [
-        1,
-        0
+        2,
+        2
       ],
       "hints": [
-        "Begin with is.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Enter “Configuration updated.” before returning to Normal mode."
       ],
       "success": "The buffer now contains “Configuration updated.” in the intended location."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "is",
+        "description": "Change the current sentence while preserving adjacent whitespace.",
+        "sequence": "cisConfiguration updated.<Esc>"
+      },
+      {
+        "key": "as",
+        "description": "Delete the current sentence and adjacent whitespace.",
+        "sequence": "das"
+      }
+    ]
   },
   {
     "group": "Additional Text Objects",
@@ -275,54 +319,134 @@ const lessons = [
       "as"
     ],
     "task": "",
-    "sequence": "ci(<Esc>da(",
+    "sequence": "ci(options<Esc>",
+    "cursor": [
+      1,
+      18
+    ],
     "code": [
-      "call(first, second)",
-      "local values = [one, two]",
-      "return values"
+      "render(['<section>Intro. Review this value. Keep this sentence.</section>']);",
+      "render(['<section>Intro. Update this value. Preserve this sentence.</section>']);",
+      "render(['<section>Intro. Finish this value. Retain this sentence.</section>']);"
     ],
     "tip": "Return to any command in Additional Text Objects that still requires conscious recall.",
     "reviewOnly": true,
     "reviewItems": [
       {
         "key": "i(",
-        "description": "Parenthesis objects work from anywhere inside the surrounding pair.",
-        "sequence": "ci(<Esc>da("
+        "description": "Change the contents of parentheses to options.",
+        "sequence": "ci(options<Esc>",
+        "code": [
+          "// Function arguments",
+          "call(first, second);",
+          "console.log(result);"
+        ],
+        "cursor": [
+          1,
+          7
+        ]
       },
       {
         "key": "a(",
-        "description": "Parenthesis objects work from anywhere inside the surrounding pair.",
-        "sequence": "ci(<Esc>da("
+        "description": "Delete the parentheses and their contents.",
+        "sequence": "da(",
+        "code": [
+          "// Function arguments",
+          "call(first, second);",
+          "console.log(result);"
+        ],
+        "cursor": [
+          1,
+          7
+        ]
       },
       {
         "key": "i[",
-        "description": "Square-bracket objects target array and index expressions without manual selection.",
-        "sequence": "ci[<Esc>da["
+        "description": "Change the contents of square brackets to items.",
+        "sequence": "ci[items<Esc>",
+        "code": [
+          "// Index expressions",
+          "const values = [one, two];",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          17
+        ]
       },
       {
         "key": "a[",
-        "description": "Square-bracket objects target array and index expressions without manual selection.",
-        "sequence": "ci[<Esc>da["
+        "description": "Delete square brackets and their contents.",
+        "sequence": "da[",
+        "code": [
+          "// Index expressions",
+          "const values = [one, two];",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          17
+        ]
       },
       {
         "key": "it",
-        "description": "Tag objects target element contents or the complete opening and closing tag pair.",
-        "sequence": "cit<Esc>dat"
+        "description": "it targets only the contents between the opening and closing tags. Pair it with c to form cit.",
+        "sequence": "citSave<Esc>",
+        "code": [
+          "const markup =",
+          "  '<button>Save changes</button>';",
+          "console.log(markup);"
+        ],
+        "cursor": [
+          1,
+          12
+        ]
       },
       {
         "key": "at",
-        "description": "Tag objects target element contents or the complete opening and closing tag pair.",
-        "sequence": "cit<Esc>dat"
+        "description": "at targets the opening tag, its contents, and the closing tag. Pair it with d to form dat.",
+        "sequence": "dat",
+        "code": [
+          "const markup =",
+          "  '<button>Save changes</button>';",
+          "console.log(markup);"
+        ],
+        "cursor": [
+          1,
+          12
+        ]
       },
       {
         "key": "is",
-        "description": "Sentence objects operate on prose bounded by punctuation and whitespace.",
-        "sequence": "cis<Esc>das"
+        "description": "Change the current sentence while preserving adjacent whitespace.",
+        "sequence": "cisConfiguration updated.<Esc>",
+        "code": [
+          "/*",
+          "  Review this setting. Keep this sentence.",
+          "  Update this option. Preserve this sentence.",
+          "  Finish this review. Leave this sentence.",
+          "*/"
+        ],
+        "cursor": [
+          2,
+          2
+        ]
       },
       {
         "key": "as",
-        "description": "Sentence objects operate on prose bounded by punctuation and whitespace.",
-        "sequence": "cis<Esc>das"
+        "description": "Delete the current sentence and adjacent whitespace.",
+        "sequence": "das",
+        "code": [
+          "/*",
+          "  Review this setting. Keep this sentence.",
+          "  Update this option. Preserve this sentence.",
+          "  Finish this review. Leave this sentence.",
+          "*/"
+        ],
+        "cursor": [
+          2,
+          2
+        ]
       }
     ]
   }

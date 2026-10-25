@@ -7,19 +7,31 @@ const lessons = [
     "title": "Find any file",
     "eyebrow": "Telescope Workflows",
     "summary": "Space f f opens Telescope's file picker. Space is the default leader.",
-    "detail": "Space f f opens Telescope's file picker. Space is the default leader.",
+    "detail": "After the picker opens, filter if needed and press Enter to open the selected file in the current window.",
     "keys": [
       "Space ff"
     ],
-    "task": "Open the file finder.",
-    "sequence": "<Space>ff",
+    "task": "Open the file finder and open the selected file.",
+    "sequence": "<Space>ff<Enter>",
     "code": [
       "> Find Files",
       "  lua/chadrc.lua",
       "  lua/mappings.lua",
       "  init.lua"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space ff",
+        "description": "Space f f opens Telescope's file picker. Space is the default leader.",
+        "sequence": "<Space>ff"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Telescope Workflows",
@@ -27,18 +39,30 @@ const lessons = [
     "title": "Search the whole project",
     "eyebrow": "Telescope Workflows",
     "summary": "Space f w runs Telescope live grep. Ripgrep must be installed.",
-    "detail": "Space f w runs Telescope live grep. Ripgrep must be installed.",
+    "detail": "After live grep opens, type a query, choose a match, and press Enter. Ripgrep must be installed and available on PATH.",
     "keys": [
       "Space fw"
     ],
-    "task": "Open project-wide live grep.",
-    "sequence": "<Space>fw",
+    "task": "Open project-wide live grep, search for config, and open the selected match.",
+    "sequence": "<Space>fwconfig<Enter>",
     "code": [
       "> Live Grep",
       "  search every tracked file",
       "  preview matches as you type"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space fw",
+        "description": "Space f w runs Telescope live grep. Ripgrep must be installed.",
+        "sequence": "<Space>fw"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Telescope Workflows",
@@ -46,18 +70,30 @@ const lessons = [
     "title": "Search hidden and ignored files",
     "eyebrow": "Telescope Workflows",
     "summary": "Space f a searches hidden and ignored paths when the ordinary Space f f picker is intentionally narrower.",
-    "detail": "Space f a searches hidden and ignored paths when the ordinary Space f f picker is intentionally narrower.",
+    "detail": "Space f a includes hidden and ignored paths; press Enter to open the selected result in the current window.",
     "keys": [
       "Space fa"
     ],
-    "task": "Open the all-files picker.",
-    "sequence": "<Space>fa",
+    "task": "Open the all-files picker and open the selected result.",
+    "sequence": "<Space>fa<Enter>",
     "code": [
       "> Find All Files",
       "  .env.example",
       "  .github/workflows/test.yml"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space fa",
+        "description": "Space f a searches hidden and ignored paths when the ordinary Space f f picker is intentionally narrower.",
+        "sequence": "<Space>fa"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Telescope Workflows",
@@ -65,18 +101,30 @@ const lessons = [
     "title": "Switch through open buffers",
     "eyebrow": "Telescope Workflows",
     "summary": "Space f b opens a searchable list of buffers without walking the filesystem.",
-    "detail": "Space f b opens a searchable list of buffers without walking the filesystem.",
+    "detail": "Space f b opens a searchable list of buffers; press Enter to switch to the selected buffer.",
     "keys": [
       "Space fb"
     ],
-    "task": "Open the buffer picker.",
-    "sequence": "<Space>fb",
+    "task": "Open the buffer picker and switch to the selected buffer.",
+    "sequence": "<Space>fb<Enter>",
     "code": [
       "> Buffers",
       "  App.tsx",
       "  lessons.ts"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space fb",
+        "description": "Space f b opens a searchable list of buffers without walking the filesystem.",
+        "sequence": "<Space>fb"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Telescope Workflows",
@@ -90,14 +138,36 @@ const lessons = [
       "Space fo",
       "Space ma"
     ],
-    "task": "Open the recent-file picker.",
-    "sequence": "<Space>fo",
+    "task": "Open the recent-file picker and reopen the selected file.",
+    "sequence": "<Space>fo<Enter>",
     "code": [
       "> Old Files",
       "  src/App.tsx",
       "  lua/mappings.lua"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space fh",
+        "description": "Space f h searches help, Space f o reopens old files, and Space m a lists marks.",
+        "sequence": "<Space>fh"
+      },
+      {
+        "key": "Space fo",
+        "description": "Space f h searches help, Space f o reopens old files, and Space m a lists marks.",
+        "sequence": "<Space>fo"
+      },
+      {
+        "key": "Space ma",
+        "description": "Space f h searches help, Space f o reopens old files, and Space m a lists marks.",
+        "sequence": "<Space>ma"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Telescope Workflows",
@@ -111,14 +181,36 @@ const lessons = [
       "Space cm",
       "Space fz"
     ],
-    "task": "Open Telescope Git status.",
-    "sequence": "<Space>gt",
+    "task": "Open Telescope Git status and open the selected changed file.",
+    "sequence": "<Space>gt<Enter>",
     "code": [
       "> Git Status",
       " M src/lessons.ts",
       " M src/referenceSections.ts"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space gt",
+        "description": "Space g t shows Git status, Space c m shows commits, and Space f z searches within the current buffer.",
+        "sequence": "<Space>gt"
+      },
+      {
+        "key": "Space cm",
+        "description": "Space g t shows Git status, Space c m shows commits, and Space f z searches within the current buffer.",
+        "sequence": "<Space>cm"
+      },
+      {
+        "key": "Space fz",
+        "description": "Space g t shows Git status, Space c m shows commits, and Space f z searches within the current buffer.",
+        "sequence": "<Space>fz"
+      }
+    ],
+    "cursor": [
+      1,
+      3
+    ],
+    "language": "text"
   },
   {
     "group": "Telescope Workflows",
@@ -137,10 +229,37 @@ const lessons = [
     "sequence": "<C-n><Enter>",
     "code": [
       "> results",
-      "  App.tsx",
-      "  lessons.ts  <- selected"
+      "  App.tsx  <- selected",
+      "  lessons.ts"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Ctrl+n",
+        "description": "Inside an open Telescope picker: Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
+        "sequence": "<C-n>"
+      },
+      {
+        "key": "Ctrl+p",
+        "description": "Inside an open Telescope picker: Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
+        "sequence": "<C-p>"
+      },
+      {
+        "key": "Enter",
+        "description": "Inside an open Telescope picker: Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
+        "sequence": "<Enter>"
+      },
+      {
+        "key": "Ctrl+c",
+        "description": "Inside an open Telescope picker: Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
+        "sequence": "<C-c>"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Telescope Workflows",
@@ -161,7 +280,29 @@ const lessons = [
       "  App.tsx",
       "  Trainer.tsx  <- selected"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Ctrl+x",
+        "description": "Inside an open Telescope picker: Ctrl+x opens a horizontal split, Ctrl+v a vertical split, and Ctrl+t a new tab page.",
+        "sequence": "<C-x>"
+      },
+      {
+        "key": "Ctrl+v",
+        "description": "Inside an open Telescope picker: Ctrl+x opens a horizontal split, Ctrl+v a vertical split, and Ctrl+t a new tab page.",
+        "sequence": "<C-v>"
+      },
+      {
+        "key": "Ctrl+t",
+        "description": "Inside an open Telescope picker: Ctrl+x opens a horizontal split, Ctrl+v a vertical split, and Ctrl+t a new tab page.",
+        "sequence": "<C-t>"
+      }
+    ],
+    "cursor": [
+      2,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Telescope Workflows",
@@ -178,11 +319,33 @@ const lessons = [
     "task": "Select a result and send the filtered set to quickfix.",
     "sequence": "<Tab><C-q>",
     "code": [
-      "[x] App.tsx",
+      "[ ] App.tsx  <- cursor",
       "[ ] lessons.ts",
       "[ ] Trainer.tsx"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Tab",
+        "description": "Inside an open Telescope picker: Tab toggles result selection; Ctrl+q sends all filtered results to quickfix.",
+        "sequence": "<Tab>"
+      },
+      {
+        "key": "Shift+Tab",
+        "description": "Inside an open Telescope picker: Tab toggles result selection; Ctrl+q sends all filtered results to quickfix.",
+        "sequence": "<S-Tab>"
+      },
+      {
+        "key": "Ctrl+q",
+        "description": "Inside an open Telescope picker: Tab toggles result selection; Ctrl+q sends all filtered results to quickfix.",
+        "sequence": "<C-q>"
+      }
+    ],
+    "cursor": [
+      0,
+      4
+    ],
+    "language": "text"
   },
   {
     "group": "Telescope Workflows",
@@ -214,7 +377,7 @@ const lessons = [
       "Ctrl+q"
     ],
     "task": "",
-    "sequence": "<Space>ff",
+    "sequence": "<Space>ff<Enter>",
     "code": [
       "> Find Files",
       "  lua/chadrc.lua",
@@ -227,104 +390,310 @@ const lessons = [
       {
         "key": "Space ff",
         "description": "Space f f opens Telescope's file picker. Space is the default leader.",
-        "sequence": "<Space>ff"
+        "sequence": "<Space>ff",
+        "code": [
+          "> Find Files",
+          "  lua/chadrc.lua",
+          "  lua/mappings.lua",
+          "  init.lua"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space fw",
         "description": "Space f w runs Telescope live grep. Ripgrep must be installed.",
-        "sequence": "<Space>fw"
+        "sequence": "<Space>fw",
+        "code": [
+          "> Live Grep",
+          "  search every tracked file",
+          "  preview matches as you type"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Space fa",
         "description": "Space f a searches hidden and ignored paths when the ordinary Space f f picker is intentionally narrower.",
-        "sequence": "<Space>fa"
+        "sequence": "<Space>fa",
+        "code": [
+          "> Find All Files",
+          "  .env.example",
+          "  .github/workflows/test.yml"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space fb",
         "description": "Space f b opens a searchable list of buffers without walking the filesystem.",
-        "sequence": "<Space>fb"
+        "sequence": "<Space>fb",
+        "code": [
+          "> Buffers",
+          "  App.tsx",
+          "  lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space fh",
         "description": "Space f h searches help, Space f o reopens old files, and Space m a lists marks.",
-        "sequence": "<Space>fo"
+        "sequence": "<Space>fh",
+        "code": [
+          "> Old Files",
+          "  src/App.tsx",
+          "  lua/mappings.lua"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space fo",
         "description": "Space f h searches help, Space f o reopens old files, and Space m a lists marks.",
-        "sequence": "<Space>fo"
+        "sequence": "<Space>fo",
+        "code": [
+          "> Old Files",
+          "  src/App.tsx",
+          "  lua/mappings.lua"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space ma",
         "description": "Space f h searches help, Space f o reopens old files, and Space m a lists marks.",
-        "sequence": "<Space>fo"
+        "sequence": "<Space>ma",
+        "code": [
+          "> Old Files",
+          "  src/App.tsx",
+          "  lua/mappings.lua"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space gt",
         "description": "Space g t shows Git status, Space c m shows commits, and Space f z searches within the current buffer.",
-        "sequence": "<Space>gt"
+        "sequence": "<Space>gt",
+        "code": [
+          "> Git Status",
+          " M src/lessons.ts",
+          " M src/referenceSections.ts"
+        ],
+        "cursor": [
+          1,
+          3
+        ],
+        "language": "text"
       },
       {
         "key": "Space cm",
         "description": "Space g t shows Git status, Space c m shows commits, and Space f z searches within the current buffer.",
-        "sequence": "<Space>gt"
+        "sequence": "<Space>cm",
+        "code": [
+          "> Git Status",
+          " M src/lessons.ts",
+          " M src/referenceSections.ts"
+        ],
+        "cursor": [
+          1,
+          3
+        ],
+        "language": "text"
       },
       {
         "key": "Space fz",
         "description": "Space g t shows Git status, Space c m shows commits, and Space f z searches within the current buffer.",
-        "sequence": "<Space>gt"
+        "sequence": "<Space>fz",
+        "code": [
+          "> Git Status",
+          " M src/lessons.ts",
+          " M src/referenceSections.ts"
+        ],
+        "cursor": [
+          1,
+          3
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+n",
-        "description": "Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
-        "sequence": "<C-n><Enter>"
+        "description": "Inside an open Telescope picker: Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
+        "sequence": "<C-n>",
+        "code": [
+          "> results",
+          "  App.tsx  <- selected",
+          "  lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+p",
-        "description": "Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
-        "sequence": "<C-n><Enter>"
+        "description": "Inside an open Telescope picker: Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
+        "sequence": "<C-p>",
+        "code": [
+          "> results",
+          "  App.tsx  <- selected",
+          "  lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Enter",
-        "description": "Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
-        "sequence": "<C-n><Enter>"
+        "description": "Inside an open Telescope picker: Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
+        "sequence": "<Enter>",
+        "code": [
+          "> results",
+          "  App.tsx  <- selected",
+          "  lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+c",
-        "description": "Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
-        "sequence": "<C-n><Enter>"
+        "description": "Inside an open Telescope picker: Ctrl+n and Ctrl+p move, Enter opens the selected result, and Ctrl+c closes the picker.",
+        "sequence": "<C-c>",
+        "code": [
+          "> results",
+          "  App.tsx  <- selected",
+          "  lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+x",
-        "description": "Ctrl+x opens a horizontal split, Ctrl+v a vertical split, and Ctrl+t a new tab page.",
-        "sequence": "<C-v>"
+        "description": "Inside an open Telescope picker: Ctrl+x opens a horizontal split, Ctrl+v a vertical split, and Ctrl+t a new tab page.",
+        "sequence": "<C-x>",
+        "code": [
+          "> Find Files",
+          "  App.tsx",
+          "  Trainer.tsx  <- selected"
+        ],
+        "cursor": [
+          2,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+v",
-        "description": "Ctrl+x opens a horizontal split, Ctrl+v a vertical split, and Ctrl+t a new tab page.",
-        "sequence": "<C-v>"
+        "description": "Inside an open Telescope picker: Ctrl+x opens a horizontal split, Ctrl+v a vertical split, and Ctrl+t a new tab page.",
+        "sequence": "<C-v>",
+        "code": [
+          "> Find Files",
+          "  App.tsx",
+          "  Trainer.tsx  <- selected"
+        ],
+        "cursor": [
+          2,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+t",
-        "description": "Ctrl+x opens a horizontal split, Ctrl+v a vertical split, and Ctrl+t a new tab page.",
-        "sequence": "<C-v>"
+        "description": "Inside an open Telescope picker: Ctrl+x opens a horizontal split, Ctrl+v a vertical split, and Ctrl+t a new tab page.",
+        "sequence": "<C-t>",
+        "code": [
+          "> Find Files",
+          "  App.tsx",
+          "  Trainer.tsx  <- selected"
+        ],
+        "cursor": [
+          2,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Tab",
-        "description": "Tab toggles result selection; Ctrl+q sends all filtered results to quickfix.",
-        "sequence": "<Tab><C-q>"
+        "description": "Inside an open Telescope picker: Tab toggles result selection; Ctrl+q sends all filtered results to quickfix.",
+        "sequence": "<Tab>",
+        "code": [
+          "[ ] App.tsx  <- cursor",
+          "[ ] lessons.ts",
+          "[ ] Trainer.tsx"
+        ],
+        "cursor": [
+          0,
+          4
+        ],
+        "language": "text"
       },
       {
         "key": "Shift+Tab",
-        "description": "Tab toggles result selection; Ctrl+q sends all filtered results to quickfix.",
-        "sequence": "<Tab><C-q>"
+        "description": "Inside an open Telescope picker: Tab toggles result selection; Ctrl+q sends all filtered results to quickfix.",
+        "sequence": "<S-Tab>",
+        "code": [
+          "[ ] App.tsx  <- cursor",
+          "[ ] lessons.ts",
+          "[ ] Trainer.tsx"
+        ],
+        "cursor": [
+          0,
+          4
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+q",
-        "description": "Tab toggles result selection; Ctrl+q sends all filtered results to quickfix.",
-        "sequence": "<Tab><C-q>"
+        "description": "Inside an open Telescope picker: Tab toggles result selection; Ctrl+q sends all filtered results to quickfix.",
+        "sequence": "<C-q>",
+        "code": [
+          "[ ] App.tsx  <- cursor",
+          "[ ] lessons.ts",
+          "[ ] Trainer.tsx"
+        ],
+        "cursor": [
+          0,
+          4
+        ],
+        "language": "text"
       }
-    ]
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   }
 ] satisfies readonly Lesson[];
 

@@ -15,34 +15,34 @@ const lessons = [
     "task": "Delete inside a bracket pair.",
     "sequence": "di{",
     "code": [
-      "local opts = { old = true, debug = false }",
-      "setup({ theme = 'onedark' })",
-      "return opts"
+      "const options = { old: true, debug: false };",
+      "setup({ theme: 'onedark' });",
+      "console.log(options);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Delete inside a bracket pair. · repetition 1 of 3",
         "code": [
-          "local opts = { old = true, debug = false }",
-          "setup({ theme = 'onedark' })",
-          "return opts"
+          "const options = { old: true, debug: false };",
+          "setup({ theme: 'onedark' });",
+          "console.log(options);"
         ]
       },
       {
         "goal": "Delete inside a bracket pair. · repetition 2 of 3",
         "code": [
-          "vim.lsp.enable({ 'html', 'cssls', 'lua_ls' })",
-          "local palette = { green = '#98c379' }",
-          "return palette"
+          "enableServers(['html', 'css', 'typescript']);",
+          "const palette = { green: '#98c379' };",
+          "console.log(palette);"
         ]
       },
       {
         "goal": "Delete inside a bracket pair. · repetition 3 of 3",
         "code": [
-          "map('n', '<leader>x', function() close() end)",
-          "configure({ ui = { border = 'single' } })",
-          "return true"
+          "bindKey('close', () => closeFile());",
+          "configure({ ui: { border: 'single' } });",
+          "console.log(settings);"
         ]
       }
     ],
@@ -51,15 +51,27 @@ const lessons = [
       "instruction": "Delete inside a bracket pair.",
       "cursor": [
         1,
-        0
+        18
       ],
       "hints": [
-        "Begin with i.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: i, a."
       ],
       "success": "Intro to Text Objects produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "i",
+        "description": "Delete inside braces while keeping the delimiters.",
+        "sequence": "di{"
+      },
+      {
+        "key": "a",
+        "description": "Delete around braces, including the delimiters.",
+        "sequence": "da{"
+      }
+    ]
   },
   {
     "group": "Text Objects - Bracket Pairs",
@@ -76,34 +88,34 @@ const lessons = [
     "task": "Practice delete inside brackets.",
     "sequence": "di{",
     "code": [
-      "local opts = { old = true, debug = false }",
-      "setup({ theme = 'onedark' })",
-      "return opts"
+      "const options = { old: true, debug: false };",
+      "setup({ theme: 'onedark' });",
+      "console.log(options);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Practice delete inside brackets. · repetition 1 of 3",
         "code": [
-          "local opts = { old = true, debug = false }",
-          "setup({ theme = 'onedark' })",
-          "return opts"
+          "const options = { old: true, debug: false };",
+          "setup({ theme: 'onedark' });",
+          "console.log(options);"
         ]
       },
       {
         "goal": "Practice delete inside brackets. · repetition 2 of 3",
         "code": [
-          "vim.lsp.enable({ 'html', 'cssls', 'lua_ls' })",
-          "local palette = { green = '#98c379' }",
-          "return palette"
+          "enableServers(['html', 'css', 'typescript']);",
+          "const palette = { green: '#98c379' };",
+          "console.log(palette);"
         ]
       },
       {
         "goal": "Practice delete inside brackets. · repetition 3 of 3",
         "code": [
-          "map('n', '<leader>x', function() close() end)",
-          "configure({ ui = { border = 'single' } })",
-          "return true"
+          "bindKey('close', () => closeFile());",
+          "configure({ ui: { border: 'single' } });",
+          "console.log(settings);"
         ]
       }
     ],
@@ -112,11 +124,11 @@ const lessons = [
       "instruction": "Practice delete inside brackets.",
       "cursor": [
         1,
-        0
+        18
       ],
       "hints": [
-        "Begin with d.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: d, i, {."
       ],
       "alternatives": [
@@ -124,7 +136,24 @@ const lessons = [
         "di}"
       ],
       "success": "Delete Inside Brackets produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "d",
+        "description": "di{ deletes the contents of the surrounding curly brackets.",
+        "sequence": "di{"
+      },
+      {
+        "key": "i",
+        "description": "di{ deletes the contents of the surrounding curly brackets.",
+        "sequence": "di{"
+      },
+      {
+        "key": "{",
+        "description": "di{ deletes the contents of the surrounding curly brackets.",
+        "sequence": "di{"
+      }
+    ]
   },
   {
     "group": "Text Objects - Bracket Pairs",
@@ -141,34 +170,34 @@ const lessons = [
     "task": "Practice delete around brackets.",
     "sequence": "da{",
     "code": [
-      "local opts = { old = true, debug = false }",
-      "setup({ theme = 'onedark' })",
-      "return opts"
+      "const options = { old: true, debug: false };",
+      "setup({ theme: 'onedark' });",
+      "console.log(options);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Practice delete around brackets. · repetition 1 of 3",
         "code": [
-          "local opts = { old = true, debug = false }",
-          "setup({ theme = 'onedark' })",
-          "return opts"
+          "const options = { old: true, debug: false };",
+          "setup({ theme: 'onedark' });",
+          "console.log(options);"
         ]
       },
       {
         "goal": "Practice delete around brackets. · repetition 2 of 3",
         "code": [
-          "vim.lsp.enable({ 'html', 'cssls', 'lua_ls' })",
-          "local palette = { green = '#98c379' }",
-          "return palette"
+          "enableServers(['html', 'css', 'typescript']);",
+          "const palette = { green: '#98c379' };",
+          "console.log(palette);"
         ]
       },
       {
         "goal": "Practice delete around brackets. · repetition 3 of 3",
         "code": [
-          "map('n', '<leader>x', function() close() end)",
-          "configure({ ui = { border = 'single' } })",
-          "return true"
+          "bindKey('close', () => closeFile());",
+          "configure({ ui: { border: 'single' } });",
+          "console.log(settings);"
         ]
       }
     ],
@@ -177,11 +206,11 @@ const lessons = [
       "instruction": "Practice delete around brackets.",
       "cursor": [
         1,
-        0
+        18
       ],
       "hints": [
-        "Begin with d.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: d, a, {."
       ],
       "alternatives": [
@@ -189,7 +218,24 @@ const lessons = [
         "da}"
       ],
       "success": "Delete Around Brackets produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "d",
+        "description": "da{ deletes the bracket contents and the curly brackets themselves.",
+        "sequence": "da{"
+      },
+      {
+        "key": "a",
+        "description": "da{ deletes the bracket contents and the curly brackets themselves.",
+        "sequence": "da{"
+      },
+      {
+        "key": "{",
+        "description": "da{ deletes the bracket contents and the curly brackets themselves.",
+        "sequence": "da{"
+      }
+    ]
   },
   {
     "group": "Text Objects - Bracket Pairs",
@@ -204,54 +250,71 @@ const lessons = [
       "{"
     ],
     "task": "Change inside curly brackets, then escape.",
-    "sequence": "ci{<Esc>",
+    "sequence": "ci{theme: 'onedark'<Esc>",
     "code": [
-      "local opts = { old = true, debug = false }",
-      "setup({ theme = 'onedark' })",
-      "return opts"
+      "const options = { old: true, debug: false };",
+      "setup({ theme: 'onedark' });",
+      "console.log(options);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Change inside curly brackets, then escape. · repetition 1 of 3",
         "code": [
-          "local opts = { old = true, debug = false }",
-          "setup({ theme = 'onedark' })",
-          "return opts"
+          "const options = { old: true, debug: false };",
+          "setup({ theme: 'onedark' });",
+          "console.log(options);"
         ]
       },
       {
         "goal": "Change inside curly brackets, then escape. · repetition 2 of 3",
         "code": [
-          "vim.lsp.enable({ 'html', 'cssls', 'lua_ls' })",
-          "local palette = { green = '#98c379' }",
-          "return palette"
+          "enableServers(['html', 'css', 'typescript']);",
+          "const palette = { green: '#98c379' };",
+          "console.log(palette);"
         ]
       },
       {
         "goal": "Change inside curly brackets, then escape. · repetition 3 of 3",
         "code": [
-          "map('n', '<leader>x', function() close() end)",
-          "configure({ ui = { border = 'single' } })",
-          "return true"
+          "bindKey('close', () => closeFile());",
+          "configure({ ui: { border: 'single' } });",
+          "console.log(settings);"
         ]
       }
     ],
     "commonMistake": "Keep the order operator → inside/around → object. For example: d + i + w.",
     "challenge": {
-      "instruction": "Change inside curly brackets, then escape. Enter “theme = 'onedark'” where text is requested.",
-      "replacement": "theme = 'onedark'",
+      "instruction": "Change inside curly brackets, then escape. Enter “theme: 'onedark'” where text is requested.",
+      "replacement": "theme: 'onedark'",
       "cursor": [
         1,
-        0
+        18
       ],
       "hints": [
-        "Begin with c.",
-        "Read the command as operator, inside/around, then object.",
-        "Enter “theme = 'onedark'” before returning to Normal mode."
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
+        "Enter “theme: 'onedark'” before returning to Normal mode."
       ],
-      "success": "The buffer now contains “theme = 'onedark'” in the intended location."
-    }
+      "success": "The buffer now contains “theme: 'onedark'” in the intended location."
+    },
+    "reviewItems": [
+      {
+        "key": "c",
+        "description": "ci{ clears bracket contents and enters Insert mode while preserving the pair.",
+        "sequence": "ci{theme: 'onedark'<Esc>"
+      },
+      {
+        "key": "i",
+        "description": "ci{ clears bracket contents and enters Insert mode while preserving the pair.",
+        "sequence": "ci{theme: 'onedark'<Esc>"
+      },
+      {
+        "key": "{",
+        "description": "ci{ clears bracket contents and enters Insert mode while preserving the pair.",
+        "sequence": "ci{theme: 'onedark'<Esc>"
+      }
+    ]
   },
   {
     "group": "Text Objects - Bracket Pairs",
@@ -266,54 +329,71 @@ const lessons = [
       "{"
     ],
     "task": "Change around curly brackets, then escape.",
-    "sequence": "ca{<Esc>",
+    "sequence": "ca{{ enabled: true }<Esc>",
     "code": [
-      "local opts = { old = true, debug = false }",
-      "setup({ theme = 'onedark' })",
-      "return opts"
+      "const options = { old: true, debug: false };",
+      "setup({ theme: 'onedark' });",
+      "console.log(options);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Change around curly brackets, then escape. · repetition 1 of 3",
         "code": [
-          "local opts = { old = true, debug = false }",
-          "setup({ theme = 'onedark' })",
-          "return opts"
+          "const options = { old: true, debug: false };",
+          "setup({ theme: 'onedark' });",
+          "console.log(options);"
         ]
       },
       {
         "goal": "Change around curly brackets, then escape. · repetition 2 of 3",
         "code": [
-          "vim.lsp.enable({ 'html', 'cssls', 'lua_ls' })",
-          "local palette = { green = '#98c379' }",
-          "return palette"
+          "enableServers(['html', 'css', 'typescript']);",
+          "const palette = { green: '#98c379' };",
+          "console.log(palette);"
         ]
       },
       {
         "goal": "Change around curly brackets, then escape. · repetition 3 of 3",
         "code": [
-          "map('n', '<leader>x', function() close() end)",
-          "configure({ ui = { border = 'single' } })",
-          "return true"
+          "bindKey('close', () => closeFile());",
+          "configure({ ui: { border: 'single' } });",
+          "console.log(settings);"
         ]
       }
     ],
     "commonMistake": "Keep the order operator → inside/around → object. For example: d + i + w.",
     "challenge": {
-      "instruction": "Change around curly brackets, then escape. Enter “{ enabled = true }” where text is requested.",
-      "replacement": "{ enabled = true }",
+      "instruction": "Change around curly brackets, then escape. Enter “{ enabled: true }” where text is requested.",
+      "replacement": "{ enabled: true }",
       "cursor": [
         1,
-        0
+        18
       ],
       "hints": [
-        "Begin with c.",
-        "Read the command as operator, inside/around, then object.",
-        "Enter “{ enabled = true }” before returning to Normal mode."
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
+        "Enter “{ enabled: true }” before returning to Normal mode."
       ],
-      "success": "The buffer now contains “{ enabled = true }” in the intended location."
-    }
+      "success": "The buffer now contains “{ enabled: true }” in the intended location."
+    },
+    "reviewItems": [
+      {
+        "key": "c",
+        "description": "ca{ replaces the contents and surrounding curly brackets.",
+        "sequence": "ca{{ enabled: true }<Esc>"
+      },
+      {
+        "key": "a",
+        "description": "ca{ replaces the contents and surrounding curly brackets.",
+        "sequence": "ca{{ enabled: true }<Esc>"
+      },
+      {
+        "key": "{",
+        "description": "ca{ replaces the contents and surrounding curly brackets.",
+        "sequence": "ca{{ enabled: true }<Esc>"
+      }
+    ]
   },
   {
     "group": "Text Objects - Bracket Pairs",
@@ -328,46 +408,46 @@ const lessons = [
       "ci{",
       "ca{"
     ],
-    "task": "Run all four bracket operations.",
-    "sequence": "di{da{ci{<Esc>ca{<Esc>",
+    "task": "Practice each listed operation separately from a fresh copy of the fixture.",
+    "sequence": "di{",
     "code": [
-      "local opts = { old = true, debug = false }",
-      "setup({ theme = 'onedark' })",
-      "return opts"
+      "const options = { old: true, debug: false };",
+      "setup({ theme: 'onedark' });",
+      "console.log(options);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Run all four bracket operations. · repetition 1 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 1 of 3",
         "code": [
-          "local opts = { old = true, debug = false }",
-          "setup({ theme = 'onedark' })",
-          "return opts"
+          "const options = { old: true, debug: false };",
+          "setup({ theme: 'onedark' });",
+          "console.log(options);"
         ]
       },
       {
-        "goal": "Run all four bracket operations. · repetition 2 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 2 of 3",
         "code": [
-          "vim.lsp.enable({ 'html', 'cssls', 'lua_ls' })",
-          "local palette = { green = '#98c379' }",
-          "return palette"
+          "enableServers(['html', 'css', 'typescript']);",
+          "const palette = { green: '#98c379' };",
+          "console.log(palette);"
         ]
       },
       {
-        "goal": "Run all four bracket operations. · repetition 3 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 3 of 3",
         "code": [
-          "map('n', '<leader>x', function() close() end)",
-          "configure({ ui = { border = 'single' } })",
-          "return true"
+          "bindKey('close', () => closeFile());",
+          "configure({ ui: { border: 'single' } });",
+          "console.log(settings);"
         ]
       }
     ],
     "commonMistake": "Keep the order operator → inside/around → object. For example: d + i + w.",
     "challenge": {
-      "instruction": "Run all four bracket operations.",
+      "instruction": "Practice each listed operation separately from a fresh copy of the fixture.",
       "cursor": [
         1,
-        0
+        18
       ],
       "hints": [
         "Begin with di{.",
@@ -376,7 +456,29 @@ const lessons = [
       ],
       "success": "Brackets Review produced the requested buffer and cursor state."
     },
-    "reviewOnly": true
+    "reviewOnly": true,
+    "reviewItems": [
+      {
+        "key": "di{",
+        "description": "Delete the indicated object.",
+        "sequence": "di{"
+      },
+      {
+        "key": "da{",
+        "description": "Delete the indicated object.",
+        "sequence": "da{"
+      },
+      {
+        "key": "ci{",
+        "description": "Change the indicated object to updated.",
+        "sequence": "ci{updated<Esc>"
+      },
+      {
+        "key": "ca{",
+        "description": "Change the indicated object to updated.",
+        "sequence": "ca{updated<Esc>"
+      }
+    ]
   }
 ] satisfies readonly Lesson[];
 

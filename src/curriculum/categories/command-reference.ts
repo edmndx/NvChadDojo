@@ -14,7 +14,8 @@ const lessons = [
     "task": "",
     "sequence": "<Esc>",
     "code": [],
-    "tip": ""
+    "tip": "",
+    "language": "text"
   }
 ] satisfies readonly Lesson[];
 

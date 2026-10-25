@@ -15,34 +15,34 @@ const lessons = [
     "task": "Record a word-change macro into register a.",
     "sequence": "qaciwchanged<Esc>q",
     "code": [
-      "user.old_name = 'Ada'",
-      "user.old_name = 'Linus'",
-      "user.old_name = 'Grace'"
+      "user.oldName = 'Ada';",
+      "user.oldName = 'Linus';",
+      "user.oldName = 'Grace';"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Record a word-change macro into register a. · repetition 1 of 3",
         "code": [
-          "user.old_name = 'Ada'",
-          "user.old_name = 'Linus'",
-          "user.old_name = 'Grace'"
+          "user.oldName = 'Ada';",
+          "user.oldName = 'Linus';",
+          "user.oldName = 'Grace';"
         ]
       },
       {
         "goal": "Record a word-change macro into register a. · repetition 2 of 3",
         "code": [
-          "plugin.enabled=false",
-          "theme.enabled=false",
-          "lsp.enabled=false"
+          "plugin.enabled = false;",
+          "theme.enabled = false;",
+          "lsp.enabled = false;"
         ]
       },
       {
         "goal": "Record a word-change macro into register a. · repetition 3 of 3",
         "code": [
-          "alpha = legacy(alpha)",
-          "beta = legacy(beta)",
-          "gamma = legacy(gamma)"
+          "const alpha = legacy(input.alpha);",
+          "const beta = legacy(input.beta);",
+          "const gamma = legacy(input.gamma);"
         ]
       }
     ],
@@ -54,12 +54,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with q.",
-        "Use only the keys introduced in Macros.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: q, a."
       ],
       "success": "Record a Macro produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "q",
+        "description": "qa records subsequent commands into register a until q stops recording.",
+        "sequence": "qaciwchanged<Esc>q"
+      },
+      {
+        "key": "a",
+        "description": "qa records subsequent commands into register a until q stops recording.",
+        "sequence": "qaciwchanged<Esc>q"
+      }
+    ]
   },
   {
     "group": "Macros",
@@ -75,34 +87,34 @@ const lessons = [
     "task": "Replay macro a once.",
     "sequence": "@a",
     "code": [
-      "user.old_name = 'Ada'",
-      "user.old_name = 'Linus'",
-      "user.old_name = 'Grace'"
+      "user.oldName = 'Ada';",
+      "user.oldName = 'Linus';",
+      "user.oldName = 'Grace';"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "This practice buffer seeds register a with the motion w. Record your own macro with qa, commands, then q before replaying it in your editor.",
     "drills": [
       {
         "goal": "Replay macro a once. · repetition 1 of 3",
         "code": [
-          "user.old_name = 'Ada'",
-          "user.old_name = 'Linus'",
-          "user.old_name = 'Grace'"
+          "user.oldName = 'Ada';",
+          "user.oldName = 'Linus';",
+          "user.oldName = 'Grace';"
         ]
       },
       {
         "goal": "Replay macro a once. · repetition 2 of 3",
         "code": [
-          "plugin.enabled=false",
-          "theme.enabled=false",
-          "lsp.enabled=false"
+          "plugin.enabled = false;",
+          "theme.enabled = false;",
+          "lsp.enabled = false;"
         ]
       },
       {
         "goal": "Replay macro a once. · repetition 3 of 3",
         "code": [
-          "alpha = legacy(alpha)",
-          "beta = legacy(beta)",
-          "gamma = legacy(gamma)"
+          "const alpha = legacy(input.alpha);",
+          "const beta = legacy(input.beta);",
+          "const gamma = legacy(input.gamma);"
         ]
       }
     ],
@@ -114,12 +126,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with @.",
-        "Use only the keys introduced in Macros.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: @, a."
       ],
       "success": "Replay a Macro produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "@",
+        "description": "@a executes the commands stored in register a.",
+        "sequence": "@a"
+      },
+      {
+        "key": "a",
+        "description": "@a executes the commands stored in register a.",
+        "sequence": "@a"
+      }
+    ]
   },
   {
     "group": "Macros",
@@ -135,34 +159,34 @@ const lessons = [
     "task": "Repeat the latest macro.",
     "sequence": "@@",
     "code": [
-      "user.old_name = 'Ada'",
-      "user.old_name = 'Linus'",
-      "user.old_name = 'Grace'"
+      "user.oldName = 'Ada';",
+      "user.oldName = 'Linus';",
+      "user.oldName = 'Grace';"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "This practice buffer seeds a macro containing w and remembers it as the latest executed macro. In your editor, execute @a before using @@.",
     "drills": [
       {
         "goal": "Repeat the latest macro. · repetition 1 of 3",
         "code": [
-          "user.old_name = 'Ada'",
-          "user.old_name = 'Linus'",
-          "user.old_name = 'Grace'"
+          "user.oldName = 'Ada';",
+          "user.oldName = 'Linus';",
+          "user.oldName = 'Grace';"
         ]
       },
       {
         "goal": "Repeat the latest macro. · repetition 2 of 3",
         "code": [
-          "plugin.enabled=false",
-          "theme.enabled=false",
-          "lsp.enabled=false"
+          "plugin.enabled = false;",
+          "theme.enabled = false;",
+          "lsp.enabled = false;"
         ]
       },
       {
         "goal": "Repeat the latest macro. · repetition 3 of 3",
         "code": [
-          "alpha = legacy(alpha)",
-          "beta = legacy(beta)",
-          "gamma = legacy(gamma)"
+          "const alpha = legacy(input.alpha);",
+          "const beta = legacy(input.beta);",
+          "const gamma = legacy(input.gamma);"
         ]
       }
     ],
@@ -174,12 +198,19 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with @.",
-        "Use only the keys introduced in Macros.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: @, @."
       ],
       "success": "Repeat the Latest Macro produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "@",
+        "description": "@@ repeats the most recently executed macro without naming its register again.",
+        "sequence": "@@"
+      }
+    ]
   },
   {
     "group": "Macros",
@@ -196,34 +227,34 @@ const lessons = [
     "task": "Execute macro a ten times.",
     "sequence": "10@a",
     "code": [
-      "user.old_name = 'Ada'",
-      "user.old_name = 'Linus'",
-      "user.old_name = 'Grace'"
+      "user.oldName = 'Ada';",
+      "user.oldName = 'Linus';",
+      "user.oldName = 'Grace';"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "This practice buffer seeds register a with the motion w. Record your own macro with qa, commands, then q before replaying it in your editor.",
     "drills": [
       {
         "goal": "Execute macro a ten times. · repetition 1 of 3",
         "code": [
-          "user.old_name = 'Ada'",
-          "user.old_name = 'Linus'",
-          "user.old_name = 'Grace'"
+          "user.oldName = 'Ada';",
+          "user.oldName = 'Linus';",
+          "user.oldName = 'Grace';"
         ]
       },
       {
         "goal": "Execute macro a ten times. · repetition 2 of 3",
         "code": [
-          "plugin.enabled=false",
-          "theme.enabled=false",
-          "lsp.enabled=false"
+          "plugin.enabled = false;",
+          "theme.enabled = false;",
+          "lsp.enabled = false;"
         ]
       },
       {
         "goal": "Execute macro a ten times. · repetition 3 of 3",
         "code": [
-          "alpha = legacy(alpha)",
-          "beta = legacy(beta)",
-          "gamma = legacy(gamma)"
+          "const alpha = legacy(input.alpha);",
+          "const beta = legacy(input.beta);",
+          "const gamma = legacy(input.gamma);"
         ]
       }
     ],
@@ -235,12 +266,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with 10.",
-        "Use only the keys introduced in Macros.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: 10, @, a."
       ],
       "success": "Run a Macro with a Count produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "10",
+        "description": "A count applies a recorded workflow repeatedly across predictable data.",
+        "sequence": "10@a"
+      },
+      {
+        "key": "@",
+        "description": "A count applies a recorded workflow repeatedly across predictable data.",
+        "sequence": "10@a"
+      },
+      {
+        "key": "a",
+        "description": "A count applies a recorded workflow repeatedly across predictable data.",
+        "sequence": "10@a"
+      }
+    ]
   },
   {
     "group": "Macros",
@@ -253,14 +301,15 @@ const lessons = [
       "q",
       "a",
       "@",
-      "10"
+      "10",
+      "@@"
     ],
     "task": "",
     "sequence": "qaciwchanged<Esc>q",
     "code": [
-      "user.old_name = 'Ada'",
-      "user.old_name = 'Linus'",
-      "user.old_name = 'Grace'"
+      "user.oldName = 'Ada';",
+      "user.oldName = 'Linus';",
+      "user.oldName = 'Grace';"
     ],
     "tip": "Return to any command in Macros that still requires conscious recall.",
     "reviewOnly": true,
@@ -268,23 +317,68 @@ const lessons = [
       {
         "key": "q",
         "description": "qa records subsequent commands into register a until q stops recording.",
-        "sequence": "qaciwchanged<Esc>q"
+        "sequence": "qaciwchanged<Esc>q",
+        "code": [
+          "user.oldName = 'Ada';",
+          "user.oldName = 'Linus';",
+          "user.oldName = 'Grace';"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "a",
         "description": "qa records subsequent commands into register a until q stops recording.",
-        "sequence": "qaciwchanged<Esc>q"
+        "sequence": "qaciwchanged<Esc>q",
+        "code": [
+          "user.oldName = 'Ada';",
+          "user.oldName = 'Linus';",
+          "user.oldName = 'Grace';"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "@",
-        "description": "@a executes the commands stored in register a.",
-        "sequence": "@a"
+        "description": "Record w into a with qawq, then replay it with @a.",
+        "sequence": "qawq@a",
+        "code": [
+          "user.oldName = 'Ada';",
+          "user.oldName = 'Linus';",
+          "user.oldName = 'Grace';"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "10",
-        "description": "A count applies a recorded workflow repeatedly across predictable data.",
-        "sequence": "10@a"
+        "description": "Record w into a, then execute it with a count of ten.",
+        "sequence": "qawq10@a",
+        "code": [
+          "user.oldName = 'Ada';",
+          "user.oldName = 'Linus';",
+          "user.oldName = 'Grace';"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
+      },
+      {
+        "key": "@@",
+        "description": "Record a macro, execute it once, then repeat the latest executed macro.",
+        "sequence": "qawq@a@@"
       }
+    ],
+    "cursor": [
+      1,
+      2
     ]
   }
 ] satisfies readonly Lesson[];

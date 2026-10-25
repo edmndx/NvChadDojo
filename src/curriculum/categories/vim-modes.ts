@@ -7,59 +7,72 @@ const lessons = [
     "title": "Normal and Insert Modes",
     "eyebrow": "Vim Modes",
     "summary": "Normal mode runs commands; Insert mode enters text. Escape returns to Normal mode.",
-    "detail": "Normal mode runs commands; Insert mode enters text. Escape returns to Normal mode.",
+    "detail": "Start on the first letter inside the quoted label. The surrounding JavaScript declaration stays intact while the text changes.",
     "keys": [
       "i",
       "Esc"
     ],
-    "task": "Practice normal and insert modes.",
-    "sequence": "i<Esc>",
+    "task": "Enter Insert mode with i, add * inside the label string, then press Esc to return to Normal mode.",
+    "sequence": "i*<Esc>",
     "code": [
-      "local items = { 'alpha', 'beta', 'gamma' }",
-      "local result = transform(items)",
-      "return result"
+      "const option = 'theme';",
+      "const label = 'ready';",
+      "console.log(option, label);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Practice normal and insert modes. · repetition 1 of 3",
+        "goal": "Enter Insert mode with i, add * inside the label string, then press Esc to return to Normal mode. · repetition 1 of 3",
         "code": [
-          "local items = { 'alpha', 'beta', 'gamma' }",
-          "local result = transform(items)",
-          "return result"
+          "const option = 'theme';",
+          "const label = 'ready';",
+          "console.log(option, label);"
         ]
       },
       {
-        "goal": "Practice normal and insert modes. · repetition 2 of 3",
+        "goal": "Enter Insert mode with i, add * inside the label string, then press Esc to return to Normal mode. · repetition 2 of 3",
         "code": [
-          "function configure(options)",
-          "  return setup(options)",
-          "end"
+          "const option = 'theme';",
+          "const label = 'draft';",
+          "console.log(option, label);"
         ]
       },
       {
-        "goal": "Practice normal and insert modes. · repetition 3 of 3",
+        "goal": "Enter Insert mode with i, add * inside the label string, then press Esc to return to Normal mode. · repetition 3 of 3",
         "code": [
-          "local user = find_user(users)",
-          "notify(user.name)",
-          "return user"
+          "const option = 'theme';",
+          "const label = 'start';",
+          "console.log(option, label);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Practice normal and insert modes.",
+      "instruction": "Enter Insert mode with i, add * inside the label string, then press Esc to return to Normal mode.",
       "cursor": [
         1,
-        0
+        15
       ],
       "hints": [
-        "Begin with i.",
-        "Use only the keys introduced in Vim Modes.",
-        "Compose the command from: i, Esc."
+        "The cursor starts on the first character inside the label string.",
+        "Press i to enter Insert mode before the cursor.",
+        "Type *, then press Esc."
       ],
-      "success": "Normal and Insert Modes produced the requested buffer and cursor state."
-    }
+      "success": "The label was edited and the complete declaration remains valid JavaScript.",
+      "replacement": "*"
+    },
+    "reviewItems": [
+      {
+        "key": "i",
+        "description": "Insert * inside the string, then return to Normal mode with Esc.",
+        "sequence": "i*<Esc>"
+      },
+      {
+        "key": "Esc",
+        "description": "Insert * inside the string, then return to Normal mode with Esc.",
+        "sequence": "i*<Esc>"
+      }
+    ]
   },
   {
     "group": "Vim Modes",
@@ -67,59 +80,71 @@ const lessons = [
     "title": "Visual Mode",
     "eyebrow": "Vim Modes",
     "summary": "v begins a characterwise selection and Escape returns to Normal mode.",
-    "detail": "v begins a characterwise selection and Escape returns to Normal mode.",
+    "detail": "Entering Visual mode selects the character under the cursor. Pressing Esc cancels the selection without changing the text.",
     "keys": [
       "v",
       "Esc"
     ],
-    "task": "Practice visual mode.",
+    "task": "Press v to begin a characterwise selection, then Esc to cancel it.",
     "sequence": "v<Esc>",
     "code": [
-      "local items = { 'alpha', 'beta', 'gamma' }",
-      "local result = transform(items)",
-      "return result"
+      "const items = ['alpha', 'beta', 'gamma'];",
+      "const result = transform(items);",
+      "console.log(result);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Practice visual mode. · repetition 1 of 3",
+        "goal": "Press v to begin a characterwise selection, then Esc to cancel it. · repetition 1 of 3",
         "code": [
-          "local items = { 'alpha', 'beta', 'gamma' }",
-          "local result = transform(items)",
-          "return result"
+          "const items = ['alpha', 'beta', 'gamma'];",
+          "const result = transform(items);",
+          "console.log(result);"
         ]
       },
       {
-        "goal": "Practice visual mode. · repetition 2 of 3",
+        "goal": "Press v to begin a characterwise selection, then Esc to cancel it. · repetition 2 of 3",
         "code": [
-          "function configure(options)",
-          "  return setup(options)",
-          "end"
+          "function configure(options) {",
+          "  return setup(options);",
+          "}"
         ]
       },
       {
-        "goal": "Practice visual mode. · repetition 3 of 3",
+        "goal": "Press v to begin a characterwise selection, then Esc to cancel it. · repetition 3 of 3",
         "code": [
-          "local user = find_user(users)",
-          "notify(user.name)",
-          "return user"
+          "const user = findUser(users);",
+          "notify(user.name);",
+          "console.log(user);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Practice visual mode.",
+      "instruction": "Press v to begin a characterwise selection, then Esc to cancel it.",
       "cursor": [
         1,
         0
       ],
       "hints": [
-        "Begin with v.",
-        "Use only the keys introduced in Vim Modes.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: v, Esc."
       ],
       "success": "Visual Mode produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "v",
+        "description": "v begins a characterwise selection and Escape returns to Normal mode.",
+        "sequence": "v<Esc>"
+      },
+      {
+        "key": "Esc",
+        "description": "v begins a characterwise selection and Escape returns to Normal mode.",
+        "sequence": "v<Esc>"
+      }
+    ]
   },
   {
     "group": "Vim Modes",
@@ -136,34 +161,34 @@ const lessons = [
     "task": "Open Command-line mode and enable line numbers.",
     "sequence": ":set number<Enter>",
     "code": [
-      "local items = { 'alpha', 'beta', 'gamma' }",
-      "local result = transform(items)",
-      "return result"
+      "const items = ['alpha', 'beta', 'gamma'];",
+      "const result = transform(items);",
+      "console.log(result);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Open Command-line mode and enable line numbers. · repetition 1 of 3",
         "code": [
-          "local items = { 'alpha', 'beta', 'gamma' }",
-          "local result = transform(items)",
-          "return result"
+          "const items = ['alpha', 'beta', 'gamma'];",
+          "const result = transform(items);",
+          "console.log(result);"
         ]
       },
       {
         "goal": "Open Command-line mode and enable line numbers. · repetition 2 of 3",
         "code": [
-          "function configure(options)",
-          "  return setup(options)",
-          "end"
+          "function configure(options) {",
+          "  return setup(options);",
+          "}"
         ]
       },
       {
         "goal": "Open Command-line mode and enable line numbers. · repetition 3 of 3",
         "code": [
-          "local user = find_user(users)",
-          "notify(user.name)",
-          "return user"
+          "const user = findUser(users);",
+          "notify(user.name);",
+          "console.log(user);"
         ]
       }
     ],
@@ -175,12 +200,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with :.",
-        "Use only the keys introduced in Vim Modes.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: :, Enter, Esc."
       ],
       "success": "Command-line Mode produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": ":",
+        "description": "Open Command-line mode and enable line numbers.",
+        "sequence": ":set number<Enter>"
+      },
+      {
+        "key": "Enter",
+        "description": "Execute the typed Ex command.",
+        "sequence": ":set number<Enter>"
+      },
+      {
+        "key": "Esc",
+        "description": "Cancel a typed Ex command without executing it.",
+        "sequence": ":set number<Esc>"
+      }
+    ]
   },
   {
     "group": "Vim Modes",
@@ -188,59 +230,72 @@ const lessons = [
     "title": "Replace Mode",
     "eyebrow": "Vim Modes",
     "summary": "R enters Replace mode, overwriting existing characters until Escape returns to Normal mode.",
-    "detail": "R enters Replace mode, overwriting existing characters until Escape returns to Normal mode.",
+    "detail": "Start on the first letter inside the quoted label. The surrounding JavaScript declaration stays intact while the text changes.",
     "keys": [
       "R",
       "Esc"
     ],
-    "task": "Replace four characters with mode, then return to Normal mode.",
+    "task": "Replace the four letters inside the label string with mode using R, then press Esc.",
     "sequence": "Rmode<Esc>",
     "code": [
-      "local items = { 'alpha', 'beta', 'gamma' }",
-      "local result = transform(items)",
-      "return result"
+      "const option = 'theme';",
+      "const label = 'test';",
+      "console.log(option, label);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Replace four characters with mode, then return to Normal mode. · repetition 1 of 3",
+        "goal": "Replace the four letters inside the label string with mode using R, then press Esc. · repetition 1 of 3",
         "code": [
-          "local items = { 'alpha', 'beta', 'gamma' }",
-          "local result = transform(items)",
-          "return result"
+          "const option = 'theme';",
+          "const label = 'test';",
+          "console.log(option, label);"
         ]
       },
       {
-        "goal": "Replace four characters with mode, then return to Normal mode. · repetition 2 of 3",
+        "goal": "Replace the four letters inside the label string with mode using R, then press Esc. · repetition 2 of 3",
         "code": [
-          "function configure(options)",
-          "  return setup(options)",
-          "end"
+          "const option = 'theme';",
+          "const label = 'demo';",
+          "console.log(option, label);"
         ]
       },
       {
-        "goal": "Replace four characters with mode, then return to Normal mode. · repetition 3 of 3",
+        "goal": "Replace the four letters inside the label string with mode using R, then press Esc. · repetition 3 of 3",
         "code": [
-          "local user = find_user(users)",
-          "notify(user.name)",
-          "return user"
+          "const option = 'theme';",
+          "const label = 'temp';",
+          "console.log(option, label);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Replace four characters with mode, then return to Normal mode.",
+      "instruction": "Replace the four letters inside the label string with mode using R, then press Esc.",
       "cursor": [
         1,
-        0
+        15
       ],
       "hints": [
-        "Begin with R.",
-        "Use only the keys introduced in Vim Modes.",
-        "Compose the command from: R, Esc."
+        "The cursor starts on the first character inside the label string.",
+        "Press R to overwrite characters.",
+        "Type mode, then press Esc."
       ],
-      "success": "Replace Mode produced the requested buffer and cursor state."
-    }
+      "success": "The label was edited and the complete declaration remains valid JavaScript.",
+      "replacement": "mode"
+    },
+    "reviewItems": [
+      {
+        "key": "R",
+        "description": "Overwrite four letters inside the string with mode, then return to Normal mode.",
+        "sequence": "Rmode<Esc>"
+      },
+      {
+        "key": "Esc",
+        "description": "Overwrite four letters inside the string with mode, then return to Normal mode.",
+        "sequence": "Rmode<Esc>"
+      }
+    ]
   },
   {
     "group": "Vim Modes",
@@ -255,48 +310,121 @@ const lessons = [
       "v",
       ":",
       "Enter",
-      "R"
+      "R",
+      ":<Esc>"
     ],
     "task": "",
-    "sequence": "i<Esc>",
+    "sequence": "i*<Esc>",
     "code": [
-      "local items = { 'alpha', 'beta', 'gamma' }",
-      "local result = transform(items)",
-      "return result"
+      "const option = 'theme';",
+      "const label = 'ready';",
+      "console.log(option, label);"
     ],
     "tip": "Return to any command in Vim Modes that still requires conscious recall.",
     "reviewOnly": true,
     "reviewItems": [
       {
         "key": "i",
-        "description": "Normal mode runs commands; Insert mode enters text. Escape returns to Normal mode.",
-        "sequence": "i<Esc>"
+        "description": "Insert * inside the string, then return to Normal mode with Esc.",
+        "sequence": "i*<Esc>",
+        "code": [
+          "const option = 'theme';",
+          "const label = 'ready';",
+          "console.log(option, label);"
+        ],
+        "cursor": [
+          1,
+          15
+        ]
       },
       {
         "key": "Esc",
-        "description": "Normal mode runs commands; Insert mode enters text. Escape returns to Normal mode.",
-        "sequence": "i<Esc>"
+        "description": "Insert * inside the string, then return to Normal mode with Esc.",
+        "sequence": "i*<Esc>",
+        "code": [
+          "const option = 'theme';",
+          "const label = 'ready';",
+          "console.log(option, label);"
+        ],
+        "cursor": [
+          1,
+          15
+        ]
       },
       {
         "key": "v",
         "description": "v begins a characterwise selection and Escape returns to Normal mode.",
-        "sequence": "v<Esc>"
+        "sequence": "v<Esc>",
+        "code": [
+          "const items = ['alpha', 'beta', 'gamma'];",
+          "const result = transform(items);",
+          "console.log(result);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": ":",
-        "description": "Colon opens Command-line mode; Enter executes the command and Escape cancels it.",
-        "sequence": ":set number<Enter>"
+        "description": "Open Command-line mode and enable line numbers.",
+        "sequence": ":set number<Enter>",
+        "code": [
+          "const items = ['alpha', 'beta', 'gamma'];",
+          "const result = transform(items);",
+          "console.log(result);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "Enter",
-        "description": "Colon opens Command-line mode; Enter executes the command and Escape cancels it.",
-        "sequence": ":set number<Enter>"
+        "description": "Execute the typed Ex command.",
+        "sequence": ":set number<Enter>",
+        "code": [
+          "const items = ['alpha', 'beta', 'gamma'];",
+          "const result = transform(items);",
+          "console.log(result);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "R",
-        "description": "R enters Replace mode, overwriting existing characters until Escape returns to Normal mode.",
-        "sequence": "Rmode<Esc>"
+        "description": "Overwrite four letters inside the string with mode, then return to Normal mode.",
+        "sequence": "Rmode<Esc>",
+        "code": [
+          "const option = 'theme';",
+          "const label = 'test';",
+          "console.log(option, label);"
+        ],
+        "cursor": [
+          1,
+          15
+        ]
+      },
+      {
+        "key": ":<Esc>",
+        "description": "Cancel a typed Ex command without executing it.",
+        "sequence": ":set number<Esc>",
+        "code": [
+          "const items = ['alpha', 'beta', 'gamma'];",
+          "const result = transform(items);",
+          "console.log(result);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       }
+    ],
+    "cursor": [
+      1,
+      15
     ]
   }
 ] satisfies readonly Lesson[];

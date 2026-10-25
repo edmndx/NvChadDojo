@@ -7,7 +7,7 @@ import type { VimCursor } from "./vimEngine";
 
 const runtimeProfiles: Record<string, LessonRuntimeProfile> =
   lessonRuntimeProfiles;
-const profileFor = (lesson: Lesson) =>
+export const runtimeProfileFor = (lesson: Lesson) =>
   runtimeProfiles[lesson.id] || {
     outcomeValidation: false,
     visual: false,
@@ -22,10 +22,7 @@ export function startingCursor(lesson: Lesson, lines: string[]): VimCursor {
       col: Math.max(0, Math.min((lines[line] || "").length, requested[1])),
     };
   }
-  const [profileLine, profileCol] = profileFor(lesson).cursor || [
-    Math.min(1, Math.max(0, lines.length - 1)),
-    2,
-  ];
+  const [profileLine, profileCol] = runtimeProfileFor(lesson).cursor || [0, 0];
   const line = Math.max(0, Math.min(lines.length - 1, profileLine));
   return {
     line,
@@ -34,8 +31,9 @@ export function startingCursor(lesson: Lesson, lines: string[]): VimCursor {
 }
 
 function reviewSequence(key: string, replacement: string) {
-  return key.startsWith("c") || key === "s" || key === "I" || key === "A"
-    ? `${key}${replacement}<Esc>`
+  const command = key.replace(/<Esc>$/, "");
+  return /^(?:c(?:[ia].|[weWEsSpP$0^_]|c)|[iaIAsRoO])$/.test(command)
+    ? `${command}${replacement}<Esc>`
     : key;
 }
 
@@ -48,38 +46,43 @@ export function challengeSteps(lesson: Lesson) {
     "small-edits": ["x", `s${replacement}<Esc>`, `r${replacement[0] || "n"}`],
     "command-line-mode": [":set number<Enter>", ":<Esc>"],
     "tag-objects": [`cit${replacement}<Esc>`, "dat"],
+    "sentence-objects": [`cis${replacement}<Esc>`, "das"],
+    "parentheses-objects": [`ci(${replacement}<Esc>`, "da("],
+    "square-bracket-objects": [`ci[${replacement}<Esc>`, "da["],
   };
   if (specific[lesson.id]) return specific[lesson.id];
-  if (lesson.id === "search-review")
-    return ["/return<Enter>", "/return<Enter>n", "/return<Enter>N", "*", "#"];
+  if (
+    lesson.reviewOnly &&
+    lesson.id !== "text-objects-mega-review" &&
+    lesson.reviewItems?.length
+  )
+    return [
+      ...new Set(
+        lesson.reviewItems.map((item) =>
+          reviewSequence(item.sequence, replacement),
+        ),
+      ),
+    ];
   if (lesson.reviewOnly)
     return lesson.keys.map((key) => reviewSequence(key, replacement));
-  const singleEscape =
-    lesson.sequence.endsWith("<Esc>") &&
-    lesson.sequence.indexOf("<Esc>") === lesson.sequence.lastIndexOf("<Esc>");
-  const insertCommand =
-    lesson.sequence.startsWith("c") ||
-    ["i", "a", "I", "A", "s"].includes(lesson.sequence.replace("<Esc>", ""));
-  return [
-    singleEscape && insertCommand
-      ? lesson.sequence.replace("<Esc>", `${replacement}<Esc>`)
-      : lesson.sequence,
-  ];
+  return [reviewSequence(lesson.sequence, replacement)];
 }
 
 export function acceptedCommands(lesson: Lesson, required: string) {
+  const canonicalize = (sequence: string) =>
+    sequence.replaceAll(" ", "<Space>");
   if (lesson.challenge?.alternatives?.length)
-    return lesson.challenge.alternatives;
-  return [required];
+    return lesson.challenge.alternatives.map(canonicalize);
+  return [canonicalize(required)];
 }
 
 export function supportsOutcomeValidation(lesson: Lesson) {
-  return profileFor(lesson).outcomeValidation;
+  return runtimeProfileFor(lesson).outcomeValidation;
 }
 
 export function commandState(typed: string, lesson: Lesson) {
   if (!typed) return "NORMAL";
-  const profile = profileFor(lesson);
+  const profile = runtimeProfileFor(lesson);
   if (profile.surface === "completion") return "INSERT / COMPLETION";
   if (profile.surface === "terminal")
     return typed.includes("<C-x>") ? "NORMAL" : "TERMINAL";

@@ -16,34 +16,34 @@ const lessons = [
     "task": "Practice delete inside quotes.",
     "sequence": "di\"",
     "code": [
-      "local theme = \"replace-this-theme\"",
-      "local mode = \"production\"",
-      "return theme"
+      "const theme = \"replace-this-theme\";",
+      "const mode = \"production\";",
+      "console.log(theme, mode);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Practice delete inside quotes. · repetition 1 of 3",
         "code": [
-          "local theme = \"replace-this-theme\"",
-          "local mode = \"production\"",
-          "return theme"
+          "const theme = \"replace-this-theme\";",
+          "const mode = \"production\";",
+          "console.log(theme, mode);"
         ]
       },
       {
         "goal": "Practice delete inside quotes. · repetition 2 of 3",
         "code": [
-          "notify(\"server started successfully\")",
-          "local icon = \"󰢱\"",
-          "return icon"
+          "notify(\"server started successfully\");",
+          "const icon = \"ready\";",
+          "console.log(icon);"
         ]
       },
       {
         "goal": "Practice delete inside quotes. · repetition 3 of 3",
         "code": [
-          "map(\"n\", \"<leader>ff\", picker)",
-          "local label = \"Find files\"",
-          "return label"
+          "bindKey(\"findFiles\", picker);",
+          "const label = \"Find files\";",
+          "console.log(label);"
         ]
       }
     ],
@@ -55,20 +55,37 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with d.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: d, i, \"."
       ],
       "success": "Delete Inside Quotes produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "d",
+        "description": "di\" removes quoted content while retaining both quote marks.",
+        "sequence": "di\""
+      },
+      {
+        "key": "i",
+        "description": "di\" removes quoted content while retaining both quote marks.",
+        "sequence": "di\""
+      },
+      {
+        "key": "\"",
+        "description": "di\" removes quoted content while retaining both quote marks.",
+        "sequence": "di\""
+      }
+    ]
   },
   {
     "group": "Text Objects - Quotes",
     "id": "delete-around-quotes",
     "title": "Delete Around Quotes",
     "eyebrow": "Text Objects - Quotes",
-    "summary": "da\" removes the content and its surrounding quote marks.",
-    "detail": "da\" removes the content and its surrounding quote marks.",
+    "summary": "da\" removes quoted content, both quote marks, and adjacent whitespace when available.",
+    "detail": "da\" removes quoted content, both quote marks, and adjacent whitespace when available.",
     "keys": [
       "d",
       "a",
@@ -77,34 +94,34 @@ const lessons = [
     "task": "Practice delete around quotes.",
     "sequence": "da\"",
     "code": [
-      "local theme = \"replace-this-theme\"",
-      "local mode = \"production\"",
-      "return theme"
+      "const theme = \"replace-this-theme\";",
+      "const mode = \"production\";",
+      "console.log(theme, mode);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Practice delete around quotes. · repetition 1 of 3",
         "code": [
-          "local theme = \"replace-this-theme\"",
-          "local mode = \"production\"",
-          "return theme"
+          "const theme = \"replace-this-theme\";",
+          "const mode = \"production\";",
+          "console.log(theme, mode);"
         ]
       },
       {
         "goal": "Practice delete around quotes. · repetition 2 of 3",
         "code": [
-          "notify(\"server started successfully\")",
-          "local icon = \"󰢱\"",
-          "return icon"
+          "notify(\"server started successfully\");",
+          "const icon = \"ready\";",
+          "console.log(icon);"
         ]
       },
       {
         "goal": "Practice delete around quotes. · repetition 3 of 3",
         "code": [
-          "map(\"n\", \"<leader>ff\", picker)",
-          "local label = \"Find files\"",
-          "return label"
+          "bindKey(\"findFiles\", picker);",
+          "const label = \"Find files\";",
+          "console.log(label);"
         ]
       }
     ],
@@ -116,12 +133,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with d.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: d, a, \"."
       ],
       "success": "Delete Around Quotes produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "d",
+        "description": "da\" removes quoted content, both quote marks, and adjacent whitespace when available.",
+        "sequence": "da\""
+      },
+      {
+        "key": "a",
+        "description": "da\" removes quoted content, both quote marks, and adjacent whitespace when available.",
+        "sequence": "da\""
+      },
+      {
+        "key": "\"",
+        "description": "da\" removes quoted content, both quote marks, and adjacent whitespace when available.",
+        "sequence": "da\""
+      }
+    ]
   },
   {
     "group": "Text Objects - Quotes",
@@ -136,36 +170,36 @@ const lessons = [
       "\""
     ],
     "task": "Change inside quotes, then escape.",
-    "sequence": "ci\"<Esc>",
+    "sequence": "ci\"catppuccin<Esc>",
     "code": [
-      "local theme = \"replace-this-theme\"",
-      "local mode = \"production\"",
-      "return theme"
+      "const theme = \"replace-this-theme\";",
+      "const mode = \"production\";",
+      "console.log(theme, mode);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Change inside quotes, then escape. · repetition 1 of 3",
         "code": [
-          "local theme = \"replace-this-theme\"",
-          "local mode = \"production\"",
-          "return theme"
+          "const theme = \"replace-this-theme\";",
+          "const mode = \"production\";",
+          "console.log(theme, mode);"
         ]
       },
       {
         "goal": "Change inside quotes, then escape. · repetition 2 of 3",
         "code": [
-          "notify(\"server started successfully\")",
-          "local icon = \"󰢱\"",
-          "return icon"
+          "notify(\"server started successfully\");",
+          "const icon = \"ready\";",
+          "console.log(icon);"
         ]
       },
       {
         "goal": "Change inside quotes, then escape. · repetition 3 of 3",
         "code": [
-          "map(\"n\", \"<leader>ff\", picker)",
-          "local label = \"Find files\"",
-          "return label"
+          "bindKey(\"findFiles\", picker);",
+          "const label = \"Find files\";",
+          "console.log(label);"
         ]
       }
     ],
@@ -178,56 +212,73 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with c.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Enter “catppuccin” before returning to Normal mode."
       ],
       "success": "The buffer now contains “catppuccin” in the intended location."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "c",
+        "description": "ci\" replaces quoted content while preserving the quotes.",
+        "sequence": "ci\"catppuccin<Esc>"
+      },
+      {
+        "key": "i",
+        "description": "ci\" replaces quoted content while preserving the quotes.",
+        "sequence": "ci\"catppuccin<Esc>"
+      },
+      {
+        "key": "\"",
+        "description": "ci\" replaces quoted content while preserving the quotes.",
+        "sequence": "ci\"catppuccin<Esc>"
+      }
+    ]
   },
   {
     "group": "Text Objects - Quotes",
     "id": "change-around-quotes",
     "title": "Change Around Quotes",
     "eyebrow": "Text Objects - Quotes",
-    "summary": "ca\" replaces both quoted content and its delimiters.",
-    "detail": "ca\" replaces both quoted content and its delimiters.",
+    "summary": "ca\" replaces quoted content, both quote marks, and adjacent whitespace when available.",
+    "detail": "ca\" replaces quoted content, both quote marks, and adjacent whitespace when available.",
     "keys": [
       "c",
       "a",
       "\""
     ],
     "task": "Change around quotes, then escape.",
-    "sequence": "ca\"<Esc>",
+    "sequence": "ca\"\"catppuccin\"<Esc>",
     "code": [
-      "local theme = \"replace-this-theme\"",
-      "local mode = \"production\"",
-      "return theme"
+      "const theme = \"replace-this-theme\";",
+      "const mode = \"production\";",
+      "console.log(theme, mode);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Change around quotes, then escape. · repetition 1 of 3",
         "code": [
-          "local theme = \"replace-this-theme\"",
-          "local mode = \"production\"",
-          "return theme"
+          "const theme = \"replace-this-theme\";",
+          "const mode = \"production\";",
+          "console.log(theme, mode);"
         ]
       },
       {
         "goal": "Change around quotes, then escape. · repetition 2 of 3",
         "code": [
-          "notify(\"server started successfully\")",
-          "local icon = \"󰢱\"",
-          "return icon"
+          "notify(\"server started successfully\");",
+          "const icon = \"ready\";",
+          "console.log(icon);"
         ]
       },
       {
         "goal": "Change around quotes, then escape. · repetition 3 of 3",
         "code": [
-          "map(\"n\", \"<leader>ff\", picker)",
-          "local label = \"Find files\"",
-          "return label"
+          "bindKey(\"findFiles\", picker);",
+          "const label = \"Find files\";",
+          "console.log(label);"
         ]
       }
     ],
@@ -240,12 +291,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with c.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Enter “\"catppuccin\"” before returning to Normal mode."
       ],
       "success": "The buffer now contains “\"catppuccin\"” in the intended location."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "c",
+        "description": "ca\" replaces quoted content, both quote marks, and adjacent whitespace when available.",
+        "sequence": "ca\"\"catppuccin\"<Esc>"
+      },
+      {
+        "key": "a",
+        "description": "ca\" replaces quoted content, both quote marks, and adjacent whitespace when available.",
+        "sequence": "ca\"\"catppuccin\"<Esc>"
+      },
+      {
+        "key": "\"",
+        "description": "ca\" replaces quoted content, both quote marks, and adjacent whitespace when available.",
+        "sequence": "ca\"\"catppuccin\"<Esc>"
+      }
+    ]
   },
   {
     "group": "Text Objects - Quotes",
@@ -260,43 +328,43 @@ const lessons = [
       "ci\"",
       "ca\""
     ],
-    "task": "Run all four quote operations.",
-    "sequence": "di\"da\"ci\"<Esc>ca\"<Esc>",
+    "task": "Practice each listed operation separately from a fresh copy of the fixture.",
+    "sequence": "di\"",
     "code": [
-      "local theme = \"replace-this-theme\"",
-      "local mode = \"production\"",
-      "return theme"
+      "const theme = \"replace-this-theme\";",
+      "const mode = \"production\";",
+      "console.log(theme, mode);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Run all four quote operations. · repetition 1 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 1 of 3",
         "code": [
-          "local theme = \"replace-this-theme\"",
-          "local mode = \"production\"",
-          "return theme"
+          "const theme = \"replace-this-theme\";",
+          "const mode = \"production\";",
+          "console.log(theme, mode);"
         ]
       },
       {
-        "goal": "Run all four quote operations. · repetition 2 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 2 of 3",
         "code": [
-          "notify(\"server started successfully\")",
-          "local icon = \"󰢱\"",
-          "return icon"
+          "notify(\"server started successfully\");",
+          "const icon = \"ready\";",
+          "console.log(icon);"
         ]
       },
       {
-        "goal": "Run all four quote operations. · repetition 3 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 3 of 3",
         "code": [
-          "map(\"n\", \"<leader>ff\", picker)",
-          "local label = \"Find files\"",
-          "return label"
+          "bindKey(\"findFiles\", picker);",
+          "const label = \"Find files\";",
+          "console.log(label);"
         ]
       }
     ],
     "commonMistake": "Keep the order operator → inside/around → object. For example: d + i + w.",
     "challenge": {
-      "instruction": "Run all four quote operations.",
+      "instruction": "Practice each listed operation separately from a fresh copy of the fixture.",
       "cursor": [
         1,
         0
@@ -308,7 +376,29 @@ const lessons = [
       ],
       "success": "Quotes Review produced the requested buffer and cursor state."
     },
-    "reviewOnly": true
+    "reviewOnly": true,
+    "reviewItems": [
+      {
+        "key": "di\"",
+        "description": "Delete the indicated object.",
+        "sequence": "di\""
+      },
+      {
+        "key": "da\"",
+        "description": "Delete the indicated object.",
+        "sequence": "da\""
+      },
+      {
+        "key": "ci\"",
+        "description": "Change the indicated object to updated.",
+        "sequence": "ci\"updated<Esc>"
+      },
+      {
+        "key": "ca\"",
+        "description": "Change the indicated object to updated.",
+        "sequence": "ca\"updated<Esc>"
+      }
+    ]
   }
 ] satisfies readonly Lesson[];
 

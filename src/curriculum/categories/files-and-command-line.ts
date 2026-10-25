@@ -15,34 +15,34 @@ const lessons = [
     "task": "Save the current buffer without closing it.",
     "sequence": ":w<Enter>",
     "code": [
-      "-- edited init.lua",
-      "local theme = 'onedark'",
-      "return theme"
+      "// Edited settings.js",
+      "const theme = 'onedark';",
+      "console.log(theme);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Save the current buffer without closing it. · repetition 1 of 3",
         "code": [
-          "-- edited init.lua",
-          "local theme = 'onedark'",
-          "return theme"
+          "// Edited settings.js",
+          "const theme = 'onedark';",
+          "console.log(theme);"
         ]
       },
       {
         "goal": "Save the current buffer without closing it. · repetition 2 of 3",
         "code": [
-          "-- unsaved mappings.lua",
-          "vim.keymap.set('n', '<leader>x', close)",
-          "return true"
+          "// Unsaved shortcuts.js",
+          "const shortcuts = { close: 'Escape' };",
+          "console.log(shortcuts);"
         ]
       },
       {
         "goal": "Save the current buffer without closing it. · repetition 3 of 3",
         "code": [
-          "-- finished configuration",
-          "vim.o.number = true",
-          "return true"
+          "// Finished settings.js",
+          "const settings = { showLineNumbers: true };",
+          "console.log(settings);"
         ]
       }
     ],
@@ -54,73 +54,104 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with :w.",
-        "Use only the keys introduced in Files & Command Line.",
-        "Compose the command from: :w, Enter."
+        "Start in Normal mode and type :w.",
+        "Press Enter to write the named buffer.",
+        "The buffer stays open after saving."
       ],
       "success": "Save and Keep Editing produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": ":w",
+        "description": ":w writes the current buffer to disk and keeps it open.",
+        "sequence": ":w<Enter>"
+      },
+      {
+        "key": "Enter",
+        "description": "After entering :w, Enter executes the write command.",
+        "sequence": ":w<Enter>"
+      }
+    ],
+    "language": "javascript"
   },
   {
     "group": "Files & Command Line",
     "id": "save-and-exit",
     "title": "Save or Exit Safely",
     "eyebrow": "Files & Command Line",
-    "summary": ":wq saves and exits, :q exits an unchanged buffer, and :q! deliberately discards unsaved changes.",
-    "detail": ":wq saves and exits, :q exits an unchanged buffer, and :q! deliberately discards unsaved changes.",
+    "summary": ":wq saves and closes the current window; :q closes it unless unsaved changes would be abandoned; :q! closes without saving.",
+    "detail": "Neovim exits when its last editing window closes. :q refuses to abandon unsaved changes; use :q! only when discarding them is intentional.",
     "keys": [
       ":wq",
       ":q",
       ":q!"
     ],
-    "task": "Save the current buffer and exit.",
+    "task": "Save the current buffer and close the current window.",
     "sequence": ":wq<Enter>",
     "code": [
-      "-- edited init.lua",
-      "local theme = 'onedark'",
-      "return theme"
+      "// Edited settings.js",
+      "const theme = 'onedark';",
+      "console.log(theme);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Save the current buffer and exit. · repetition 1 of 3",
+        "goal": "Save the current buffer and close the current window. · repetition 1 of 3",
         "code": [
-          "-- edited init.lua",
-          "local theme = 'onedark'",
-          "return theme"
+          "// Edited settings.js",
+          "const theme = 'onedark';",
+          "console.log(theme);"
         ]
       },
       {
-        "goal": "Save the current buffer and exit. · repetition 2 of 3",
+        "goal": "Save the current buffer and close the current window. · repetition 2 of 3",
         "code": [
-          "-- unsaved mappings.lua",
-          "vim.keymap.set('n', '<leader>x', close)",
-          "return true"
+          "// Unsaved shortcuts.js",
+          "const shortcuts = { close: 'Escape' };",
+          "console.log(shortcuts);"
         ]
       },
       {
-        "goal": "Save the current buffer and exit. · repetition 3 of 3",
+        "goal": "Save the current buffer and close the current window. · repetition 3 of 3",
         "code": [
-          "-- finished configuration",
-          "vim.o.number = true",
-          "return true"
+          "// Finished settings.js",
+          "const settings = { showLineNumbers: true };",
+          "console.log(settings);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Save the current buffer and exit.",
+      "instruction": "Save the current buffer and close the current window.",
       "cursor": [
         1,
         0
       ],
       "hints": [
-        "Begin with :wq.",
-        "Use only the keys introduced in Files & Command Line.",
-        "Compose the command from: :wq, :q, :q!."
+        "Start in Normal mode and type :wq.",
+        "Press Enter to write and close the current window.",
+        "Neovim exits if this was its last window; :q and :q! are alternatives, not additional steps."
       ],
       "success": "Save or Exit Safely produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": ":wq",
+        "description": "Write the current buffer and close the current window.",
+        "sequence": ":wq<Enter>"
+      },
+      {
+        "key": ":q",
+        "description": "Close the current window unless doing so would abandon unsaved changes.",
+        "sequence": ":q<Enter>"
+      },
+      {
+        "key": ":q!",
+        "description": "Close the current window without saving; unsaved changes may be discarded.",
+        "sequence": ":q!<Enter>"
+      }
+    ],
+    "language": "javascript"
   },
   {
     "group": "Files & Command Line",
@@ -139,9 +170,9 @@ const lessons = [
     "task": "",
     "sequence": ":w<Enter>",
     "code": [
-      "-- edited init.lua",
-      "local theme = 'onedark'",
-      "return theme"
+      "// Edited settings.js",
+      "const theme = 'onedark';",
+      "console.log(theme);"
     ],
     "tip": "Return to any command in Files & Command Line that still requires conscious recall.",
     "reviewOnly": true,
@@ -149,29 +180,84 @@ const lessons = [
       {
         "key": ":w",
         "description": ":w writes the current buffer to disk and keeps it open.",
-        "sequence": ":w<Enter>"
+        "sequence": ":w<Enter>",
+        "code": [
+          "// Edited settings.js",
+          "const theme = 'onedark';",
+          "console.log(theme);"
+        ],
+        "cursor": [
+          1,
+          0
+        ],
+        "language": "javascript"
       },
       {
         "key": "Enter",
-        "description": ":w writes the current buffer to disk and keeps it open.",
-        "sequence": ":w<Enter>"
+        "description": "After entering :w, Enter executes the write command.",
+        "sequence": ":w<Enter>",
+        "code": [
+          "// Edited settings.js",
+          "const theme = 'onedark';",
+          "console.log(theme);"
+        ],
+        "cursor": [
+          1,
+          0
+        ],
+        "language": "javascript"
       },
       {
         "key": ":wq",
-        "description": ":wq saves and exits, :q exits an unchanged buffer, and :q! deliberately discards unsaved changes.",
-        "sequence": ":wq<Enter>"
+        "description": "Write the current buffer and close the current window.",
+        "sequence": ":wq<Enter>",
+        "code": [
+          "// Edited settings.js",
+          "const theme = 'onedark';",
+          "console.log(theme);"
+        ],
+        "cursor": [
+          1,
+          0
+        ],
+        "language": "javascript"
       },
       {
         "key": ":q",
-        "description": ":wq saves and exits, :q exits an unchanged buffer, and :q! deliberately discards unsaved changes.",
-        "sequence": ":wq<Enter>"
+        "description": "Close the current window unless doing so would abandon unsaved changes.",
+        "sequence": ":q<Enter>",
+        "code": [
+          "// Edited settings.js",
+          "const theme = 'onedark';",
+          "console.log(theme);"
+        ],
+        "cursor": [
+          1,
+          0
+        ],
+        "language": "javascript"
       },
       {
         "key": ":q!",
-        "description": ":wq saves and exits, :q exits an unchanged buffer, and :q! deliberately discards unsaved changes.",
-        "sequence": ":wq<Enter>"
+        "description": "Close the current window without saving; unsaved changes may be discarded.",
+        "sequence": ":q!<Enter>",
+        "code": [
+          "// Edited settings.js",
+          "const theme = 'onedark';",
+          "console.log(theme);"
+        ],
+        "cursor": [
+          1,
+          0
+        ],
+        "language": "javascript"
       }
-    ]
+    ],
+    "cursor": [
+      1,
+      0
+    ],
+    "language": "javascript"
   }
 ] satisfies readonly Lesson[];
 

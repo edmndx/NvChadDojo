@@ -15,34 +15,34 @@ const lessons = [
     "task": "Put the latest yanked text from register 0.",
     "sequence": "\"0p",
     "code": [
-      "local copied = 'keep this text'",
-      "local disposable = 'delete this'",
-      "return copied"
+      "const copied = 'keep this text';",
+      "const disposable = 'delete this';",
+      "console.log(copied);"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "The practice buffer seeds register 0 with the line `const yanked = true;`. In your editor, yank some text before using \"0p.",
     "drills": [
       {
         "goal": "Put the latest yanked text from register 0. · repetition 1 of 3",
         "code": [
-          "local copied = 'keep this text'",
-          "local disposable = 'delete this'",
-          "return copied"
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
         ]
       },
       {
         "goal": "Put the latest yanked text from register 0. · repetition 2 of 3",
         "code": [
-          "local alpha = 1",
-          "local beta = 2",
-          "local gamma = 3"
+          "const alpha = 1;",
+          "const beta = 2;",
+          "const gamma = 3;"
         ]
       },
       {
         "goal": "Put the latest yanked text from register 0. · repetition 3 of 3",
         "code": [
-          "map('n', 'x', action)",
-          "map('n', 'y', other)",
-          "return map"
+          "map('n', 'x', action);",
+          "map('n', 'y', other);",
+          "console.log(map);"
         ]
       }
     ],
@@ -54,12 +54,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with \"0.",
-        "Use only the keys introduced in Registers.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: \"0, p."
       ],
       "success": "Use the Yank Register produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "\"0",
+        "description": "Register 0 keeps the latest yank even after another delete changes the unnamed register.",
+        "sequence": "\"0p"
+      },
+      {
+        "key": "p",
+        "description": "Register 0 keeps the latest yank even after another delete changes the unnamed register.",
+        "sequence": "\"0p"
+      }
+    ]
   },
   {
     "group": "Registers",
@@ -77,34 +89,34 @@ const lessons = [
     "task": "Yank a line into register a, then put it.",
     "sequence": "\"ayy\"ap",
     "code": [
-      "local copied = 'keep this text'",
-      "local disposable = 'delete this'",
-      "return copied"
+      "const copied = 'keep this text';",
+      "const disposable = 'delete this';",
+      "console.log(copied);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Yank a line into register a, then put it. · repetition 1 of 3",
         "code": [
-          "local copied = 'keep this text'",
-          "local disposable = 'delete this'",
-          "return copied"
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
         ]
       },
       {
         "goal": "Yank a line into register a, then put it. · repetition 2 of 3",
         "code": [
-          "local alpha = 1",
-          "local beta = 2",
-          "local gamma = 3"
+          "const alpha = 1;",
+          "const beta = 2;",
+          "const gamma = 3;"
         ]
       },
       {
         "goal": "Yank a line into register a, then put it. · repetition 3 of 3",
         "code": [
-          "map('n', 'x', action)",
-          "map('n', 'y', other)",
-          "return map"
+          "map('n', 'x', action);",
+          "map('n', 'y', other);",
+          "console.log(map);"
         ]
       }
     ],
@@ -116,12 +128,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with \"a.",
-        "Use only the keys introduced in Registers.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: \"a, yy, \"a, p."
       ],
       "success": "Named Registers produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "\"a",
+        "description": "Named registers preserve text for deliberate reuse across edits.",
+        "sequence": "\"ayy\"ap"
+      },
+      {
+        "key": "yy",
+        "description": "Named registers preserve text for deliberate reuse across edits.",
+        "sequence": "\"ayy\"ap"
+      },
+      {
+        "key": "p",
+        "description": "Named registers preserve text for deliberate reuse across edits.",
+        "sequence": "\"ayy\"ap"
+      }
+    ]
   },
   {
     "group": "Registers",
@@ -138,34 +167,34 @@ const lessons = [
     "task": "Delete a word without changing the active paste register.",
     "sequence": "\"_dw",
     "code": [
-      "local copied = 'keep this text'",
-      "local disposable = 'delete this'",
-      "return copied"
+      "const copied = 'keep this text';",
+      "const disposable = 'delete this';",
+      "console.log(copied);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Delete a word without changing the active paste register. · repetition 1 of 3",
         "code": [
-          "local copied = 'keep this text'",
-          "local disposable = 'delete this'",
-          "return copied"
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
         ]
       },
       {
         "goal": "Delete a word without changing the active paste register. · repetition 2 of 3",
         "code": [
-          "local alpha = 1",
-          "local beta = 2",
-          "local gamma = 3"
+          "const alpha = 1;",
+          "const beta = 2;",
+          "const gamma = 3;"
         ]
       },
       {
         "goal": "Delete a word without changing the active paste register. · repetition 3 of 3",
         "code": [
-          "map('n', 'x', action)",
-          "map('n', 'y', other)",
-          "return map"
+          "map('n', 'x', action);",
+          "map('n', 'y', other);",
+          "console.log(map);"
         ]
       }
     ],
@@ -177,12 +206,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with \"_.",
-        "Use only the keys introduced in Registers.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: \"_, d, w."
       ],
       "success": "Delete Without Overwriting produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "\"_",
+        "description": "The black-hole register discards deleted text without replacing what you plan to paste.",
+        "sequence": "\"_dw"
+      },
+      {
+        "key": "d",
+        "description": "The black-hole register discards deleted text without replacing what you plan to paste.",
+        "sequence": "\"_dw"
+      },
+      {
+        "key": "w",
+        "description": "The black-hole register discards deleted text without replacing what you plan to paste.",
+        "sequence": "\"_dw"
+      }
+    ]
   },
   {
     "group": "Registers",
@@ -198,34 +244,34 @@ const lessons = [
     "task": "Open the register list.",
     "sequence": ":registers<Enter>",
     "code": [
-      "local copied = 'keep this text'",
-      "local disposable = 'delete this'",
-      "return copied"
+      "const copied = 'keep this text';",
+      "const disposable = 'delete this';",
+      "console.log(copied);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Open the register list. · repetition 1 of 3",
         "code": [
-          "local copied = 'keep this text'",
-          "local disposable = 'delete this'",
-          "return copied"
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
         ]
       },
       {
         "goal": "Open the register list. · repetition 2 of 3",
         "code": [
-          "local alpha = 1",
-          "local beta = 2",
-          "local gamma = 3"
+          "const alpha = 1;",
+          "const beta = 2;",
+          "const gamma = 3;"
         ]
       },
       {
         "goal": "Open the register list. · repetition 3 of 3",
         "code": [
-          "map('n', 'x', action)",
-          "map('n', 'y', other)",
-          "return map"
+          "map('n', 'x', action);",
+          "map('n', 'y', other);",
+          "console.log(map);"
         ]
       }
     ],
@@ -237,12 +283,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with :registers.",
-        "Use only the keys introduced in Registers.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: :registers, Enter."
       ],
       "success": "Inspect Registers produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": ":registers",
+        "description": ":registers shows the current contents of named, numbered, and special registers.",
+        "sequence": ":registers<Enter>"
+      },
+      {
+        "key": "Enter",
+        "description": ":registers shows the current contents of named, numbered, and special registers.",
+        "sequence": ":registers<Enter>"
+      }
+    ]
   },
   {
     "group": "Registers",
@@ -265,9 +323,9 @@ const lessons = [
     "task": "",
     "sequence": "\"0p",
     "code": [
-      "local copied = 'keep this text'",
-      "local disposable = 'delete this'",
-      "return copied"
+      "const copied = 'keep this text';",
+      "const disposable = 'delete this';",
+      "console.log(copied);"
     ],
     "tip": "Return to any command in Registers that still requires conscious recall.",
     "reviewOnly": true,
@@ -275,48 +333,133 @@ const lessons = [
       {
         "key": "\"0",
         "description": "Register 0 keeps the latest yank even after another delete changes the unnamed register.",
-        "sequence": "\"0p"
+        "sequence": "\"0p",
+        "code": [
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "p",
         "description": "Register 0 keeps the latest yank even after another delete changes the unnamed register.",
-        "sequence": "\"0p"
+        "sequence": "\"0p",
+        "code": [
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "\"a",
         "description": "Named registers preserve text for deliberate reuse across edits.",
-        "sequence": "\"ayy\"ap"
+        "sequence": "\"ayy\"ap",
+        "code": [
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "yy",
         "description": "Named registers preserve text for deliberate reuse across edits.",
-        "sequence": "\"ayy\"ap"
+        "sequence": "\"ayy\"ap",
+        "code": [
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "\"_",
         "description": "The black-hole register discards deleted text without replacing what you plan to paste.",
-        "sequence": "\"_dw"
+        "sequence": "\"_dw",
+        "code": [
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "d",
         "description": "The black-hole register discards deleted text without replacing what you plan to paste.",
-        "sequence": "\"_dw"
+        "sequence": "\"_dw",
+        "code": [
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "w",
         "description": "The black-hole register discards deleted text without replacing what you plan to paste.",
-        "sequence": "\"_dw"
+        "sequence": "\"_dw",
+        "code": [
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": ":registers",
         "description": ":registers shows the current contents of named, numbered, and special registers.",
-        "sequence": ":registers<Enter>"
+        "sequence": ":registers<Enter>",
+        "code": [
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "Enter",
         "description": ":registers shows the current contents of named, numbered, and special registers.",
-        "sequence": ":registers<Enter>"
+        "sequence": ":registers<Enter>",
+        "code": [
+          "const copied = 'keep this text';",
+          "const disposable = 'delete this';",
+          "console.log(copied);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       }
+    ],
+    "cursor": [
+      1,
+      2
     ]
   }
 ] satisfies readonly Lesson[];

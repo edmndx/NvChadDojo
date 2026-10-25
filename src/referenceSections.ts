@@ -48,8 +48,8 @@ export const referenceSections: readonly ReferenceSection[] = [
     tone: "cyan",
     rows: [
       ["Select all text", "ggVG"],
-      ["Cursor to EOF", "VG"],
-      ["Cursor to top", "Vgg"],
+      ["Current line through EOF", "VG"],
+      ["Current line through top", "Vgg"],
       ["Current line", "V"],
       ["Lines down / up", "V then j / k"],
       ["Current word", "viw"],
@@ -64,7 +64,7 @@ export const referenceSections: readonly ReferenceSection[] = [
       ["Inside double / single quotes", "vi\" / vi'"],
       ["Inside parentheses", "vi( or vib"],
       ["Inside / around curly braces", "vi{ / va{"],
-      ["Inside HTML / JSX tag", "vit"],
+      ["Inside paired HTML / JSX tag", "vit"],
     ],
   },
   {
@@ -203,9 +203,9 @@ export const referenceSections: readonly ReferenceSection[] = [
       ["Open or create by path", ":e path"],
       ["Write under a new name", ":saveas path"],
       ["Write and keep editing", ":w / Ctrl+s"],
-      ["Write and quit", ":wq"],
-      ["Quit unchanged buffer", ":q"],
-      ["Discard changes and quit", ":q!"],
+      ["Write and close window", ":wq"],
+      ["Close unchanged window", ":q"],
+      ["Force close current window", ":q!"],
     ],
   },
   {
@@ -337,7 +337,7 @@ export const referenceSections: readonly ReferenceSection[] = [
       ["Preview / select hunk", "Space hp / ih"],
       ["Blame current line", "Space hb"],
       ["Working tree / HEAD diff", "Space hd / Space hD"],
-      ["Undo latest hunk stage", "Space hu"],
+      ["Unstage current staged hunk", "Space hu"],
       ["Partial hunk action", "Visual then Space hs or hr"],
     ],
   },
@@ -406,7 +406,10 @@ export const referenceSections: readonly ReferenceSection[] = [
     rows: [
       ["Open help for a topic", ":help topic"],
       ["Follow tag / jump back", "Ctrl+] / Ctrl+o"],
-      ["All / Normal / Insert mappings", ":map / :nmap / :imap"],
+      [
+        "Normal+Visual+Operator / Normal / Insert mappings",
+        ":map / :nmap / :imap",
+      ],
       ["Find mapping source", ":verbose map {key}"],
       ["WhichKey all / prefix", "Space wK / Space wk"],
       ["NVChad cheatsheet", "Space ch"],

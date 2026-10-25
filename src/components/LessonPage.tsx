@@ -1,16 +1,15 @@
 import { useState, type CSSProperties } from "react";
 import type { Lesson } from "../curriculum";
-import { applyVimCommand } from "../vimEngine";
+import { applyVimCommand, applyVimTokens } from "../vimEngine";
+import { getLessonExamples } from "../lessonExamples";
+import { commandTokens, displayKey, tokenizeSequence } from "../keyboard";
+import { commandState } from "../lessonRuntime";
 import {
-  canonicalPracticeSequence,
-  commandTokens,
-  displayKey,
-} from "../keyboard";
-import {
-  commandState,
-  startingCursor,
-  supportsOutcomeValidation,
-} from "../lessonRuntime";
+  createLessonVimState,
+  resolveLessonPractice,
+  runScenario,
+  scenarioAsVimState,
+} from "../practiceModel";
 import { syntaxLine } from "./CodeLine";
 
 const meanings: Record<string, string> = {
@@ -80,6 +79,16 @@ const meanings: Record<string, string> = {
 };
 
 const contextualMeanings: Record<string, Record<string, string>> = {
+  "Visual Editing": {
+    o: "move to the opposite end of the Visual selection",
+    d: "delete the Visual selection",
+    c: "change the Visual selection",
+    y: "yank the Visual selection",
+  },
+  "Text Objects - Bracket Pairs": {
+    i: "select inside the text object's delimiters",
+    a: "select around the text object, including delimiters",
+  },
   "Windows, Buffers & Tabs": {
     ":ls": "list loaded buffers",
     ":tabs": "list native tab pages",
@@ -189,7 +198,7 @@ const contextualMeanings: Record<string, Record<string, string>> = {
     "Space hr": "reset the selected hunk or range",
     "Space hd": "diff working tree against the index",
     "Space hD": "diff the buffer against HEAD",
-    "Space hu": "undo the latest hunk stage",
+    "Space hu": "unstage the current staged hunk with stage_hunk",
     M: "open LazyGit conflict options",
     h: "go to the previous conflict",
     l: "go to the next conflict",
@@ -229,6 +238,18 @@ const contextualMeanings: Record<string, Record<string, string>> = {
 function describeKey(lesson: Lesson, key: string) {
   if (contextualMeanings[lesson.group]?.[key])
     return contextualMeanings[lesson.group][key];
+  if (
+    key.length === 1 &&
+    [
+      "Practical LSP Actions",
+      "NVChad Workflow",
+      "Coding Intelligence",
+      "Macros",
+      "Substitution",
+      "Advanced Visual Block",
+    ].includes(lesson.group)
+  )
+    return lesson.summary.replace(/[.]$/, "").toLowerCase();
   if (meanings[key]) return meanings[key];
   if (/^[dcya][iwap{"(]/.test(key))
     return `${key[0] === "d" ? "delete" : key[0] === "c" ? "change" : key[0] === "y" ? "yank" : "select"} ${key[1] === "i" ? "inside" : "around"} the target text object`;
@@ -294,7 +315,7 @@ function ConceptVisual({ lesson }: { lesson: Lesson }) {
     return (
       <div className="concept-visual">
         <code>
-          local <mark>theme</mark> = config.<mark>theme</mark>
+          const <mark>theme</mark> = config.<mark>theme</mark>;
         </code>
         <p>Search creates destinations; repeat motions move between them.</p>
       </div>
@@ -304,23 +325,40 @@ function ConceptVisual({ lesson }: { lesson: Lesson }) {
 
 function Example({
   lesson,
-  index,
-  sequence,
+  example,
   replay,
   onReplay,
 }: {
   lesson: Lesson;
-  index: number;
-  sequence: string;
+  example: ReturnType<typeof getLessonExamples>[number];
   replay: number;
   onReplay: () => void;
 }) {
-  const drill = (lesson.drills || [{ goal: lesson.task, code: lesson.code }])[
-    index % (lesson.drills?.length || 1)
-  ];
-  const cursor = startingCursor(lesson, drill.code);
-  const result = applyVimCommand(drill.code, cursor, sequence);
-  const simulated = supportsOutcomeValidation(lesson);
+  const { code, cursor, sequence, language } = example;
+  const practice = resolveLessonPractice(lesson);
+  const initial = createLessonVimState(lesson, code, cursor);
+  const result =
+    lesson.id === "text-objects-mega-review"
+      ? applyVimCommand(code, cursor, sequence)
+      : practice.kind === "vim"
+        ? applyVimTokens(initial, tokenizeSequence(sequence))
+        : practice.kind === "scenario"
+          ? scenarioAsVimState(initial, runScenario(lesson, sequence))
+          : initial;
+  const simulated = practice.kind !== "reference";
+  const shortcutOnly = practice.kind === "scenario" && !example.expectedCode;
+  const modeLabel =
+    practice.kind === "scenario"
+      ? example.expectedCode
+        ? "EXAMPLE RESULT"
+        : "SHORTCUT PRACTICE"
+      : simulated
+        ? result.mode.toUpperCase()
+        : commandState(sequence, lesson);
+  const message =
+    result.message === modeLabel
+      ? ""
+      : result.message || "Command applied to the buffer.";
   const tokens = commandTokens(sequence, lesson.challenge?.replacement);
   const sequenceDelay = Math.min(3.2, 0.42 + tokens.length * 0.19);
   return (
@@ -334,6 +372,13 @@ function Example({
         <span>Example</span>
         <i />
       </div>
+      {practice.kind === "scenario" && (
+        <p className="shortcut-note">
+          {example.expectedCode
+            ? "This shows an example outcome. In Neovim, the result depends on your setup."
+            : "Practice the shortcut here; use it in Neovim to perform the action."}
+        </p>
+      )}
       <div className="example-input">
         <span className="cli-prompt">$</span>
         <span className="cli-label">keys</span>
@@ -351,8 +396,12 @@ function Example({
         </button>
       </div>
       <div className="example-stage">
-        <pre className="example-before">
-          {drill.code.map((line, lineIndex) => (
+        <pre
+          className={
+            shortcutOnly ? "example-before example-context" : "example-before"
+          }
+        >
+          {code.map((line, lineIndex) => (
             <div
               className={lineIndex === cursor.line ? "active" : ""}
               key={lineIndex}
@@ -361,51 +410,69 @@ function Example({
               <code>
                 {lineIndex === cursor.line ? (
                   <>
-                    {syntaxLine(line.slice(0, cursor.col))}
+                    {syntaxLine(line, {
+                      language,
+                      lines: code,
+                      lineIndex,
+                      end: cursor.col,
+                    })}
                     <em />
-                    {syntaxLine(line.slice(cursor.col))}
+                    {syntaxLine(line, {
+                      language,
+                      lines: code,
+                      lineIndex,
+                      start: cursor.col,
+                    })}
                   </>
                 ) : (
-                  syntaxLine(line)
+                  syntaxLine(line, { language, lines: code, lineIndex })
                 )}
               </code>
             </div>
           ))}
         </pre>
-        <pre className="example-after">
-          {result.lines.map((line, lineIndex) => {
-            const active = lineIndex === result.cursor.line;
-            const col = Math.min(result.cursor.col, line.length);
-            return (
-              <div className={active ? "active" : ""} key={lineIndex}>
-                <span>{lineIndex + 1}</span>
-                <code>
-                  {active ? (
-                    <>
-                      {syntaxLine(line.slice(0, col))}
-                      <em />
-                      {syntaxLine(line.slice(col))}
-                    </>
-                  ) : (
-                    syntaxLine(line)
-                  )}
-                </code>
-              </div>
-            );
-          })}
-        </pre>
+        {!shortcutOnly && (
+          <pre className="example-after">
+            {result.lines.map((line, lineIndex) => {
+              const active = lineIndex === result.cursor.line;
+              const col = Math.min(result.cursor.col, line.length);
+              return (
+                <div className={active ? "active" : ""} key={lineIndex}>
+                  <span>{lineIndex + 1}</span>
+                  <code>
+                    {active ? (
+                      <>
+                        {syntaxLine(line, {
+                          language,
+                          lines: result.lines,
+                          lineIndex,
+                          end: col,
+                        })}
+                        <em />
+                        {syntaxLine(line, {
+                          language,
+                          lines: result.lines,
+                          lineIndex,
+                          start: col,
+                        })}
+                      </>
+                    ) : (
+                      syntaxLine(line, {
+                        language,
+                        lines: result.lines,
+                        lineIndex,
+                      })
+                    )}
+                  </code>
+                </div>
+              );
+            })}
+          </pre>
+        )}
       </div>
       <div className="example-mode">
-        <b>
-          {simulated
-            ? result.mode.toUpperCase()
-            : commandState(sequence, lesson)}
-        </b>
-        <span>
-          {simulated
-            ? result.message || "Command applied to the buffer."
-            : "NVChad or plugin action invoked; the practice buffer stays open."}
-        </span>
+        <b>{modeLabel}</b>
+        {message && <span>{message}</span>}
       </div>
     </div>
   );
@@ -414,49 +481,38 @@ function Example({
 export function LessonKeyGuide({ lesson }: { lesson: Lesson }) {
   const [open, setOpen] = useState<number | null>(null);
   const [replay, setReplay] = useState(0);
-  const items =
-    lesson.reviewItems ||
-    lesson.keys.map((key) => ({
-      key,
-      description: "",
-      sequence: lesson.reviewOnly
-        ? canonicalPracticeSequence(key)
-        : lesson.sequence,
-    }));
+  const items = getLessonExamples(lesson);
   return (
     <div className="key-guide">
-      {items.map((item, index) => (
-        <div
-          className={`key-guide-item ${open === index ? "expanded" : ""}`}
-          key={`${item.key}-${index}`}
-        >
-          <div className="key-guide-row">
-            <kbd>{item.key}</kbd>
-            <span>–</span>
-            <p>
-              {meanings[item.key]
-                ? describeKey(lesson, item.key)
-                : item.description || describeKey(lesson, item.key)}
-            </p>
-            <button
-              type="button"
-              aria-expanded={open === index}
-              onClick={() => setOpen(open === index ? null : index)}
-            >
-              {open === index ? "■ hide example" : "▶ show example"}
-            </button>
+      {items.map((item, index) => {
+        return (
+          <div
+            className={`key-guide-item ${open === index ? "expanded" : ""}`}
+            key={`${item.key}-${index}`}
+          >
+            <div className="key-guide-row">
+              <kbd>{item.key}</kbd>
+              <span>–</span>
+              <p>{item.description || describeKey(lesson, item.key)}</p>
+              <button
+                type="button"
+                aria-expanded={open === index}
+                onClick={() => setOpen(open === index ? null : index)}
+              >
+                {open === index ? "■ hide example" : "▶ show example"}
+              </button>
+            </div>
+            {open === index && (
+              <Example
+                lesson={lesson}
+                example={item}
+                replay={replay}
+                onReplay={() => setReplay((value) => value + 1)}
+              />
+            )}
           </div>
-          {open === index && (
-            <Example
-              lesson={lesson}
-              index={index}
-              sequence={item.sequence}
-              replay={replay}
-              onReplay={() => setReplay((value) => value + 1)}
-            />
-          )}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
@@ -545,7 +601,7 @@ const followUps: Record<string, [string, string, string]> = {
   "Diagnostics & Quickfix": [
     "Turn errors into a navigable queue",
     "Use location lists for one window and quickfix for project-wide results; add Trouble when a richer view helps.",
-    "Native lists work without Trouble, while Space x mappings require the optional plugin.",
+    "Native lists work without Trouble. Its suggested Space xx, Space xX, Space xQ, and Space xL mappings require the optional plugin and configuration; Space x itself closes a buffer when NVChad tabufline is enabled.",
   ],
   "Telescope Workflows": [
     "Search first, then choose the destination",
@@ -593,10 +649,11 @@ export function LessonFollowUp({ lesson }: { lesson: Lesson }) {
       <h2>
         <span>#</span> {note[0]}
       </h2>
-      <p className="lesson-recap">{lesson.summary}</p>
       <h3>When to use it</h3>
       <p>{note[1]}</p>
-      <h3>NVChad connection</h3>
+      <h3>
+        {followUps[lesson.group] ? "NVChad connection" : "Practice reminder"}
+      </h3>
       <p>{note[2]}</p>
     </section>
   );

@@ -12,54 +12,74 @@ const lessons = [
       "/",
       "?"
     ],
-    "task": "Search forward for config, then backward for local.",
-    "sequence": "/config<Enter>?local<Enter>",
+    "task": "Search forward for config, then backward for const.",
+    "sequence": "/config<Enter>?const<Enter>",
     "code": [
-      "local config = require('config')",
-      "config.theme = 'onedark'",
-      "return config"
+      "function getConfig() {",
+      "  const config = loadConfig();",
+      "  config.theme = 'onedark';",
+      "  return config;",
+      "}"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Search forward for config, then backward for local. · repetition 1 of 3",
+        "goal": "Search forward for config, then backward for const. · repetition 1 of 3",
         "code": [
-          "local config = require('config')",
-          "config.theme = 'onedark'",
-          "return config"
+          "function getConfig() {",
+          "  const config = loadConfig();",
+          "  config.theme = 'onedark';",
+          "  return config;",
+          "}"
         ]
       },
       {
-        "goal": "Search forward for config, then backward for local. · repetition 2 of 3",
+        "goal": "Search forward for config, then backward for const. · repetition 2 of 3",
         "code": [
-          "local theme = 'dark'",
-          "apply_theme(theme)",
-          "return theme"
+          "function getConfig() {",
+          "  const config = loadConfig();",
+          "  config.theme = 'dark';",
+          "  return config;",
+          "}"
         ]
       },
       {
-        "goal": "Search forward for config, then backward for local. · repetition 3 of 3",
+        "goal": "Search forward for config, then backward for const. · repetition 3 of 3",
         "code": [
-          "map('n', 'gd', goto_definition)",
-          "map('n', 'K', hover)",
-          "return map"
+          "function getConfig() {",
+          "  const config = { theme: true };",
+          "  config.theme = false;",
+          "  return config;",
+          "}"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Search forward for config, then backward for local.",
+      "instruction": "Search forward for config, then backward for const.",
       "cursor": [
-        1,
-        0
+        2,
+        2
       ],
       "hints": [
-        "Begin with /.",
-        "Use only the keys introduced in Search.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: /, ?."
       ],
       "success": "Search produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "/",
+        "description": "Search forward for config.",
+        "sequence": "/config<Enter>"
+      },
+      {
+        "key": "?",
+        "description": "Search backward for const.",
+        "sequence": "?const<Enter>"
+      }
+    ]
   },
   {
     "group": "Search",
@@ -72,54 +92,74 @@ const lessons = [
       "n",
       "N"
     ],
-    "task": "Repeat a search forward, then backward.",
+    "task": "Repeat the seeded forward search for config with n, then return with N.",
     "sequence": "nN",
     "code": [
-      "local config = require('config')",
-      "config.theme = 'onedark'",
-      "return config"
+      "function getConfig() {",
+      "  const config = loadConfig();",
+      "  config.theme = 'onedark';",
+      "  return config;",
+      "}"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "The practice buffer starts with config as the previous forward search. Use /config then Enter to establish it in your own editor.",
     "drills": [
       {
-        "goal": "Repeat a search forward, then backward. · repetition 1 of 3",
+        "goal": "Repeat the seeded forward search for config with n, then return with N. · repetition 1 of 3",
         "code": [
-          "local config = require('config')",
-          "config.theme = 'onedark'",
-          "return config"
+          "function getConfig() {",
+          "  const config = loadConfig();",
+          "  config.theme = 'onedark';",
+          "  return config;",
+          "}"
         ]
       },
       {
-        "goal": "Repeat a search forward, then backward. · repetition 2 of 3",
+        "goal": "Repeat the seeded forward search for config with n, then return with N. · repetition 2 of 3",
         "code": [
-          "local theme = 'dark'",
-          "apply_theme(theme)",
-          "return theme"
+          "function getConfig() {",
+          "  const config = loadConfig();",
+          "  config.theme = 'dark';",
+          "  return config;",
+          "}"
         ]
       },
       {
-        "goal": "Repeat a search forward, then backward. · repetition 3 of 3",
+        "goal": "Repeat the seeded forward search for config with n, then return with N. · repetition 3 of 3",
         "code": [
-          "map('n', 'gd', goto_definition)",
-          "map('n', 'K', hover)",
-          "return map"
+          "function getConfig() {",
+          "  const config = { theme: true };",
+          "  config.theme = false;",
+          "  return config;",
+          "}"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Repeat a search forward, then backward.",
+      "instruction": "Repeat the seeded forward search for config with n, then return with N.",
       "cursor": [
-        1,
-        0
+        2,
+        2
       ],
       "hints": [
-        "Begin with n.",
-        "Use only the keys introduced in Search.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: n, N."
       ],
       "success": "Repeat Search produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "n",
+        "description": "Repeat the seeded config search in its forward direction.",
+        "sequence": "n"
+      },
+      {
+        "key": "N",
+        "description": "Repeat the seeded config search in the opposite direction.",
+        "sequence": "N"
+      }
+    ]
   },
   {
     "group": "Search",
@@ -135,34 +175,42 @@ const lessons = [
     "task": "Search the current word forward and backward.",
     "sequence": "*#",
     "code": [
-      "local config = require('config')",
-      "config.theme = 'onedark'",
-      "return config"
+      "function getConfig() {",
+      "  const config = loadConfig();",
+      "  config.theme = 'onedark';",
+      "  return config;",
+      "}"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Search the current word forward and backward. · repetition 1 of 3",
         "code": [
-          "local config = require('config')",
-          "config.theme = 'onedark'",
-          "return config"
+          "function getConfig() {",
+          "  const config = loadConfig();",
+          "  config.theme = 'onedark';",
+          "  return config;",
+          "}"
         ]
       },
       {
         "goal": "Search the current word forward and backward. · repetition 2 of 3",
         "code": [
-          "local theme = 'dark'",
-          "apply_theme(theme)",
-          "return theme"
+          "function getConfig() {",
+          "  const config = loadConfig();",
+          "  config.theme = 'dark';",
+          "  return config;",
+          "}"
         ]
       },
       {
         "goal": "Search the current word forward and backward. · repetition 3 of 3",
         "code": [
-          "map('n', 'gd', goto_definition)",
-          "map('n', 'K', hover)",
-          "return map"
+          "function getConfig() {",
+          "  const config = { theme: true };",
+          "  config.theme = false;",
+          "  return config;",
+          "}"
         ]
       }
     ],
@@ -170,16 +218,28 @@ const lessons = [
     "challenge": {
       "instruction": "Search the current word forward and backward.",
       "cursor": [
-        1,
-        0
+        2,
+        2
       ],
       "hints": [
-        "Begin with *.",
-        "Use only the keys introduced in Search.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: *, #."
       ],
       "success": "Quick Word Search produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "*",
+        "description": "Search forward for the complete word under the cursor.",
+        "sequence": "*"
+      },
+      {
+        "key": "#",
+        "description": "Search backward for the complete word under the cursor.",
+        "sequence": "#"
+      }
+    ]
   },
   {
     "group": "Search",
@@ -190,51 +250,60 @@ const lessons = [
     "detail": "Combine explicit searches, repeat motions, and searches for the current word.",
     "keys": [
       "/",
+      "?",
       "n",
       "N",
       "*",
       "#"
     ],
-    "task": "Search for theme, repeat both ways, then use * and #.",
-    "sequence": "/theme<Enter>nN*#",
+    "task": "Review forward and backward searches, repetition in both directions, and whole-word searches.",
+    "sequence": "/config<Enter>nN*#",
     "code": [
-      "local config = require('config')",
-      "config.theme = 'onedark'",
-      "return config"
+      "function getConfig() {",
+      "  const config = loadConfig();",
+      "  config.theme = 'onedark';",
+      "  return config;",
+      "}"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Search for theme, repeat both ways, then use * and #. · repetition 1 of 3",
+        "goal": "Review forward and backward searches, repetition in both directions, and whole-word searches. · repetition 1 of 3",
         "code": [
-          "local config = require('config')",
-          "config.theme = 'onedark'",
-          "return config"
+          "function getConfig() {",
+          "  const config = loadConfig();",
+          "  config.theme = 'onedark';",
+          "  return config;",
+          "}"
         ]
       },
       {
-        "goal": "Search for theme, repeat both ways, then use * and #. · repetition 2 of 3",
+        "goal": "Review forward and backward searches, repetition in both directions, and whole-word searches. · repetition 2 of 3",
         "code": [
-          "local theme = 'dark'",
-          "apply_theme(theme)",
-          "return theme"
+          "function getConfig() {",
+          "  const config = loadConfig();",
+          "  config.theme = 'dark';",
+          "  return config;",
+          "}"
         ]
       },
       {
-        "goal": "Search for theme, repeat both ways, then use * and #. · repetition 3 of 3",
+        "goal": "Review forward and backward searches, repetition in both directions, and whole-word searches. · repetition 3 of 3",
         "code": [
-          "map('n', 'gd', goto_definition)",
-          "map('n', 'K', hover)",
-          "return map"
+          "function getConfig() {",
+          "  const config = { theme: true };",
+          "  config.theme = false;",
+          "  return config;",
+          "}"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Search for theme, repeat both ways, then use * and #.",
+      "instruction": "Review forward and backward searches, repetition in both directions, and whole-word searches.",
       "cursor": [
-        1,
-        0
+        2,
+        2
       ],
       "hints": [
         "Begin with /.",
@@ -243,7 +312,39 @@ const lessons = [
       ],
       "success": "Search Review produced the requested buffer and cursor state."
     },
-    "reviewOnly": true
+    "reviewOnly": true,
+    "reviewItems": [
+      {
+        "key": "/",
+        "description": "Search forward for config.",
+        "sequence": "/config<Enter>"
+      },
+      {
+        "key": "?",
+        "description": "Search backward for const.",
+        "sequence": "?const<Enter>"
+      },
+      {
+        "key": "n",
+        "description": "Establish a search, then repeat it forward.",
+        "sequence": "/config<Enter>n"
+      },
+      {
+        "key": "N",
+        "description": "Establish a search, then repeat it backward.",
+        "sequence": "/config<Enter>N"
+      },
+      {
+        "key": "*",
+        "description": "Search forward for the word under the cursor.",
+        "sequence": "*"
+      },
+      {
+        "key": "#",
+        "description": "Search backward for the word under the cursor.",
+        "sequence": "#"
+      }
+    ]
   }
 ] satisfies readonly Lesson[];
 

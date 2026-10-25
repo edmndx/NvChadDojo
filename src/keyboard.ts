@@ -4,6 +4,7 @@ export type CommandToken =
   | { kind: "text"; value: string };
 
 export function displayKey(raw: string) {
+  if (raw === " ") return "Space";
   return raw
     .replaceAll("<Space>", "Space ")
     .replaceAll("<Enter>", "↵")
@@ -20,6 +21,7 @@ export function normalizeKey(event: KeyboardEvent) {
   if (event.key === "Enter") return "<Enter>";
   if (event.key === "Tab") return event.shiftKey ? "<S-Tab>" : "<Tab>";
   if (event.ctrlKey && event.key === " ") return "<C-Space>";
+  if (event.ctrlKey && event.key === "6") return "<C-^>";
   if (event.key === " ") return "<Space>";
   if (event.ctrlKey && event.key.length === 1)
     return `<C-${event.key.toLowerCase()}>`;
@@ -29,6 +31,45 @@ export function normalizeKey(event: KeyboardEvent) {
 }
 
 export const tokenizeSequence = tokenizeCommand;
+
+export function matchAcceptedInput(
+  typed: string,
+  typedPrefix: string,
+  token: string,
+  accepted: readonly string[],
+) {
+  const candidates =
+    token === "<Space>"
+      ? [typed + typedPrefix + token, typed + typedPrefix + " "]
+      : [typed + typedPrefix + token];
+  const value =
+    candidates.find((candidate) =>
+      accepted.some((option) => option.startsWith(candidate)),
+    ) || candidates[0];
+  return {
+    value,
+    viable: accepted.some((option) => option.startsWith(value)),
+    complete: accepted.includes(value),
+  };
+}
+
+export function shouldCancelPendingInput(
+  token: string,
+  mode: string,
+  pending: string,
+  typed: string,
+  remapPending: string,
+  accepted: readonly string[],
+) {
+  if (
+    token !== "<Esc>" ||
+    mode !== "normal" ||
+    (!pending && !typed && !remapPending)
+  )
+    return false;
+  const continued = typed + remapPending + token;
+  return !accepted.some((option) => option.startsWith(continued));
+}
 
 export function commandTokens(
   sequence: string,
@@ -71,12 +112,13 @@ export function commandTokens(
     return grouped;
   }
   if (insertedText) {
-    const start = sequence.indexOf(insertedText);
+    const encodedInsertedText = insertedText.replaceAll(" ", "<Space>");
+    const start = sequence.indexOf(encodedInsertedText);
     if (start >= 0) {
       return [
         ...commandTokens(sequence.slice(0, start)),
         { kind: "text", value: insertedText } as const,
-        ...commandTokens(sequence.slice(start + insertedText.length)),
+        ...commandTokens(sequence.slice(start + encodedInsertedText.length)),
       ];
     }
   }

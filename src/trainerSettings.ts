@@ -15,13 +15,21 @@ export type TrainerPreferences = {
 };
 
 export const trainerSettingsKey = "vimdojo_trainer_settings_v3";
-export const defaultRemaps = `" Exit Insert mode with an easy sequence
+const legacyDefaultRemaps = `" Exit Insert mode with an easy sequence
 inoremap jk <Esc>
 inoremap kj <Esc>
 
 " Normal-mode examples
 nnoremap J <C-d>
 nnoremap K <C-u>`;
+
+export const defaultRemaps = `" Exit Insert mode with an easy sequence
+inoremap jk <Esc>
+inoremap kj <Esc>
+
+" Optional Normal-mode examples (uncomment to enable)
+" nnoremap J <C-d>
+" nnoremap K <C-u>`;
 
 export const defaultPreferences: TrainerPreferences = {
   lineNumberMode: "both",
@@ -94,7 +102,9 @@ export function loadTrainerPreferences(): TrainerPreferences {
           : defaultPreferences.animateResults,
       remapText:
         typeof stored.remapText === "string"
-          ? stored.remapText
+          ? stored.remapText === legacyDefaultRemaps
+            ? defaultRemaps
+            : stored.remapText
           : defaultPreferences.remapText,
     };
     return merged;

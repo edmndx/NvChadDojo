@@ -10,7 +10,7 @@ export const lessonSummaries = [
     ],
     "moduleId": "command-reference",
     "kind": "reference",
-    "searchText": "modes Normal mode Esc Insert before / after cursor i / a Replace continuously R then Esc Visual character / line / block v / V / Ctrl+v Command-line mode : Terminal input / Normal mode i / Ctrl+x movement Left / down / up / right h j k l Next / end / previous word w e b Move by whitespace WORDs W E B Start / first text / line end 0 _ $ First / last line gg / G Paragraph back / forward { / } select Select all text ggVG Cursor to EOF VG Cursor to top Vgg Current line V Lines down / up V then j / k Current word viw Word + space vaw To end / start of line v$ / v0 text objects Inside double / single quotes vi\" / vi' Inside parentheses vi( or vib Inside / around curly braces vi{ / va{ Inside HTML / JSX tag vit copy Selection to system clipboard \"+y Whole file to clipboard :%y+ Yank all lines :%y Inside quotes yi\" Current line yy Paste below / above p / P delete Delete / cut selection d or x Delete whole file :%d Delete paragraph dap Change selection c Paste over selection p Delete to line end D search Search forward / backward / / ? Repeat / reverse n / N Current word forward / backward * / # Find character f / F Move till character t / T Repeat character search ; format Indent / un-indent selection > / < Auto-indent whole file gg=G Format buffer or selection Space fm Reselect last selection gv visual actions Copy to clipboard \"+y Delete / cut d Paste over p Indent / un-indent > / < Change and insert c Switch active end o repeat Repeat latest change . Repeat three times 3. Repeat latest Ex command @: Repeat latest macro @@ registers Put latest yank \"0p Yank into register a \"ayy Put from register a \"ap Delete without overwriting \"_d Inspect registers :registers macros Record into register a qa … q Replay register a @a Repeat latest macro @@ Run macro ten times 10@a visual block Enter block selection Ctrl+v Insert across lines I then Esc Append across lines A then Esc Replace selected block r{char} jump history Jump backward / forward Ctrl+o / Ctrl+i Previous / next change g; / g, Matching delimiter % Latest edit `. substitute Replace once on line :s/old/new Replace throughout file :%s/old/new/g Confirm replacements :%s/old/new/gc Reuse latest search :%s//new/g more objects Parentheses i( / a( Square brackets i[ / a[ Tag it / at Sentence is / as files Open or create by path :e path Write under a new name :saveas path Write and keep editing :w / Ctrl+s Write and quit :wq Quit unchanged buffer :q Discard changes and quit :q! windows & tab pages Horizontal / vertical split Ctrl+w s / Ctrl+w v Move between splits Ctrl+h j k l Equalize / resize Ctrl+w = / Ctrl+w + - < > Close current / keep only current Ctrl+w c / Ctrl+w o Create / close tab page :tabnew / :tabclose Next / previous tab page gt / gT Inspect buffers / tabs :ls / :tabs buffers & tabufline New buffer Space b Next / previous buffer Tab / Shift+Tab Close selected buffer Space x nvchad general Toggle comment Space / Numbers / relative numbers Space n / Space rn telescope Files / all hidden files Space ff / Space fa Live grep / open buffers Space fw / Space fb Help / marks / old files Space fh / Space ma / Space fo Search current buffer Space fz Git commits / status Space cm / Space gt Theme picker Space th Next / previous result Ctrl+n / Ctrl+p Open / close picker Enter / Ctrl+c Horizontal / vertical / tab Ctrl+x / Ctrl+v / Ctrl+t Select result / send to quickfix Tab / Ctrl+q nvchad terminals New horizontal / vertical Space h / Space v Toggle horizontal / vertical Alt+h / Alt+v Toggle floating terminal Alt+i Leave Terminal mode Ctrl+x Pick a hidden terminal Space pt End shell process exit Close terminal buffer Ctrl+x then Space x nvimtree navigation Toggle / focus tree Ctrl+n / Space e Open node / parent Enter or o / P Move root upward - Vertical / horizontal split Ctrl+v / Ctrl+x New tab / preview Ctrl+t / Tab Filter / clear filter f / F Show tree mappings g? nvimtree file actions Create file or directory a Rename / rename basename r / e Copy / cut / paste c / x / p Delete / trash d / D cheats & plugins NVChad cheatsheet Space ch All WhichKey mappings Space wK Query a WhichKey prefix Space wk Plugin manager :Lazy Install configured tools :MasonInstallAll Tool package manager :Mason Neovim health report :checkhealth completion & snippets Previous / next suggestion Ctrl+p / Ctrl+n Scroll documentation Ctrl+d / Ctrl+f Open / close completion Ctrl+Space / Ctrl+e Confirm selected item Enter Next / previous snippet stop Tab / Shift+Tab Normal-mode buffer cycling Tab / Shift+Tab lsp actions Definition / references gd / grr Hover documentation K Rename symbol grn Code actions gra Signature help in Insert mode Ctrl+s Format after refactor Space fm gitsigns · map these Next / previous hunk ]c / [c Stage / reset hunk Space hs / Space hr Stage / reset buffer Space hS / Space hR Preview / select hunk Space hp / ih Blame current line Space hb Working tree / HEAD diff Space hd / Space hD Undo latest hunk stage Space hu Partial hunk action Visual then Space hs or hr lazygit · optional Launch through plugin :LazyGit Stage selected Space Stage all files a Commit staged changes c Stash options S Amend selected commit A Quit LazyGit q Pull p Push P Conflict menu M Pick both sides b Previous / next conflict h / l Previous / next hunk k / j Undo / redo repository action z / Z diagnostics & lists Next / previous diagnostic ]d / [d Inspect current diagnostic :lua vim.diagnostic.open_float() Diagnostics location list Space ds Open / close quickfix :copen / :cclose Next / previous quickfix :cnext / :cprev Open / close location list :lopen / :lclose Next / previous location :lnext / :lprev sessions & projects Show / change working directory :pwd / :cd path Window-local / tab-local directory :lcd path / :tcd path Save / restore session :mksession! Session.vim / :source Session.vim Show / add argument :args / :argadd path Next / previous argument :next / :previous Alternate file Ctrl+^ command discovery Open help for a topic :help topic Follow tag / jump back Ctrl+] / Ctrl+o All / Normal / Insert mappings :map / :nmap / :imap Find mapping source :verbose map {key} WhichKey all / prefix Space wK / Space wk NVChad cheatsheet Space ch Plugin-local help g? or ? surround · optional Surround using a motion ys{motion}{char} Surround current line yss{char} Delete surrounding pair ds{char} Change surrounding pair cs{old}{new} Surround visual selection S{char} trouble · map these Workspace diagnostics Space xx Buffer diagnostics Space xX Symbols Space cs LSP definitions / references Space cl Location list Space xL Quickfix list Space xQ Jump / horizontal / vertical Enter / Ctrl+s / Ctrl+v Preview / close p / q nvim-dap · map these Continue / start F5 Step over / into / out F10 / F11 / F12 Toggle breakpoint Space db Conditional breakpoint Space dB Open REPL Space dr Terminate session Space dt",
+    "searchText": "modes Normal mode Esc Insert before / after cursor i / a Replace continuously R then Esc Visual character / line / block v / V / Ctrl+v Command-line mode : Terminal input / Normal mode i / Ctrl+x movement Left / down / up / right h j k l Next / end / previous word w e b Move by whitespace WORDs W E B Start / first text / line end 0 _ $ First / last line gg / G Paragraph back / forward { / } select Select all text ggVG Current line through EOF VG Current line through top Vgg Current line V Lines down / up V then j / k Current word viw Word + space vaw To end / start of line v$ / v0 text objects Inside double / single quotes vi\" / vi' Inside parentheses vi( or vib Inside / around curly braces vi{ / va{ Inside paired HTML / JSX tag vit copy Selection to system clipboard \"+y Whole file to clipboard :%y+ Yank all lines :%y Inside quotes yi\" Current line yy Paste below / above p / P delete Delete / cut selection d or x Delete whole file :%d Delete paragraph dap Change selection c Paste over selection p Delete to line end D search Search forward / backward / / ? Repeat / reverse n / N Current word forward / backward * / # Find character f / F Move till character t / T Repeat character search ; format Indent / un-indent selection > / < Auto-indent whole file gg=G Format buffer or selection Space fm Reselect last selection gv visual actions Copy to clipboard \"+y Delete / cut d Paste over p Indent / un-indent > / < Change and insert c Switch active end o repeat Repeat latest change . Repeat three times 3. Repeat latest Ex command @: Repeat latest macro @@ registers Put latest yank \"0p Yank into register a \"ayy Put from register a \"ap Delete without overwriting \"_d Inspect registers :registers macros Record into register a qa … q Replay register a @a Repeat latest macro @@ Run macro ten times 10@a visual block Enter block selection Ctrl+v Insert across lines I then Esc Append across lines A then Esc Replace selected block r{char} jump history Jump backward / forward Ctrl+o / Ctrl+i Previous / next change g; / g, Matching delimiter % Latest edit `. substitute Replace once on line :s/old/new Replace throughout file :%s/old/new/g Confirm replacements :%s/old/new/gc Reuse latest search :%s//new/g more objects Parentheses i( / a( Square brackets i[ / a[ Tag it / at Sentence is / as files Open or create by path :e path Write under a new name :saveas path Write and keep editing :w / Ctrl+s Write and close window :wq Close unchanged window :q Force close current window :q! windows & tab pages Horizontal / vertical split Ctrl+w s / Ctrl+w v Move between splits Ctrl+h j k l Equalize / resize Ctrl+w = / Ctrl+w + - < > Close current / keep only current Ctrl+w c / Ctrl+w o Create / close tab page :tabnew / :tabclose Next / previous tab page gt / gT Inspect buffers / tabs :ls / :tabs buffers & tabufline New buffer Space b Next / previous buffer Tab / Shift+Tab Close selected buffer Space x nvchad general Toggle comment Space / Numbers / relative numbers Space n / Space rn telescope Files / all hidden files Space ff / Space fa Live grep / open buffers Space fw / Space fb Help / marks / old files Space fh / Space ma / Space fo Search current buffer Space fz Git commits / status Space cm / Space gt Theme picker Space th Next / previous result Ctrl+n / Ctrl+p Open / close picker Enter / Ctrl+c Horizontal / vertical / tab Ctrl+x / Ctrl+v / Ctrl+t Select result / send to quickfix Tab / Ctrl+q nvchad terminals New horizontal / vertical Space h / Space v Toggle horizontal / vertical Alt+h / Alt+v Toggle floating terminal Alt+i Leave Terminal mode Ctrl+x Pick a hidden terminal Space pt End shell process exit Close terminal buffer Ctrl+x then Space x nvimtree navigation Toggle / focus tree Ctrl+n / Space e Open node / parent Enter or o / P Move root upward - Vertical / horizontal split Ctrl+v / Ctrl+x New tab / preview Ctrl+t / Tab Filter / clear filter f / F Show tree mappings g? nvimtree file actions Create file or directory a Rename / rename basename r / e Copy / cut / paste c / x / p Delete / trash d / D cheats & plugins NVChad cheatsheet Space ch All WhichKey mappings Space wK Query a WhichKey prefix Space wk Plugin manager :Lazy Install configured tools :MasonInstallAll Tool package manager :Mason Neovim health report :checkhealth completion & snippets Previous / next suggestion Ctrl+p / Ctrl+n Scroll documentation Ctrl+d / Ctrl+f Open / close completion Ctrl+Space / Ctrl+e Confirm selected item Enter Next / previous snippet stop Tab / Shift+Tab Normal-mode buffer cycling Tab / Shift+Tab lsp actions Definition / references gd / grr Hover documentation K Rename symbol grn Code actions gra Signature help in Insert mode Ctrl+s Format after refactor Space fm gitsigns · map these Next / previous hunk ]c / [c Stage / reset hunk Space hs / Space hr Stage / reset buffer Space hS / Space hR Preview / select hunk Space hp / ih Blame current line Space hb Working tree / HEAD diff Space hd / Space hD Unstage current staged hunk Space hu Partial hunk action Visual then Space hs or hr lazygit · optional Launch through plugin :LazyGit Stage selected Space Stage all files a Commit staged changes c Stash options S Amend selected commit A Quit LazyGit q Pull p Push P Conflict menu M Pick both sides b Previous / next conflict h / l Previous / next hunk k / j Undo / redo repository action z / Z diagnostics & lists Next / previous diagnostic ]d / [d Inspect current diagnostic :lua vim.diagnostic.open_float() Diagnostics location list Space ds Open / close quickfix :copen / :cclose Next / previous quickfix :cnext / :cprev Open / close location list :lopen / :lclose Next / previous location :lnext / :lprev sessions & projects Show / change working directory :pwd / :cd path Window-local / tab-local directory :lcd path / :tcd path Save / restore session :mksession! Session.vim / :source Session.vim Show / add argument :args / :argadd path Next / previous argument :next / :previous Alternate file Ctrl+^ command discovery Open help for a topic :help topic Follow tag / jump back Ctrl+] / Ctrl+o Normal+Visual+Operator / Normal / Insert mappings :map / :nmap / :imap Find mapping source :verbose map {key} WhichKey all / prefix Space wK / Space wk NVChad cheatsheet Space ch Plugin-local help g? or ? surround · optional Surround using a motion ys{motion}{char} Surround current line yss{char} Delete surrounding pair ds{char} Change surrounding pair cs{old}{new} Surround visual selection S{char} trouble · map these Workspace diagnostics Space xx Buffer diagnostics Space xX Symbols Space cs LSP definitions / references Space cl Location list Space xL Quickfix list Space xQ Jump / horizontal / vertical Enter / Ctrl+s / Ctrl+v Preview / close p / q nvim-dap · map these Continue / start F5 Step over / into / out F10 / F11 / F12 Toggle breakpoint Space db Conditional breakpoint Space dB Open REPL Space dr Terminate session Space dt",
     "index": 0
   },
   {
@@ -72,7 +72,8 @@ export const lessonSummaries = [
       "v",
       ":",
       "Enter",
-      "R"
+      "R",
+      ":<Esc>"
     ],
     "moduleId": "vim-modes",
     "kind": "review",
@@ -227,7 +228,8 @@ export const lessonSummaries = [
     "keys": [
       "f",
       "F",
-      ";"
+      ";",
+      ","
     ],
     "moduleId": "essential-motions",
     "kind": "practice",
@@ -240,7 +242,8 @@ export const lessonSummaries = [
     "keys": [
       "t",
       "T",
-      ";"
+      ";",
+      ","
     ],
     "moduleId": "essential-motions",
     "kind": "practice",
@@ -261,7 +264,10 @@ export const lessonSummaries = [
       "F",
       ";",
       "t",
-      "T"
+      "T",
+      ",",
+      "t,;",
+      "t,;,"
     ],
     "moduleId": "essential-motions",
     "kind": "review",
@@ -356,7 +362,8 @@ export const lessonSummaries = [
       "j",
       "k",
       "p",
-      "P"
+      "P",
+      "dd"
     ],
     "moduleId": "basic-operators",
     "kind": "review",
@@ -510,6 +517,7 @@ export const lessonSummaries = [
     "title": "Search Review",
     "keys": [
       "/",
+      "?",
       "n",
       "N",
       "*",
@@ -854,7 +862,10 @@ export const lessonSummaries = [
       "v",
       "o",
       "V",
-      "Esc"
+      "Esc",
+      "Vjo",
+      "Vjd",
+      "Vjy"
     ],
     "moduleId": "visual-editing",
     "kind": "review",
@@ -1090,7 +1101,8 @@ export const lessonSummaries = [
       "q",
       "a",
       "@",
-      "10"
+      "10",
+      "@@"
     ],
     "moduleId": "macros",
     "kind": "review",
@@ -1269,7 +1281,12 @@ export const lessonSummaries = [
     "title": "Confirm Replacements",
     "keys": [
       ":%s",
-      "gc"
+      "gc",
+      "y",
+      "n",
+      "a",
+      "l",
+      "q"
     ],
     "moduleId": "substitution",
     "kind": "practice",
@@ -1297,6 +1314,11 @@ export const lessonSummaries = [
       ":%s",
       "g",
       "gc",
+      "y",
+      "n",
+      "a",
+      "l",
+      "q",
       ":%s//"
     ],
     "moduleId": "substitution",
@@ -1374,9 +1396,7 @@ export const lessonSummaries = [
     "group": "Practical LSP Actions",
     "title": "Rename a Symbol",
     "keys": [
-      "g",
-      "r",
-      "n"
+      "grn"
     ],
     "moduleId": "practical-lsp-actions",
     "kind": "practice",
@@ -1387,9 +1407,7 @@ export const lessonSummaries = [
     "group": "Practical LSP Actions",
     "title": "Find References",
     "keys": [
-      "g",
-      "r",
-      "r"
+      "grr"
     ],
     "moduleId": "practical-lsp-actions",
     "kind": "practice",
@@ -1400,9 +1418,7 @@ export const lessonSummaries = [
     "group": "Practical LSP Actions",
     "title": "Code Actions",
     "keys": [
-      "g",
-      "r",
-      "a"
+      "gra"
     ],
     "moduleId": "practical-lsp-actions",
     "kind": "practice",
@@ -1424,10 +1440,9 @@ export const lessonSummaries = [
     "group": "Practical LSP Actions",
     "title": "Practical LSP Actions Review",
     "keys": [
-      "g",
-      "r",
-      "n",
-      "a",
+      "grn",
+      "grr",
+      "gra",
       "Ctrl+s"
     ],
     "moduleId": "practical-lsp-actions",
@@ -2531,7 +2546,7 @@ export const lessonSummaries = [
     "group": "Advanced Git Workflows",
     "title": "Stage part of a hunk",
     "keys": [
-      "v",
+      "V",
       "Space hs",
       "Space hr"
     ],
@@ -2554,10 +2569,10 @@ export const lessonSummaries = [
   {
     "id": "git-undo-stage",
     "group": "Advanced Git Workflows",
-    "title": "Undo the latest hunk stage",
+    "title": "Unstage the current hunk",
     "keys": [
       "Space hu",
-      ":Gitsigns undo_stage_hunk"
+      ":Gitsigns stage_hunk"
     ],
     "moduleId": "advanced-git-workflows",
     "kind": "practice",
@@ -2609,13 +2624,13 @@ export const lessonSummaries = [
     "group": "Advanced Git Workflows",
     "title": "Advanced Git Workflows Review",
     "keys": [
-      "v",
+      "V",
       "Space hs",
       "Space hr",
       "Space hd",
       "Space hD",
       "Space hu",
-      ":Gitsigns undo_stage_hunk",
+      ":Gitsigns stage_hunk",
       "M",
       "h",
       "l",
@@ -2807,9 +2822,7 @@ export const lessonSummaries = [
     "group": "NVChad Workflow",
     "title": "Switch themes live",
     "keys": [
-      "Space",
-      "t",
-      "h"
+      "Space th"
     ],
     "moduleId": "nvchad-workflow",
     "kind": "practice",
@@ -2820,9 +2833,7 @@ export const lessonSummaries = [
     "group": "NVChad Workflow",
     "title": "Ask NVChad",
     "keys": [
-      "Space",
-      "c",
-      "h"
+      "Space ch"
     ],
     "moduleId": "nvchad-workflow",
     "kind": "practice",
@@ -2833,10 +2844,8 @@ export const lessonSummaries = [
     "group": "NVChad Workflow",
     "title": "NVChad Workflow Review",
     "keys": [
-      "Space",
-      "t",
-      "h",
-      "c"
+      "Space th",
+      "Space ch"
     ],
     "moduleId": "nvchad-workflow",
     "kind": "review",
@@ -2847,8 +2856,7 @@ export const lessonSummaries = [
     "group": "Coding Intelligence",
     "title": "Go to definition",
     "keys": [
-      "g",
-      "d"
+      "gd"
     ],
     "moduleId": "coding-intelligence",
     "kind": "practice",
@@ -2870,9 +2878,7 @@ export const lessonSummaries = [
     "group": "Coding Intelligence",
     "title": "Format deliberately",
     "keys": [
-      "Space",
-      "f",
-      "m"
+      "Space fm"
     ],
     "moduleId": "coding-intelligence",
     "kind": "practice",
@@ -2883,8 +2889,8 @@ export const lessonSummaries = [
     "group": "Coding Intelligence",
     "title": "Install developer tools",
     "keys": [
-      ":",
-      "Mason"
+      ":Mason",
+      ":MasonInstallAll"
     ],
     "moduleId": "coding-intelligence",
     "kind": "practice",
@@ -2895,14 +2901,11 @@ export const lessonSummaries = [
     "group": "Coding Intelligence",
     "title": "Coding Intelligence Review",
     "keys": [
-      "g",
-      "d",
+      "gd",
       "K",
-      "Space",
-      "f",
-      "m",
-      ":",
-      "Mason"
+      "Space fm",
+      ":Mason",
+      ":MasonInstallAll"
     ],
     "moduleId": "coding-intelligence",
     "kind": "review",
@@ -2913,7 +2916,7 @@ export const lessonSummaries = [
     "group": "Configure NVChad",
     "title": "Create a mapping",
     "keys": [
-      "vim.keymap.set"
+      ":e lua/mappings.lua"
     ],
     "moduleId": "configure-nvchad",
     "kind": "practice",
@@ -2924,8 +2927,7 @@ export const lessonSummaries = [
     "group": "Configure NVChad",
     "title": "Extend plugins safely",
     "keys": [
-      "lazy.nvim",
-      "opts"
+      ":e lua/plugins/init.lua"
     ],
     "moduleId": "configure-nvchad",
     "kind": "practice",
@@ -2936,7 +2938,7 @@ export const lessonSummaries = [
     "group": "Configure NVChad",
     "title": "Shape the interface",
     "keys": [
-      "chadrc.lua"
+      ":e lua/chadrc.lua"
     ],
     "moduleId": "configure-nvchad",
     "kind": "practice",
@@ -2947,7 +2949,7 @@ export const lessonSummaries = [
     "group": "Configure NVChad",
     "title": "Enable language servers",
     "keys": [
-      "vim.lsp.enable"
+      ":e lua/configs/lspconfig.lua"
     ],
     "moduleId": "configure-nvchad",
     "kind": "practice",
@@ -2986,11 +2988,10 @@ export const lessonSummaries = [
     "group": "Configure NVChad",
     "title": "Configure NVChad Review",
     "keys": [
-      "vim.keymap.set",
-      "lazy.nvim",
-      "opts",
-      "chadrc.lua",
-      "vim.lsp.enable",
+      ":e lua/mappings.lua",
+      ":e lua/plugins/init.lua",
+      ":e lua/chadrc.lua",
+      ":e lua/configs/lspconfig.lua",
       ":checkhealth",
       ":Lazy",
       ":Mason",

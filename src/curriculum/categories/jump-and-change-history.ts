@@ -15,40 +15,40 @@ const lessons = [
     "task": "Move backward and forward through the jump list.",
     "sequence": "<C-o><C-i>",
     "code": [
-      "function start()",
-      "  configure()",
-      "  run()",
-      "end",
-      "return start"
+      "function start() {",
+      "  configure();",
+      "  run();",
+      "}",
+      "console.log(start);"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "The practice buffer seeds jump positions. In your editor, use jumps such as gg and G before navigating with Ctrl+o and Ctrl+i.",
     "drills": [
       {
         "goal": "Move backward and forward through the jump list. · repetition 1 of 3",
         "code": [
-          "function start()",
-          "  configure()",
-          "  run()",
-          "end",
-          "return start"
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
         ]
       },
       {
         "goal": "Move backward and forward through the jump list. · repetition 2 of 3",
         "code": [
-          "local first = 1",
+          "const first = 1;",
           "",
-          "local middle = 2",
+          "const middle = 2;",
           "",
-          "local last = 3"
+          "const last = 3;"
         ]
       },
       {
         "goal": "Move backward and forward through the jump list. · repetition 3 of 3",
         "code": [
-          "setup({ theme = 'dark' })",
-          "return setup",
-          "-- last edit was above"
+          "setup({ theme: 'dark' });",
+          "console.log(setup);",
+          "// last edit was above"
         ]
       }
     ],
@@ -60,12 +60,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with Ctrl+o.",
-        "Use only the keys introduced in Jump & Change History.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: Ctrl+o, Ctrl+i."
       ],
       "success": "Jump Back and Forward produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "Ctrl+o",
+        "description": "Ctrl+o travels backward through jumps; Ctrl+i travels forward again.",
+        "sequence": "<C-o><C-i>"
+      },
+      {
+        "key": "Ctrl+i",
+        "description": "Ctrl+o travels backward through jumps; Ctrl+i travels forward again.",
+        "sequence": "<C-o><C-i>"
+      }
+    ]
   },
   {
     "group": "Jump & Change History",
@@ -78,60 +90,72 @@ const lessons = [
       "g;",
       "g,"
     ],
-    "task": "Visit the previous and next change positions.",
-    "sequence": "g;g,",
+    "task": "Visit the newest change, move to the older change, then return to the newer change.",
+    "sequence": "g;g;g,",
     "code": [
-      "function start()",
-      "  configure()",
-      "  run()",
-      "end",
-      "return start"
+      "function start() {",
+      "  configure();",
+      "  run();",
+      "}",
+      "console.log(start);"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "The practice buffer seeds changes on the first and last lines. g; starts at the newest change before moving through older positions.",
     "drills": [
       {
-        "goal": "Visit the previous and next change positions. · repetition 1 of 3",
+        "goal": "Visit the newest change, move to the older change, then return to the newer change.",
         "code": [
-          "function start()",
-          "  configure()",
-          "  run()",
-          "end",
-          "return start"
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
         ]
       },
       {
-        "goal": "Visit the previous and next change positions. · repetition 2 of 3",
+        "goal": "Visit the newest change, move to the older change, then return to the newer change.",
         "code": [
-          "local first = 1",
+          "const first = 1;",
           "",
-          "local middle = 2",
+          "const middle = 2;",
           "",
-          "local last = 3"
+          "const last = 3;"
         ]
       },
       {
-        "goal": "Visit the previous and next change positions. · repetition 3 of 3",
+        "goal": "Visit the newest change, move to the older change, then return to the newer change.",
         "code": [
-          "setup({ theme = 'dark' })",
-          "return setup",
-          "-- last edit was above"
+          "setup({ theme: 'dark' });",
+          "console.log(setup);",
+          "// last edit was above"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Visit the previous and next change positions.",
+      "instruction": "Visit the newest change, move to the older change, then return to the newer change.",
       "cursor": [
         1,
         0
       ],
       "hints": [
-        "Begin with g;.",
-        "Use only the keys introduced in Jump & Change History.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: g;, g,."
       ],
       "success": "Navigate Recent Changes produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "g;",
+        "description": "Visit the newest and then the previous change position.",
+        "sequence": "g;g;"
+      },
+      {
+        "key": "g,",
+        "description": "Visit two change positions backward, then move one position forward.",
+        "sequence": "g;g;g,"
+      }
+    ]
   },
   {
     "group": "Jump & Change History",
@@ -146,40 +170,34 @@ const lessons = [
     "task": "Jump to the matching delimiter.",
     "sequence": "%",
     "code": [
-      "function start()",
-      "  configure()",
-      "  run()",
-      "end",
-      "return start"
+      "function start() {",
+      "  configure(options);",
+      "}"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Jump to the matching delimiter. · repetition 1 of 3",
         "code": [
-          "function start()",
-          "  configure()",
-          "  run()",
-          "end",
-          "return start"
+          "function start() {",
+          "  configure(options);",
+          "}"
         ]
       },
       {
         "goal": "Jump to the matching delimiter. · repetition 2 of 3",
         "code": [
-          "local first = 1",
-          "",
-          "local middle = 2",
-          "",
-          "local last = 3"
+          "const first = 1;",
+          "const middle = { enabled: true };",
+          "console.log(middle);"
         ]
       },
       {
         "goal": "Jump to the matching delimiter. · repetition 3 of 3",
         "code": [
-          "setup({ theme = 'dark' })",
-          "return setup",
-          "-- last edit was above"
+          "const settings = {};",
+          "setup(settings);",
+          "console.log(settings);"
         ]
       }
     ],
@@ -191,15 +209,22 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with %.",
-        "Use only the keys introduced in Jump & Change History.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: %."
       ],
       "alternatives": [
         "%"
       ],
       "success": "Jump to a Matching Pair produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "%",
+        "description": "% jumps between matching brackets, parentheses, and braces.",
+        "sequence": "%"
+      }
+    ]
   },
   {
     "group": "Jump & Change History",
@@ -214,40 +239,40 @@ const lessons = [
     "task": "Jump exactly to the latest edit position.",
     "sequence": "`.",
     "code": [
-      "function start()",
-      "  configure()",
-      "  run()",
-      "end",
-      "return start"
+      "function start() {",
+      "  configure();",
+      "  run();",
+      "}",
+      "console.log(start);"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "The practice buffer seeds a previous change at the beginning of the first line. The dot mark is unavailable before a real edit.",
     "drills": [
       {
         "goal": "Jump exactly to the latest edit position. · repetition 1 of 3",
         "code": [
-          "function start()",
-          "  configure()",
-          "  run()",
-          "end",
-          "return start"
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
         ]
       },
       {
         "goal": "Jump exactly to the latest edit position. · repetition 2 of 3",
         "code": [
-          "local first = 1",
+          "const first = 1;",
           "",
-          "local middle = 2",
+          "const middle = 2;",
           "",
-          "local last = 3"
+          "const last = 3;"
         ]
       },
       {
         "goal": "Jump exactly to the latest edit position. · repetition 3 of 3",
         "code": [
-          "setup({ theme = 'dark' })",
-          "return setup",
-          "-- last edit was above"
+          "setup({ theme: 'dark' });",
+          "console.log(setup);",
+          "// last edit was above"
         ]
       }
     ],
@@ -259,12 +284,19 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with `..",
-        "Use only the keys introduced in Jump & Change History.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: `.."
       ],
       "success": "Return to the Last Edit produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "`.",
+        "description": "The dot mark stores the position of the most recent change.",
+        "sequence": "`."
+      }
+    ]
   },
   {
     "group": "Jump & Change History",
@@ -280,40 +312,40 @@ const lessons = [
     "task": "Save the current position as mark a.",
     "sequence": "ma",
     "code": [
-      "function start()",
-      "  configure()",
-      "  run()",
-      "end",
-      "return start"
+      "function start() {",
+      "  configure();",
+      "  run();",
+      "}",
+      "console.log(start);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Save the current position as mark a. · repetition 1 of 3",
         "code": [
-          "function start()",
-          "  configure()",
-          "  run()",
-          "end",
-          "return start"
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
         ]
       },
       {
         "goal": "Save the current position as mark a. · repetition 2 of 3",
         "code": [
-          "local first = 1",
+          "const first = 1;",
           "",
-          "local middle = 2",
+          "const middle = 2;",
           "",
-          "local last = 3"
+          "const last = 3;"
         ]
       },
       {
         "goal": "Save the current position as mark a. · repetition 3 of 3",
         "code": [
-          "setup({ theme = 'dark' })",
-          "return setup",
-          "-- last edit was above"
+          "setup({ theme: 'dark' });",
+          "console.log(setup);",
+          "// last edit was above"
         ]
       }
     ],
@@ -325,12 +357,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with m.",
-        "Use only the keys introduced in Jump & Change History.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: m, a."
       ],
       "success": "Set a Mark produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "m",
+        "description": "ma stores the current position in mark a; lowercase marks belong to the current buffer.",
+        "sequence": "ma"
+      },
+      {
+        "key": "a",
+        "description": "ma stores the current position in mark a; lowercase marks belong to the current buffer.",
+        "sequence": "ma"
+      }
+    ]
   },
   {
     "group": "Jump & Change History",
@@ -346,40 +390,40 @@ const lessons = [
     "task": "Set mark a, move away, then return to its exact position.",
     "sequence": "maG`a",
     "code": [
-      "function start()",
-      "  configure()",
-      "  run()",
-      "end",
-      "return start"
+      "function start() {",
+      "  configure();",
+      "  run();",
+      "}",
+      "console.log(start);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Set mark a, move away, then return to its exact position. · repetition 1 of 3",
         "code": [
-          "function start()",
-          "  configure()",
-          "  run()",
-          "end",
-          "return start"
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
         ]
       },
       {
         "goal": "Set mark a, move away, then return to its exact position. · repetition 2 of 3",
         "code": [
-          "local first = 1",
+          "const first = 1;",
           "",
-          "local middle = 2",
+          "const middle = 2;",
           "",
-          "local last = 3"
+          "const last = 3;"
         ]
       },
       {
         "goal": "Set mark a, move away, then return to its exact position. · repetition 3 of 3",
         "code": [
-          "setup({ theme = 'dark' })",
-          "return setup",
-          "-- last edit was above"
+          "setup({ theme: 'dark' });",
+          "console.log(setup);",
+          "// last edit was above"
         ]
       }
     ],
@@ -391,12 +435,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with `a.",
-        "Use only the keys introduced in Jump & Change History.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: `a, 'a."
       ],
       "success": "Return to a Mark produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "`a",
+        "description": "Set mark a, move away, and return to its exact column.",
+        "sequence": "maG`a"
+      },
+      {
+        "key": "'a",
+        "description": "Set mark a, move away, and return to the first non-blank character of its line.",
+        "sequence": "maG'a"
+      }
+    ]
   },
   {
     "group": "Jump & Change History",
@@ -420,65 +476,177 @@ const lessons = [
     "task": "",
     "sequence": "<C-o><C-i>",
     "code": [
-      "function start()",
-      "  configure()",
-      "  run()",
-      "end",
-      "return start"
+      "function start() {",
+      "  configure();",
+      "  run();",
+      "}",
+      "console.log(start);"
     ],
     "tip": "Return to any command in Jump & Change History that still requires conscious recall.",
     "reviewOnly": true,
     "reviewItems": [
       {
         "key": "Ctrl+o",
-        "description": "Ctrl+o travels backward through jumps; Ctrl+i travels forward again.",
-        "sequence": "<C-o><C-i>"
+        "description": "Create jumps to the first and last lines, then move backward and forward through them.",
+        "sequence": "ggG<C-o><C-i>",
+        "code": [
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "Ctrl+i",
-        "description": "Ctrl+o travels backward through jumps; Ctrl+i travels forward again.",
-        "sequence": "<C-o><C-i>"
+        "description": "Create jumps to the first and last lines, then move backward and forward through them.",
+        "sequence": "ggG<C-o><C-i>",
+        "code": [
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "g;",
-        "description": "g; visits older change positions and g, moves toward newer ones.",
-        "sequence": "g;g,"
+        "description": "Visit the newest and then the previous change position.",
+        "sequence": "g;g;",
+        "code": [
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "g,",
-        "description": "g; visits older change positions and g, moves toward newer ones.",
-        "sequence": "g;g,"
+        "description": "Visit two change positions backward, then move one position forward.",
+        "sequence": "g;g;g,",
+        "code": [
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "%",
         "description": "% jumps between matching brackets, parentheses, and braces.",
-        "sequence": "%"
+        "sequence": "%",
+        "code": [
+          "function start() {",
+          "  configure(options);",
+          "}"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "`.",
         "description": "The dot mark stores the position of the most recent change.",
-        "sequence": "`."
+        "sequence": "`.",
+        "code": [
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "m",
         "description": "ma stores the current position in mark a; lowercase marks belong to the current buffer.",
-        "sequence": "ma"
+        "sequence": "ma",
+        "code": [
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "a",
         "description": "ma stores the current position in mark a; lowercase marks belong to the current buffer.",
-        "sequence": "ma"
+        "sequence": "ma",
+        "code": [
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "`a",
-        "description": "`a returns to the exact marked position; 'a returns to the marked line's first non-blank text.",
-        "sequence": "maG`a"
+        "description": "Set mark a, move away, and return to its exact column.",
+        "sequence": "maG`a",
+        "code": [
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "'a",
-        "description": "`a returns to the exact marked position; 'a returns to the marked line's first non-blank text.",
-        "sequence": "maG`a"
+        "description": "Set mark a, move away, and return to the first non-blank character of its line.",
+        "sequence": "maG'a",
+        "code": [
+          "function start() {",
+          "  configure();",
+          "  run();",
+          "}",
+          "console.log(start);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       }
+    ],
+    "cursor": [
+      1,
+      2
     ]
   }
 ] satisfies readonly Lesson[];

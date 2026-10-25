@@ -4,3 +4,4 @@ src/curriculum/catalog.generated.ts
 src/curriculum/runtimeProfiles.generated.ts
 src/curriculum/categories
 package-lock.json
+.worktrees

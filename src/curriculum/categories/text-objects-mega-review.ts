@@ -14,55 +14,59 @@ const lessons = [
       "ciw",
       "dap"
     ],
-    "task": "Complete the bracket, quote, word, and paragraph sequence.",
-    "sequence": "di{ca\"<Esc>ciw<Esc>dap",
+    "task": "Practice each bracket, quote, word, and paragraph operation on a fresh fixture.",
+    "sequence": "di{",
     "code": [
-      "setup({ old = true })",
-      "local theme = \"replace-me\"",
-      "local temporary = enabled",
+      "/* Keep the introduction. */",
       "",
-      "Remove this whole paragraph."
+      "setup({ theme: '\"legacy\"' });",
+      "/* Keep this paragraph line. */",
+      "",
+      "/* Keep the closing paragraph. */"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "Each operation resets the fixture. The cursor starts inside a quoted word, inside braces, within the middle paragraph.",
     "drills": [
       {
-        "goal": "Complete the bracket, quote, word, and paragraph sequence. · repetition 1 of 3",
+        "goal": "Practice each bracket, quote, word, and paragraph operation on a fresh fixture. · repetition 1 of 3",
         "code": [
-          "setup({ old = true })",
-          "local theme = \"replace-me\"",
-          "local temporary = enabled",
+          "/* Keep the introduction. */",
           "",
-          "Remove this whole paragraph."
+          "setup({ theme: '\"legacy\"' });",
+          "/* Keep this paragraph line. */",
+          "",
+          "/* Keep the closing paragraph. */"
         ]
       },
       {
-        "goal": "Complete the bracket, quote, word, and paragraph sequence. · repetition 2 of 3",
+        "goal": "Practice each bracket, quote, word, and paragraph operation on a fresh fixture. · repetition 2 of 3",
         "code": [
-          "configure({ plugins = { 'old' } })",
-          "local mode = \"debug\"",
-          "local stale_value = true",
+          "/* Keep the heading. */",
           "",
-          "Another disposable paragraph."
+          "setup({ theme: '\"outdated\"' });",
+          "/* Preserve this second line. */",
+          "",
+          "/* Keep the footer. */"
         ]
       },
       {
-        "goal": "Complete the bracket, quote, word, and paragraph sequence. · repetition 3 of 3",
+        "goal": "Practice each bracket, quote, word, and paragraph operation on a fresh fixture. · repetition 3 of 3",
         "code": [
-          "run({ command = { 'legacy' } })",
-          "local label = \"outdated\"",
-          "local unused_item = false",
+          "/* Keep the first paragraph. */",
           "",
-          "Final review paragraph."
+          "setup({ theme: '\"temporary\"' });",
+          "/* Retain this paragraph line. */",
+          "",
+          "/* Keep the final paragraph. */"
         ]
       }
     ],
     "commonMistake": "Keep the order operator → inside/around → object. For example: d + i + w.",
     "challenge": {
-      "instruction": "Complete the bracket, quote, word, and paragraph sequence. Enter “updated” where text is requested.",
+      "instruction": "Practice each bracket, quote, word, and paragraph operation on a fresh fixture.",
       "replacement": "updated",
       "cursor": [
-        1,
-        0
+        2,
+        19
       ],
       "hints": [
         "Begin with di{.",
@@ -71,7 +75,29 @@ const lessons = [
       ],
       "success": "The buffer now contains “updated” in the intended location."
     },
-    "reviewOnly": true
+    "reviewOnly": true,
+    "reviewItems": [
+      {
+        "key": "di{",
+        "description": "Delete the indicated object.",
+        "sequence": "di{"
+      },
+      {
+        "key": "ca\"",
+        "description": "Change the indicated object to updated.",
+        "sequence": "ca\"updated<Esc>"
+      },
+      {
+        "key": "ciw",
+        "description": "Change the indicated object to updated.",
+        "sequence": "ciwupdated<Esc>"
+      },
+      {
+        "key": "dap",
+        "description": "Delete the indicated object.",
+        "sequence": "dap"
+      }
+    ]
   }
 ] satisfies readonly Lesson[];
 

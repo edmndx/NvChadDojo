@@ -1,32 +1,66 @@
 import type { ReactNode } from "react";
+import type { SnippetLanguage } from "../curriculum/schema";
 
-export function syntaxLine(line: string): ReactNode[] {
-  const pattern =
-    /(--.*$|'(?:\\.|[^'\\])*'|"(?:\\.|[^"\\])*"|\b(?:local|return|function|end|if|then|else|for|while|do|true|false|nil|const|let|var|import|from|export)\b|\b\d+(?:\.\d+)?\b|\b[a-zA-Z_][\w]*(?=\s*\())/g;
+const patterns = {
+  javascript:
+    /(\/\/[^\n]*|\/\*[\s\S]*?(?:\*\/|$))|('(?:\\.|[^'\\\n])*'|"(?:\\.|[^"\\\n])*"|`(?:\\[\s\S]|[^`\\])*`)|\b(0[xX][\da-fA-F]+|0[bB][01]+|0[oO][0-7]+|\d+(?:\.\d+)?(?:[eE][+-]?\d+)?n?)\b|\b(async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|export|extends|false|finally|for|from|function|if|import|in|instanceof|let|new|null|of|return|static|super|switch|this|throw|true|try|typeof|undefined|var|void|while|yield)\b|([\p{ID_Start}$_][\p{ID_Continue}$]*(?=\s*\())/gu,
+  lua: /(--\[\[[\s\S]*?(?:\]\]|$)|--[^\n]*)|('(?:\\.|[^'\\\n])*'|"(?:\\.|[^"\\\n])*"|\[\[[\s\S]*?\]\])|\b(\d+(?:\.\d+)?)\b|\b(local|return|function|end|if|then|else|elseif|for|while|do|true|false|nil|and|or|not|in|repeat|until)\b|([a-zA-Z_][\w]*(?=\s*\())/g,
+};
+
+type HighlightOptions = {
+  language?: SnippetLanguage;
+  lines?: string[];
+  lineIndex?: number;
+  start?: number;
+  end?: number;
+};
+
+// Tokenize with the whole buffer's context, then render only the requested range.
+// A cursor in a string/comment must not change the highlighting on either side.
+export function syntaxLine(
+  line: string,
+  options: HighlightOptions = {},
+): ReactNode[] {
+  const {
+    language = "javascript",
+    lines,
+    lineIndex = 0,
+    start = 0,
+    end = line.length,
+  } = options;
+  if (language === "text") return [line.slice(start, end)];
+  const source = lines ? lines.join("\n") : line;
+  const offset = lines
+    ? lines.slice(0, lineIndex).reduce((sum, item) => sum + item.length + 1, 0)
+    : 0;
+  const rangeStart = offset + start;
+  const rangeEnd = offset + end;
   const parts: ReactNode[] = [];
-  let cursor = 0;
-  for (const match of line.matchAll(pattern)) {
-    const index = match.index || 0;
-    if (index > cursor) parts.push(line.slice(cursor, index));
-    const token = match[0];
-    const tone = token.startsWith("--")
+  let cursor = rangeStart;
+  for (const match of source.matchAll(patterns[language])) {
+    const index = match.index;
+    const tokenEnd = index + match[0].length;
+    if (tokenEnd <= rangeStart) continue;
+    if (index >= rangeEnd) break;
+    const from = Math.max(index, rangeStart);
+    const to = Math.min(tokenEnd, rangeEnd);
+    if (from > cursor) parts.push(source.slice(cursor, from));
+    const tone = match[1]
       ? "comment"
-      : /^['"]/.test(token)
+      : match[2]
         ? "string"
-        : /^\d/.test(token)
+        : match[3]
           ? "number"
-          : /^(local|return|function|end|if|then|else|for|while|do|true|false|nil|const|let|var|import|from|export)$/.test(
-                token,
-              )
+          : match[4]
             ? "keyword"
             : "call";
     parts.push(
-      <span className={`code-token ${tone}`} key={`${index}-${token}`}>
-        {token}
+      <span className={`code-token ${tone}`} key={`${from}-${to}`}>
+        {source.slice(from, to)}
       </span>,
     );
-    cursor = index + token.length;
+    cursor = to;
   }
-  if (cursor < line.length) parts.push(line.slice(cursor));
-  return parts.length ? parts : [line || " "];
+  if (cursor < rangeEnd) parts.push(source.slice(cursor, rangeEnd));
+  return parts;
 }

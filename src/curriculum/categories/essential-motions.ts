@@ -16,34 +16,34 @@ const lessons = [
     "task": "Use W, E, then B.",
     "sequence": "WEB",
     "code": [
-      "require('nvchad.configs.lspconfig').defaults()",
-      "vim.lsp.enable({ 'html', 'cssls' })",
-      "return true"
+      "configureDefaults();",
+      "enableServers(['html', 'css']);",
+      "console.log(settings);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Use W, E, then B. · repetition 1 of 3",
         "code": [
-          "require('nvchad.configs.lspconfig').defaults()",
-          "vim.lsp.enable({ 'html', 'cssls' })",
-          "return true"
+          "configureDefaults();",
+          "enableServers(['html', 'css']);",
+          "console.log(settings);"
         ]
       },
       {
         "goal": "Use W, E, then B. · repetition 2 of 3",
         "code": [
-          "local result = transform(input, options)",
-          "local label = 'ready:production'",
-          "return result"
+          "const result = transform(input, options);",
+          "const label = 'ready:production';",
+          "console.log(result, label);"
         ]
       },
       {
         "goal": "Use W, E, then B. · repetition 3 of 3",
         "code": [
-          "map('<leader>ff', telescope.find_files)",
-          "map('<leader>fw', telescope.live_grep)",
-          "return telescope"
+          "bindKey('findFiles', search.findFiles);",
+          "bindKey('findText', search.findText);",
+          "console.log(search);"
         ]
       }
     ],
@@ -55,12 +55,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with W.",
-        "Use only the keys introduced in Essential Motions.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: W, E, B."
       ],
       "success": "Moving by WORDs produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "W",
+        "description": "Move to the next whitespace-separated WORD.",
+        "sequence": "W"
+      },
+      {
+        "key": "E",
+        "description": "Move to the end of a WORD.",
+        "sequence": "E"
+      },
+      {
+        "key": "B",
+        "description": "Move to the previous WORD beginning.",
+        "sequence": "B"
+      }
+    ]
   },
   {
     "group": "Essential Motions",
@@ -77,34 +94,34 @@ const lessons = [
     "task": "Visit column zero, first text, then line end.",
     "sequence": "0_$",
     "code": [
-      "require('nvchad.configs.lspconfig').defaults()",
-      "vim.lsp.enable({ 'html', 'cssls' })",
-      "return true"
+      "if (ready) {",
+      "  enableServers(['html', 'css']);",
+      "}"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Visit column zero, first text, then line end. · repetition 1 of 3",
         "code": [
-          "require('nvchad.configs.lspconfig').defaults()",
-          "vim.lsp.enable({ 'html', 'cssls' })",
-          "return true"
+          "if (ready) {",
+          "  enableServers(['html', 'css']);",
+          "}"
         ]
       },
       {
         "goal": "Visit column zero, first text, then line end. · repetition 2 of 3",
         "code": [
-          "local result = transform(input, options)",
-          "local label = 'ready:production'",
-          "return result"
+          "if (ready) {",
+          "  const label = 'ready:production';",
+          "}"
         ]
       },
       {
         "goal": "Visit column zero, first text, then line end. · repetition 3 of 3",
         "code": [
-          "map('<leader>ff', telescope.find_files)",
-          "map('<leader>fw', telescope.live_grep)",
-          "return telescope"
+          "if (ready) {",
+          "  bindKey('findText', search.findText);",
+          "}"
         ]
       }
     ],
@@ -113,11 +130,11 @@ const lessons = [
       "instruction": "Visit column zero, first text, then line end.",
       "cursor": [
         1,
-        0
+        5
       ],
       "hints": [
-        "Begin with 0.",
-        "Use only the keys introduced in Essential Motions.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: 0, _, $."
       ],
       "alternatives": [
@@ -125,129 +142,192 @@ const lessons = [
         "0^$"
       ],
       "success": "Moving to Line Ends produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "0",
+        "description": "Move to the first column of the line.",
+        "sequence": "0"
+      },
+      {
+        "key": "_",
+        "description": "Move to the first non-blank character; a count selects a later line.",
+        "sequence": "_"
+      },
+      {
+        "key": "$",
+        "description": "Move to the final character of the line.",
+        "sequence": "$"
+      }
+    ]
   },
   {
     "group": "Essential Motions",
     "id": "find-character",
     "title": "Find Character",
     "eyebrow": "Essential Motions",
-    "summary": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
-    "detail": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
+    "summary": "f and F find a character forward or backward; ; repeats that direction and , repeats it in reverse.",
+    "detail": "The target character is part of the command. Repeating with ; keeps the last direction, while , deliberately reverses it.",
     "keys": [
       "f",
       "F",
-      ";"
+      ";",
+      ","
     ],
-    "task": "Find ( forward, backward, then repeat twice.",
-    "sequence": "f(F(;;",
+    "task": "Find commas forward, backward, and in both repeat directions.",
+    "sequence": "f,;;F,;,",
     "code": [
-      "require('nvchad.configs.lspconfig').defaults()",
-      "vim.lsp.enable({ 'html', 'cssls' })",
-      "return true"
+      "const values = collect(alpha, beta, gamma, delta);",
+      "notify(one, two, three, four);",
+      "console.log(values);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Find ( forward, backward, then repeat twice. · repetition 1 of 3",
+        "goal": "Find commas forward, backward, and in both repeat directions. · repetition 1 of 3",
         "code": [
-          "require('nvchad.configs.lspconfig').defaults()",
-          "vim.lsp.enable({ 'html', 'cssls' })",
-          "return true"
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
         ]
       },
       {
-        "goal": "Find ( forward, backward, then repeat twice. · repetition 2 of 3",
+        "goal": "Find commas forward, backward, and in both repeat directions. · repetition 2 of 3",
         "code": [
-          "local result = transform(input, options)",
-          "local label = 'ready:production'",
-          "return result"
+          "const result = transform(input, options, cache, logger);",
+          "emit(name, status, duration, retries);",
+          "console.log(result);"
         ]
       },
       {
-        "goal": "Find ( forward, backward, then repeat twice. · repetition 3 of 3",
+        "goal": "Find commas forward, backward, and in both repeat directions. · repetition 3 of 3",
         "code": [
-          "map('<leader>ff', telescope.find_files)",
-          "map('<leader>fw', telescope.live_grep)",
-          "return telescope"
+          "bindKey('normal', 'ff', search.findFiles, options);",
+          "bindKey('normal', 'fw', search.findText, options);",
+          "console.log(bindings);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Find ( forward, backward, then repeat twice.",
+      "instruction": "Find commas forward with f and ;, backward with F and ;, then reverse once with ,.",
       "cursor": [
         1,
         0
       ],
       "hints": [
-        "Begin with f.",
-        "Use only the keys introduced in Essential Motions.",
-        "Compose the command from: f, F, ;."
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
+        "Use ; for the same direction and , for the opposite direction."
       ],
       "success": "Find Character produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "f",
+        "description": "Find the next comma.",
+        "sequence": "f,"
+      },
+      {
+        "key": "F",
+        "description": "Go to line end, then find a comma backward.",
+        "sequence": "$F,"
+      },
+      {
+        "key": ";",
+        "description": "Find a comma, then find the next comma in the same direction.",
+        "sequence": "f,;"
+      },
+      {
+        "key": ",",
+        "description": "Find two commas forward, then find a comma in reverse.",
+        "sequence": "f,;,"
+      }
+    ]
   },
   {
     "group": "Essential Motions",
     "id": "till-character",
     "title": "Till Character",
     "eyebrow": "Essential Motions",
-    "summary": "t and T stop just before a target character; semicolon repeats the motion.",
-    "detail": "t and T stop just before a target character; semicolon repeats the motion.",
+    "summary": "t stops immediately before a target to the right; T stops immediately after a target to the left. ; repeats the motion and , reverses its direction.",
+    "detail": "Unlike f and F, till motions leave the cursor adjacent to the target. Their repeat direction is still controlled by ; and ,.",
     "keys": [
       "t",
       "T",
-      ";"
+      ";",
+      ","
     ],
-    "task": "Move till ( forward, backward, then repeat twice.",
-    "sequence": "t(T(;;",
+    "task": "Move till commas forward, backward, and in both repeat directions.",
+    "sequence": "t,;;T,;,",
     "code": [
-      "require('nvchad.configs.lspconfig').defaults()",
-      "vim.lsp.enable({ 'html', 'cssls' })",
-      "return true"
+      "const values = collect(alpha, beta, gamma, delta);",
+      "notify(one, two, three, four);",
+      "console.log(values);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Move till ( forward, backward, then repeat twice. · repetition 1 of 3",
+        "goal": "Move till commas forward, backward, and in both repeat directions. · repetition 1 of 3",
         "code": [
-          "require('nvchad.configs.lspconfig').defaults()",
-          "vim.lsp.enable({ 'html', 'cssls' })",
-          "return true"
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
         ]
       },
       {
-        "goal": "Move till ( forward, backward, then repeat twice. · repetition 2 of 3",
+        "goal": "Move till commas forward, backward, and in both repeat directions. · repetition 2 of 3",
         "code": [
-          "local result = transform(input, options)",
-          "local label = 'ready:production'",
-          "return result"
+          "const result = transform(input, options, cache, logger);",
+          "emit(name, status, duration, retries);",
+          "console.log(result);"
         ]
       },
       {
-        "goal": "Move till ( forward, backward, then repeat twice. · repetition 3 of 3",
+        "goal": "Move till commas forward, backward, and in both repeat directions. · repetition 3 of 3",
         "code": [
-          "map('<leader>ff', telescope.find_files)",
-          "map('<leader>fw', telescope.live_grep)",
-          "return telescope"
+          "bindKey('normal', 'ff', search.findFiles, options);",
+          "bindKey('normal', 'fw', search.findText, options);",
+          "console.log(bindings);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Move till ( forward, backward, then repeat twice.",
+      "instruction": "Move till commas forward with t and ;, backward with T and ;, then reverse once with ,.",
       "cursor": [
         1,
         0
       ],
       "hints": [
-        "Begin with t.",
-        "Use only the keys introduced in Essential Motions.",
-        "Compose the command from: t, T, ;."
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
+        "Use ; for the same direction and , for the opposite direction."
       ],
       "success": "Till Character produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "t",
+        "description": "Stop immediately before the next comma.",
+        "sequence": "t,"
+      },
+      {
+        "key": "T",
+        "description": "Go to line end, then stop immediately after a comma behind the cursor.",
+        "sequence": "$T,"
+      },
+      {
+        "key": ";",
+        "description": "Stop before a comma, then repeat in the same direction.",
+        "sequence": "t,;"
+      },
+      {
+        "key": ",",
+        "description": "Repeat a till motion in the opposite direction.",
+        "sequence": "t,;,"
+      }
+    ]
   },
   {
     "group": "Essential Motions",
@@ -267,73 +347,221 @@ const lessons = [
       "F",
       ";",
       "t",
-      "T"
+      "T",
+      ",",
+      "t,;",
+      "t,;,"
     ],
     "task": "",
     "sequence": "WEB",
     "code": [
-      "require('nvchad.configs.lspconfig').defaults()",
-      "vim.lsp.enable({ 'html', 'cssls' })",
-      "return true"
+      "if (ready) {",
+      "  notify(one, two, three, four);",
+      "}"
     ],
     "tip": "Return to any command in Essential Motions that still requires conscious recall.",
     "reviewOnly": true,
     "reviewItems": [
       {
         "key": "W",
-        "description": "Uppercase word motions treat each whitespace-separated chunk as one WORD.",
-        "sequence": "WEB"
+        "description": "Move to the next whitespace-separated WORD.",
+        "sequence": "W",
+        "code": [
+          "configureDefaults();",
+          "enableServers(['html', 'css']);",
+          "console.log(settings);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "E",
-        "description": "Uppercase word motions treat each whitespace-separated chunk as one WORD.",
-        "sequence": "WEB"
+        "description": "Move to the end of a WORD.",
+        "sequence": "E",
+        "code": [
+          "configureDefaults();",
+          "enableServers(['html', 'css']);",
+          "console.log(settings);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "B",
-        "description": "Uppercase word motions treat each whitespace-separated chunk as one WORD.",
-        "sequence": "WEB"
+        "description": "Move to the previous WORD beginning.",
+        "sequence": "B",
+        "code": [
+          "configureDefaults();",
+          "enableServers(['html', 'css']);",
+          "console.log(settings);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "0",
-        "description": "0 reaches column zero, _ reaches first non-blank text, and $ reaches the line end.",
-        "sequence": "0_$"
+        "description": "Move to the first column of the line.",
+        "sequence": "0",
+        "code": [
+          "if (ready) {",
+          "  enableServers(['html', 'css']);",
+          "}"
+        ],
+        "cursor": [
+          1,
+          5
+        ]
       },
       {
         "key": "_",
-        "description": "0 reaches column zero, _ reaches first non-blank text, and $ reaches the line end.",
-        "sequence": "0_$"
+        "description": "Move to the first non-blank character; a count selects a later line.",
+        "sequence": "_",
+        "code": [
+          "if (ready) {",
+          "  enableServers(['html', 'css']);",
+          "}"
+        ],
+        "cursor": [
+          1,
+          5
+        ]
       },
       {
         "key": "$",
-        "description": "0 reaches column zero, _ reaches first non-blank text, and $ reaches the line end.",
-        "sequence": "0_$"
+        "description": "Move to the final character of the line.",
+        "sequence": "$",
+        "code": [
+          "if (ready) {",
+          "  enableServers(['html', 'css']);",
+          "}"
+        ],
+        "cursor": [
+          1,
+          5
+        ]
       },
       {
         "key": "f",
-        "description": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
-        "sequence": "f(F(;;"
+        "description": "Find the next comma.",
+        "sequence": "f,",
+        "code": [
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "F",
-        "description": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
-        "sequence": "f(F(;;"
+        "description": "Go to line end, then find a comma backward.",
+        "sequence": "$F,",
+        "code": [
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": ";",
-        "description": "f finds forward, F finds backward, and semicolon repeats the latest character search.",
-        "sequence": "f(F(;;"
+        "description": "Find a comma, then find the next comma in the same direction.",
+        "sequence": "f,;",
+        "code": [
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "t",
-        "description": "t and T stop just before a target character; semicolon repeats the motion.",
-        "sequence": "t(T(;;"
+        "description": "Stop immediately before the next comma.",
+        "sequence": "t,",
+        "code": [
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "T",
-        "description": "t and T stop just before a target character; semicolon repeats the motion.",
-        "sequence": "t(T(;;"
+        "description": "Go to line end, then stop immediately after a comma behind the cursor.",
+        "sequence": "$T,",
+        "code": [
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
+      },
+      {
+        "key": ",",
+        "description": "Find two commas forward, then find a comma in reverse.",
+        "sequence": "f,;,",
+        "code": [
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
+      },
+      {
+        "key": "t,;",
+        "description": "Stop before a comma, then repeat in the same direction.",
+        "sequence": "t,;",
+        "code": [
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
+      },
+      {
+        "key": "t,;,",
+        "description": "Repeat a till motion in the opposite direction.",
+        "sequence": "t,;,",
+        "code": [
+          "const values = collect(alpha, beta, gamma, delta);",
+          "notify(one, two, three, four);",
+          "console.log(values);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       }
+    ],
+    "cursor": [
+      1,
+      5
     ]
   }
 ] satisfies readonly Lesson[];

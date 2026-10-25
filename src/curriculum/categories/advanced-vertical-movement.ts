@@ -6,8 +6,8 @@ const lessons = [
     "id": "relative-line-jumps",
     "title": "Relative Line Jumps",
     "eyebrow": "Advanced Vertical Movement",
-    "summary": "Prefix j or k with a count to move an exact number of screen lines.",
-    "detail": "Prefix j or k with a count to move an exact number of screen lines.",
+    "summary": "Prefix j or k with a count to move that many buffer lines, stopping at the file boundary.",
+    "detail": "Native j and k count buffer lines. Wrapped screen lines use gj and gk; NVChad may map uncounted j and k to those motions.",
     "keys": [
       "{n}",
       "j",
@@ -16,46 +16,46 @@ const lessons = [
     "task": "Move down five lines, then up three.",
     "sequence": "5j3k",
     "code": [
-      "-- top of configuration",
-      "local ui = {}",
-      "ui.theme = 'onedark'",
-      "ui.statusline = true",
-      "ui.tabufline = true",
-      "return ui"
+      "// UI configuration.",
+      "const ui = {};",
+      "ui.theme = 'onedark';",
+      "ui.statusLine = true;",
+      "ui.tabs = true;",
+      "console.log(ui);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Move down five lines, then up three. · repetition 1 of 3",
         "code": [
-          "-- top of configuration",
-          "local ui = {}",
-          "ui.theme = 'onedark'",
-          "ui.statusline = true",
-          "ui.tabufline = true",
-          "return ui"
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
         ]
       },
       {
         "goal": "Move down five lines, then up three. · repetition 2 of 3",
         "code": [
-          "local alpha = 1",
+          "const alpha = 1;",
           "",
-          "local beta = 2",
+          "const beta = 2;",
           "",
-          "local gamma = 3",
-          "return gamma"
+          "const gamma = 3;",
+          "console.log(alpha, beta, gamma);"
         ]
       },
       {
         "goal": "Move down five lines, then up three. · repetition 3 of 3",
         "code": [
-          "function setup()",
-          "  configure_ui()",
-          "  configure_lsp()",
-          "  configure_maps()",
-          "end",
-          "return setup"
+          "function setup() {",
+          "  configureUi();",
+          "  configureLanguageServer();",
+          "  configureMappings();",
+          "}",
+          "console.log(setup);"
         ]
       }
     ],
@@ -63,16 +63,33 @@ const lessons = [
     "challenge": {
       "instruction": "Move down five lines, then up three.",
       "cursor": [
-        1,
+        0,
         0
       ],
       "hints": [
-        "Begin with {n}.",
-        "Use only the keys introduced in Advanced Vertical Movement.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: {n}, j, k."
       ],
       "success": "Relative Line Jumps produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "{n}",
+        "description": "Counts select how many buffer lines to move.",
+        "sequence": "5j3k"
+      },
+      {
+        "key": "j",
+        "description": "Move down five buffer lines.",
+        "sequence": "5j"
+      },
+      {
+        "key": "k",
+        "description": "Move down five lines, then up three.",
+        "sequence": "5j3k"
+      }
+    ]
   },
   {
     "group": "Advanced Vertical Movement",
@@ -88,46 +105,46 @@ const lessons = [
     "task": "Jump to the end, then the beginning.",
     "sequence": "Ggg",
     "code": [
-      "-- top of configuration",
-      "local ui = {}",
-      "ui.theme = 'onedark'",
-      "ui.statusline = true",
-      "ui.tabufline = true",
-      "return ui"
+      "// UI configuration.",
+      "const ui = {};",
+      "ui.theme = 'onedark';",
+      "ui.statusLine = true;",
+      "ui.tabs = true;",
+      "console.log(ui);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Jump to the end, then the beginning. · repetition 1 of 3",
         "code": [
-          "-- top of configuration",
-          "local ui = {}",
-          "ui.theme = 'onedark'",
-          "ui.statusline = true",
-          "ui.tabufline = true",
-          "return ui"
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
         ]
       },
       {
         "goal": "Jump to the end, then the beginning. · repetition 2 of 3",
         "code": [
-          "local alpha = 1",
+          "const alpha = 1;",
           "",
-          "local beta = 2",
+          "const beta = 2;",
           "",
-          "local gamma = 3",
-          "return gamma"
+          "const gamma = 3;",
+          "console.log(alpha, beta, gamma);"
         ]
       },
       {
         "goal": "Jump to the end, then the beginning. · repetition 3 of 3",
         "code": [
-          "function setup()",
-          "  configure_ui()",
-          "  configure_lsp()",
-          "  configure_maps()",
-          "end",
-          "return setup"
+          "function setup() {",
+          "  configureUi();",
+          "  configureLanguageServer();",
+          "  configureMappings();",
+          "}",
+          "console.log(setup);"
         ]
       }
     ],
@@ -139,12 +156,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with gg.",
-        "Use only the keys introduced in Advanced Vertical Movement.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: gg, G."
       ],
       "success": "Absolute Line Jumps produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "gg",
+        "description": "Jump to the first line.",
+        "sequence": "gg"
+      },
+      {
+        "key": "G",
+        "description": "Jump to the last line.",
+        "sequence": "G"
+      }
+    ]
   },
   {
     "group": "Advanced Vertical Movement",
@@ -160,46 +189,49 @@ const lessons = [
     "task": "Jump forward one paragraph, then back.",
     "sequence": "}{",
     "code": [
-      "-- top of configuration",
-      "local ui = {}",
-      "ui.theme = 'onedark'",
-      "ui.statusline = true",
-      "ui.tabufline = true",
-      "return ui"
+      "// UI settings.",
+      "const ui = {};",
+      "",
+      "// Language server settings.",
+      "const languageServer = {};",
+      "",
+      "console.log(ui, languageServer);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Jump forward one paragraph, then back. · repetition 1 of 3",
         "code": [
-          "-- top of configuration",
-          "local ui = {}",
-          "ui.theme = 'onedark'",
-          "ui.statusline = true",
-          "ui.tabufline = true",
-          "return ui"
+          "// UI settings.",
+          "const ui = {};",
+          "",
+          "// Language server settings.",
+          "const languageServer = {};",
+          "",
+          "console.log(ui, languageServer);"
         ]
       },
       {
         "goal": "Jump forward one paragraph, then back. · repetition 2 of 3",
         "code": [
-          "local alpha = 1",
+          "let alpha = 1;",
+          "alpha += 1;",
           "",
-          "local beta = 2",
+          "const beta = 2;",
           "",
-          "local gamma = 3",
-          "return gamma"
+          "console.log(alpha, beta);"
         ]
       },
       {
         "goal": "Jump forward one paragraph, then back. · repetition 3 of 3",
         "code": [
-          "function setup()",
-          "  configure_ui()",
-          "  configure_lsp()",
-          "  configure_maps()",
-          "end",
-          "return setup"
+          "function setup() {",
+          "  configureUi();",
+          "}",
+          "",
+          "setup();",
+          "",
+          "console.log(setup);"
         ]
       }
     ],
@@ -211,12 +243,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with }.",
-        "Use only the keys introduced in Advanced Vertical Movement.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: }, {."
       ],
       "success": "Paragraph Jumps produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "}",
+        "description": "Move to the next paragraph boundary.",
+        "sequence": "}"
+      },
+      {
+        "key": "{",
+        "description": "Move forward to a boundary, then back to the previous boundary.",
+        "sequence": "}{"
+      }
+    ]
   },
   {
     "group": "Advanced Vertical Movement",
@@ -232,46 +276,46 @@ const lessons = [
     "task": "Scroll up half a window, then down.",
     "sequence": "<C-u><C-d>",
     "code": [
-      "-- top of configuration",
-      "local ui = {}",
-      "ui.theme = 'onedark'",
-      "ui.statusline = true",
-      "ui.tabufline = true",
-      "return ui"
+      "// UI configuration.",
+      "const ui = {};",
+      "ui.theme = 'onedark';",
+      "ui.statusLine = true;",
+      "ui.tabs = true;",
+      "console.log(ui);"
     ],
-    "tip": "These are native Vim motions and work inside NVChad.",
+    "tip": "Ctrl+u and Ctrl+d use half the current window height by default. This short fixture reaches file boundaries; actual scrolling depends on the terminal height.",
     "drills": [
       {
         "goal": "Scroll up half a window, then down. · repetition 1 of 3",
         "code": [
-          "-- top of configuration",
-          "local ui = {}",
-          "ui.theme = 'onedark'",
-          "ui.statusline = true",
-          "ui.tabufline = true",
-          "return ui"
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
         ]
       },
       {
         "goal": "Scroll up half a window, then down. · repetition 2 of 3",
         "code": [
-          "local alpha = 1",
+          "const alpha = 1;",
           "",
-          "local beta = 2",
+          "const beta = 2;",
           "",
-          "local gamma = 3",
-          "return gamma"
+          "const gamma = 3;",
+          "console.log(alpha, beta, gamma);"
         ]
       },
       {
         "goal": "Scroll up half a window, then down. · repetition 3 of 3",
         "code": [
-          "function setup()",
-          "  configure_ui()",
-          "  configure_lsp()",
-          "  configure_maps()",
-          "end",
-          "return setup"
+          "function setup() {",
+          "  configureUi();",
+          "  configureLanguageServer();",
+          "  configureMappings();",
+          "}",
+          "console.log(setup);"
         ]
       }
     ],
@@ -283,12 +327,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with Ctrl+u.",
-        "Use only the keys introduced in Advanced Vertical Movement.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: Ctrl+u, Ctrl+d."
       ],
       "success": "Window Scrolls produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "Ctrl+u",
+        "description": "Move upward by the scroll amount, normally half a window.",
+        "sequence": "<C-u>"
+      },
+      {
+        "key": "Ctrl+d",
+        "description": "Move downward by the scroll amount, normally half a window.",
+        "sequence": "<C-d>"
+      }
+    ]
   },
   {
     "group": "Advanced Vertical Movement",
@@ -311,61 +367,175 @@ const lessons = [
     "task": "",
     "sequence": "5j3k",
     "code": [
-      "-- top of configuration",
-      "local ui = {}",
-      "ui.theme = 'onedark'",
-      "ui.statusline = true",
-      "ui.tabufline = true",
-      "return ui"
+      "// UI configuration.",
+      "const ui = {};",
+      "ui.theme = 'onedark';",
+      "ui.statusLine = true;",
+      "ui.tabs = true;",
+      "console.log(ui);"
     ],
     "tip": "Return to any command in Advanced Vertical Movement that still requires conscious recall.",
     "reviewOnly": true,
     "reviewItems": [
       {
         "key": "{n}",
-        "description": "Prefix j or k with a count to move an exact number of screen lines.",
-        "sequence": "5j3k"
+        "description": "Counts select how many buffer lines to move.",
+        "sequence": "5j3k",
+        "code": [
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
+        ],
+        "cursor": [
+          0,
+          0
+        ]
       },
       {
         "key": "j",
-        "description": "Prefix j or k with a count to move an exact number of screen lines.",
-        "sequence": "5j3k"
+        "description": "Move down five buffer lines.",
+        "sequence": "5j",
+        "code": [
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
+        ],
+        "cursor": [
+          0,
+          0
+        ]
       },
       {
         "key": "k",
-        "description": "Prefix j or k with a count to move an exact number of screen lines.",
-        "sequence": "5j3k"
+        "description": "Move down five lines, then up three.",
+        "sequence": "5j3k",
+        "code": [
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
+        ],
+        "cursor": [
+          0,
+          0
+        ]
       },
       {
         "key": "gg",
-        "description": "gg jumps to the first line and G jumps to the final line.",
-        "sequence": "Ggg"
+        "description": "Jump to the first line.",
+        "sequence": "gg",
+        "code": [
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "G",
-        "description": "gg jumps to the first line and G jumps to the final line.",
-        "sequence": "Ggg"
+        "description": "Jump to the last line.",
+        "sequence": "G",
+        "code": [
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "}",
-        "description": "Closing brace moves to the next paragraph; opening brace moves to the previous one.",
-        "sequence": "}{"
+        "description": "Move to the next paragraph boundary.",
+        "sequence": "}",
+        "code": [
+          "// UI settings.",
+          "const ui = {};",
+          "",
+          "// Language server settings.",
+          "const languageServer = {};",
+          "",
+          "console.log(ui, languageServer);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "{",
-        "description": "Closing brace moves to the next paragraph; opening brace moves to the previous one.",
-        "sequence": "}{"
+        "description": "Move forward to a boundary, then back to the previous boundary.",
+        "sequence": "}{",
+        "code": [
+          "// UI settings.",
+          "const ui = {};",
+          "",
+          "// Language server settings.",
+          "const languageServer = {};",
+          "",
+          "console.log(ui, languageServer);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "Ctrl+u",
-        "description": "Ctrl+u scrolls half a window up and Ctrl+d scrolls half a window down.",
-        "sequence": "<C-u><C-d>"
+        "description": "Move upward by the scroll amount, normally half a window.",
+        "sequence": "<C-u>",
+        "code": [
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "Ctrl+d",
-        "description": "Ctrl+u scrolls half a window up and Ctrl+d scrolls half a window down.",
-        "sequence": "<C-u><C-d>"
+        "description": "Move downward by the scroll amount, normally half a window.",
+        "sequence": "<C-d>",
+        "code": [
+          "// UI configuration.",
+          "const ui = {};",
+          "ui.theme = 'onedark';",
+          "ui.statusLine = true;",
+          "ui.tabs = true;",
+          "console.log(ui);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       }
+    ],
+    "cursor": [
+      1,
+      2
     ]
   }
 ] satisfies readonly Lesson[];

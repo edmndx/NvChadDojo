@@ -19,7 +19,24 @@ const lessons = [
       "buffer 2: mappings.lua",
       "tab 1: two windows"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":ls",
+        "description": "A buffer holds text, a window views a buffer, and a tab page owns a window layout.",
+        "sequence": ":ls<Enter>"
+      },
+      {
+        "key": ":tabs",
+        "description": "A buffer holds text, a window views a buffer, and a tab page owns a window layout.",
+        "sequence": ":tabs<Enter>"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Windows, Buffers & Tabs",
@@ -35,11 +52,28 @@ const lessons = [
     "task": "Create one horizontal split and one vertical split.",
     "sequence": "<C-w>s<C-w>v",
     "code": [
-      "init.lua",
-      "-- split this buffer into multiple views",
-      "return true"
+      "const settings = { theme: 'onedark' };",
+      "// Split this buffer into multiple views.",
+      "console.log(settings);"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Ctrl+w s",
+        "description": "Ctrl+w s splits horizontally and Ctrl+w v splits vertically.",
+        "sequence": "<C-w>s"
+      },
+      {
+        "key": "Ctrl+w v",
+        "description": "Ctrl+w s splits horizontally and Ctrl+w v splits vertically.",
+        "sequence": "<C-w>v"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "javascript"
   },
   {
     "group": "Windows, Buffers & Tabs",
@@ -57,11 +91,38 @@ const lessons = [
     "task": "Move to the split on the right.",
     "sequence": "<C-l>",
     "code": [
-      "-- left: init.lua",
-      "-- right: mappings.lua",
-      "vim.keymap.set(...)"
+      "left window: init.lua",
+      "right window: mappings.lua",
+      "Ctrl+h / Ctrl+l: switch window"
     ],
-    "tip": "This is an NVChad default mapping over native Ctrl+w window navigation."
+    "tip": "This is an NVChad default mapping over native Ctrl+w window navigation.",
+    "reviewItems": [
+      {
+        "key": "Ctrl+h",
+        "description": "NVChad maps Ctrl+h/j/k/l to move between editor windows.",
+        "sequence": "<C-h>"
+      },
+      {
+        "key": "Ctrl+j",
+        "description": "NVChad maps Ctrl+h/j/k/l to move between editor windows.",
+        "sequence": "<C-j>"
+      },
+      {
+        "key": "Ctrl+k",
+        "description": "NVChad maps Ctrl+h/j/k/l to move between editor windows.",
+        "sequence": "<C-k>"
+      },
+      {
+        "key": "Ctrl+l",
+        "description": "NVChad maps Ctrl+h/j/k/l to move between editor windows.",
+        "sequence": "<C-l>"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Windows, Buffers & Tabs",
@@ -84,7 +145,39 @@ const lessons = [
       "------------+-------------",
       "balanced layout"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Ctrl+w =",
+        "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
+        "sequence": "<C-w>="
+      },
+      {
+        "key": "Ctrl+w +",
+        "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
+        "sequence": "<C-w>+"
+      },
+      {
+        "key": "Ctrl+w -",
+        "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
+        "sequence": "<C-w>-"
+      },
+      {
+        "key": "Ctrl+w <",
+        "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
+        "sequence": "<C-w><"
+      },
+      {
+        "key": "Ctrl+w >",
+        "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
+        "sequence": "<C-w>>"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Windows, Buffers & Tabs",
@@ -104,15 +197,32 @@ const lessons = [
       "window 2 <- close",
       "window 3"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Ctrl+w c",
+        "description": "Ctrl+w c closes the current window while Ctrl+w o keeps only the current window.",
+        "sequence": "<C-w>c"
+      },
+      {
+        "key": "Ctrl+w o",
+        "description": "Ctrl+w c closes the current window while Ctrl+w o keeps only the current window.",
+        "sequence": "<C-w>o"
+      }
+    ],
+    "cursor": [
+      1,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Windows, Buffers & Tabs",
     "id": "buffers",
     "title": "Manage tabufline buffers",
     "eyebrow": "Windows, Buffers & Tabs",
-    "summary": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
-    "detail": "Space b creates a buffer, Tab and Shift+Tab cycle, and Space x closes the selected buffer.",
+    "summary": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+    "detail": "With tabufline enabled, Space b creates a buffer, Tab and Shift+Tab cycle, and Space x closes the selected buffer; these mappings are not created when tabufline is disabled.",
     "keys": [
       "Space b",
       "Tab",
@@ -126,7 +236,34 @@ const lessons = [
       "",
       "-- buffers inside the current tab page"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space b",
+        "description": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+        "sequence": "<Space>b"
+      },
+      {
+        "key": "Tab",
+        "description": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+        "sequence": "<Tab>"
+      },
+      {
+        "key": "Shift+Tab",
+        "description": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+        "sequence": "<S-Tab>"
+      },
+      {
+        "key": "Space x",
+        "description": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+        "sequence": "<Space>x"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Windows, Buffers & Tabs",
@@ -148,7 +285,34 @@ const lessons = [
       "tab 2: git review",
       "-- each tab owns its window layout"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":tabnew",
+        "description": ":tabnew creates a tab page, gt and gT navigate, and :tabclose closes the current tab page.",
+        "sequence": ":tabnew<Enter>"
+      },
+      {
+        "key": "gt",
+        "description": ":tabnew creates a tab page, gt and gT navigate, and :tabclose closes the current tab page.",
+        "sequence": "gt"
+      },
+      {
+        "key": "gT",
+        "description": ":tabnew creates a tab page, gt and gT navigate, and :tabclose closes the current tab page.",
+        "sequence": "gT"
+      },
+      {
+        "key": ":tabclose",
+        "description": ":tabnew creates a tab page, gt and gT navigate, and :tabclose closes the current tab page.",
+        "sequence": ":tabclose<Enter>"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Windows, Buffers & Tabs",
@@ -195,119 +359,354 @@ const lessons = [
       {
         "key": ":ls",
         "description": "A buffer holds text, a window views a buffer, and a tab page owns a window layout.",
-        "sequence": ":ls<Enter>:tabs<Enter>"
+        "sequence": ":ls<Enter>",
+        "code": [
+          "buffer 1: init.lua",
+          "buffer 2: mappings.lua",
+          "tab 1: two windows"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":tabs",
         "description": "A buffer holds text, a window views a buffer, and a tab page owns a window layout.",
-        "sequence": ":ls<Enter>:tabs<Enter>"
+        "sequence": ":tabs<Enter>",
+        "code": [
+          "buffer 1: init.lua",
+          "buffer 2: mappings.lua",
+          "tab 1: two windows"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+w s",
         "description": "Ctrl+w s splits horizontally and Ctrl+w v splits vertically.",
-        "sequence": "<C-w>s<C-w>v"
+        "sequence": "<C-w>s",
+        "code": [
+          "const settings = { theme: 'onedark' };",
+          "// Split this buffer into multiple views.",
+          "console.log(settings);"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "javascript"
       },
       {
         "key": "Ctrl+w v",
         "description": "Ctrl+w s splits horizontally and Ctrl+w v splits vertically.",
-        "sequence": "<C-w>s<C-w>v"
+        "sequence": "<C-w>v",
+        "code": [
+          "const settings = { theme: 'onedark' };",
+          "// Split this buffer into multiple views.",
+          "console.log(settings);"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "javascript"
       },
       {
         "key": "Ctrl+h",
         "description": "NVChad maps Ctrl+h/j/k/l to move between editor windows.",
-        "sequence": "<C-l>"
+        "sequence": "<C-h>",
+        "code": [
+          "left window: init.lua",
+          "right window: mappings.lua",
+          "Ctrl+h / Ctrl+l: switch window"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+j",
         "description": "NVChad maps Ctrl+h/j/k/l to move between editor windows.",
-        "sequence": "<C-l>"
+        "sequence": "<C-j>",
+        "code": [
+          "left window: init.lua",
+          "right window: mappings.lua",
+          "Ctrl+h / Ctrl+l: switch window"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+k",
         "description": "NVChad maps Ctrl+h/j/k/l to move between editor windows.",
-        "sequence": "<C-l>"
+        "sequence": "<C-k>",
+        "code": [
+          "left window: init.lua",
+          "right window: mappings.lua",
+          "Ctrl+h / Ctrl+l: switch window"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+l",
         "description": "NVChad maps Ctrl+h/j/k/l to move between editor windows.",
-        "sequence": "<C-l>"
+        "sequence": "<C-l>",
+        "code": [
+          "left window: init.lua",
+          "right window: mappings.lua",
+          "Ctrl+h / Ctrl+l: switch window"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+w =",
         "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
-        "sequence": "<C-w>="
+        "sequence": "<C-w>=",
+        "code": [
+          "left window | right window",
+          "------------+-------------",
+          "balanced layout"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+w +",
         "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
-        "sequence": "<C-w>="
+        "sequence": "<C-w>+",
+        "code": [
+          "left window | right window",
+          "------------+-------------",
+          "balanced layout"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+w -",
         "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
-        "sequence": "<C-w>="
+        "sequence": "<C-w>-",
+        "code": [
+          "left window | right window",
+          "------------+-------------",
+          "balanced layout"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+w <",
         "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
-        "sequence": "<C-w>="
+        "sequence": "<C-w><",
+        "code": [
+          "left window | right window",
+          "------------+-------------",
+          "balanced layout"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+w >",
         "description": "Ctrl+w = equalizes windows; +, -, <, and > adjust height or width.",
-        "sequence": "<C-w>="
+        "sequence": "<C-w>>",
+        "code": [
+          "left window | right window",
+          "------------+-------------",
+          "balanced layout"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+w c",
         "description": "Ctrl+w c closes the current window while Ctrl+w o keeps only the current window.",
-        "sequence": "<C-w>c"
+        "sequence": "<C-w>c",
+        "code": [
+          "window 1",
+          "window 2 <- close",
+          "window 3"
+        ],
+        "cursor": [
+          1,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+w o",
         "description": "Ctrl+w c closes the current window while Ctrl+w o keeps only the current window.",
-        "sequence": "<C-w>c"
+        "sequence": "<C-w>o",
+        "code": [
+          "window 1",
+          "window 2 <- close",
+          "window 3"
+        ],
+        "cursor": [
+          1,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Space b",
-        "description": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
-        "sequence": "<Space>b<Tab><Space>x"
+        "description": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+        "sequence": "<Space>b",
+        "code": [
+          "init.lua  mappings.lua  plugins.lua",
+          "",
+          "-- buffers inside the current tab page"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Tab",
-        "description": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
-        "sequence": "<Space>b<Tab><Space>x"
+        "description": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+        "sequence": "<Tab>",
+        "code": [
+          "init.lua  mappings.lua  plugins.lua",
+          "",
+          "-- buffers inside the current tab page"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Shift+Tab",
-        "description": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
-        "sequence": "<Space>b<Tab><Space>x"
+        "description": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+        "sequence": "<S-Tab>",
+        "code": [
+          "init.lua  mappings.lua  plugins.lua",
+          "",
+          "-- buffers inside the current tab page"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Space x",
-        "description": "NVChad's tabufline exposes open buffers without turning them into native tab pages.",
-        "sequence": "<Space>b<Tab><Space>x"
+        "description": "When NVChad's tabufline is enabled, it exposes open buffers without turning them into native tab pages.",
+        "sequence": "<Space>x",
+        "code": [
+          "init.lua  mappings.lua  plugins.lua",
+          "",
+          "-- buffers inside the current tab page"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":tabnew",
         "description": ":tabnew creates a tab page, gt and gT navigate, and :tabclose closes the current tab page.",
-        "sequence": ":tabnew<Enter>gtgT:tabclose<Enter>"
+        "sequence": ":tabnew<Enter>",
+        "code": [
+          "tab 1: editor + tests",
+          "tab 2: git review",
+          "-- each tab owns its window layout"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "gt",
         "description": ":tabnew creates a tab page, gt and gT navigate, and :tabclose closes the current tab page.",
-        "sequence": ":tabnew<Enter>gtgT:tabclose<Enter>"
+        "sequence": "gt",
+        "code": [
+          "tab 1: editor + tests",
+          "tab 2: git review",
+          "-- each tab owns its window layout"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "gT",
         "description": ":tabnew creates a tab page, gt and gT navigate, and :tabclose closes the current tab page.",
-        "sequence": ":tabnew<Enter>gtgT:tabclose<Enter>"
+        "sequence": "gT",
+        "code": [
+          "tab 1: editor + tests",
+          "tab 2: git review",
+          "-- each tab owns its window layout"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":tabclose",
         "description": ":tabnew creates a tab page, gt and gT navigate, and :tabclose closes the current tab page.",
-        "sequence": ":tabnew<Enter>gtgT:tabclose<Enter>"
+        "sequence": ":tabclose<Enter>",
+        "code": [
+          "tab 1: editor + tests",
+          "tab 2: git review",
+          "-- each tab owns its window layout"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       }
-    ]
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   }
 ] satisfies readonly Lesson[];
 

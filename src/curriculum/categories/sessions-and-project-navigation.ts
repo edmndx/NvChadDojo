@@ -19,15 +19,32 @@ const lessons = [
       "src/",
       "tests/"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":pwd",
+        "description": ":pwd shows the current directory and :cd changes the global working directory.",
+        "sequence": ":pwd<Enter>"
+      },
+      {
+        "key": ":cd path",
+        "description": ":pwd shows the current directory and :cd changes the global working directory.",
+        "sequence": ":cd src<Enter>"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Sessions & Project Navigation",
     "id": "scoped-directories",
     "title": "Scope directories to a window or tab",
     "eyebrow": "Sessions & Project Navigation",
-    "summary": ":lcd changes only the current window while :tcd changes every window in the current tab page.",
-    "detail": ":lcd changes only the current window while :tcd changes every window in the current tab page.",
+    "summary": ":lcd sets a window-local directory; :tcd sets the tab-local directory. Existing window-local directories take precedence in their own windows.",
+    "detail": ":lcd sets a window-local directory; :tcd sets the tab-local directory. Existing window-local directories take precedence in their own windows.",
     "keys": [
       ":lcd path",
       ":tcd path"
@@ -39,15 +56,32 @@ const lessons = [
       "tab 2 cwd: /projects/app",
       "-- scoped navigation"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":lcd path",
+        "description": ":lcd sets a window-local directory; :tcd sets the tab-local directory. Existing window-local directories take precedence in their own windows.",
+        "sequence": ":lcd src<Enter>"
+      },
+      {
+        "key": ":tcd path",
+        "description": ":lcd sets a window-local directory; :tcd sets the tab-local directory. Existing window-local directories take precedence in their own windows.",
+        "sequence": ":tcd src<Enter>"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Sessions & Project Navigation",
     "id": "save-session",
     "title": "Save and restore a session",
     "eyebrow": "Sessions & Project Navigation",
-    "summary": ":mksession! writes layouts and buffers; :source reloads the saved Session.vim file.",
-    "detail": ":mksession! writes layouts and buffers; :source reloads the saved Session.vim file.",
+    "summary": ":mksession! saves buffers and layout according to sessionoptions, overwriting the session file; :source restores it. Save edited files separately: a session is not a backup of unsaved text.",
+    "detail": ":mksession! saves buffers and layout according to sessionoptions, overwriting the session file; :source restores it. Save edited files separately: a session is not a backup of unsaved text.",
     "keys": [
       ":mksession! Session.vim",
       ":source Session.vim"
@@ -59,15 +93,32 @@ const lessons = [
       "  buffers",
       "  windows and tab pages"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":mksession! Session.vim",
+        "description": ":mksession! saves buffers and layout according to sessionoptions, overwriting the session file; :source restores it. Save edited files separately: a session is not a backup of unsaved text.",
+        "sequence": ":mksession! Session.vim<Enter>"
+      },
+      {
+        "key": ":source Session.vim",
+        "description": ":mksession! saves buffers and layout according to sessionoptions, overwriting the session file; :source restores it. Save edited files separately: a session is not a backup of unsaved text.",
+        "sequence": ":source Session.vim<Enter>"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Sessions & Project Navigation",
     "id": "argument-list",
     "title": "Navigate an argument list",
     "eyebrow": "Sessions & Project Navigation",
-    "summary": ":args displays project files, :argadd adds one, and :next or :previous navigates the list.",
-    "detail": ":args displays project files, :argadd adds one, and :next or :previous navigates the list.",
+    "summary": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
+    "detail": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
     "keys": [
       ":args",
       ":argadd path",
@@ -81,7 +132,34 @@ const lessons = [
       "-- argument list",
       ""
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":args",
+        "description": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
+        "sequence": ":args<Enter>"
+      },
+      {
+        "key": ":argadd path",
+        "description": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
+        "sequence": ":argadd src<Enter>"
+      },
+      {
+        "key": ":next",
+        "description": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
+        "sequence": ":next<Enter>"
+      },
+      {
+        "key": ":previous",
+        "description": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
+        "sequence": ":previous<Enter>"
+      }
+    ],
+    "cursor": [
+      0,
+      1
+    ],
+    "language": "text"
   },
   {
     "group": "Sessions & Project Navigation",
@@ -95,12 +173,24 @@ const lessons = [
     ],
     "task": "Jump to the alternate file.",
     "sequence": "<C-^>",
+    "cursor": [
+      0,
+      0
+    ],
     "code": [
       "current: App.tsx",
       "alternate: App.test.tsx",
       "-- fast two-file loop"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Ctrl+^",
+        "description": "Ctrl+^ switches between the current file and the most recently visited alternate file.",
+        "sequence": "<C-^>"
+      }
+    ],
+    "language": "text"
   },
   {
     "group": "Sessions & Project Navigation",
@@ -113,14 +203,31 @@ const lessons = [
       "Space fo",
       ":cd path"
     ],
-    "task": "Open recent files to resume a project.",
-    "sequence": "<Space>fo",
+    "task": "Open the recent-file picker and reopen its selected file.",
+    "sequence": "<Space>fo<Enter>",
     "code": [
       "> Old Files",
       "  project/src/App.tsx",
       "  project/src/lessons.ts"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space fo",
+        "description": "Use Space f o for a recent file, then :cd to establish the project root before opening more files.",
+        "sequence": "<Space>fo"
+      },
+      {
+        "key": ":cd path",
+        "description": "Use Space f o for a recent file, then :cd to establish the project root before opening more files.",
+        "sequence": ":cd src<Enter>"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Sessions & Project Navigation",
@@ -156,64 +263,189 @@ const lessons = [
       {
         "key": ":pwd",
         "description": ":pwd shows the current directory and :cd changes the global working directory.",
-        "sequence": ":pwd<Enter>"
+        "sequence": ":pwd<Enter>",
+        "code": [
+          "/projects/nvchad-app",
+          "src/",
+          "tests/"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":cd path",
         "description": ":pwd shows the current directory and :cd changes the global working directory.",
-        "sequence": ":pwd<Enter>"
+        "sequence": ":cd src<Enter>",
+        "code": [
+          "/projects/nvchad-app",
+          "src/",
+          "tests/"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":lcd path",
-        "description": ":lcd changes only the current window while :tcd changes every window in the current tab page.",
-        "sequence": ":tcd src<Enter>"
+        "description": ":lcd sets a window-local directory; :tcd sets the tab-local directory. Existing window-local directories take precedence in their own windows.",
+        "sequence": ":lcd src<Enter>",
+        "code": [
+          "tab 1 cwd: /projects/app/src",
+          "tab 2 cwd: /projects/app",
+          "-- scoped navigation"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":tcd path",
-        "description": ":lcd changes only the current window while :tcd changes every window in the current tab page.",
-        "sequence": ":tcd src<Enter>"
+        "description": ":lcd sets a window-local directory; :tcd sets the tab-local directory. Existing window-local directories take precedence in their own windows.",
+        "sequence": ":tcd src<Enter>",
+        "code": [
+          "tab 1 cwd: /projects/app/src",
+          "tab 2 cwd: /projects/app",
+          "-- scoped navigation"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":mksession! Session.vim",
-        "description": ":mksession! writes layouts and buffers; :source reloads the saved Session.vim file.",
-        "sequence": ":mksession! Session.vim<Enter>"
+        "description": ":mksession! saves buffers and layout according to sessionoptions, overwriting the session file; :source restores it. Save edited files separately: a session is not a backup of unsaved text.",
+        "sequence": ":mksession! Session.vim<Enter>",
+        "code": [
+          "Session.vim",
+          "  buffers",
+          "  windows and tab pages"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":source Session.vim",
-        "description": ":mksession! writes layouts and buffers; :source reloads the saved Session.vim file.",
-        "sequence": ":mksession! Session.vim<Enter>"
+        "description": ":mksession! saves buffers and layout according to sessionoptions, overwriting the session file; :source restores it. Save edited files separately: a session is not a backup of unsaved text.",
+        "sequence": ":source Session.vim<Enter>",
+        "code": [
+          "Session.vim",
+          "  buffers",
+          "  windows and tab pages"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":args",
-        "description": ":args displays project files, :argadd adds one, and :next or :previous navigates the list.",
-        "sequence": ":args<Enter>:next<Enter>"
+        "description": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
+        "sequence": ":args<Enter>",
+        "code": [
+          "[App.tsx] lessons.ts Trainer.tsx",
+          "-- argument list",
+          ""
+        ],
+        "cursor": [
+          0,
+          1
+        ],
+        "language": "text"
       },
       {
         "key": ":argadd path",
-        "description": ":args displays project files, :argadd adds one, and :next or :previous navigates the list.",
-        "sequence": ":args<Enter>:next<Enter>"
+        "description": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
+        "sequence": ":argadd src<Enter>",
+        "code": [
+          "[App.tsx] lessons.ts Trainer.tsx",
+          "-- argument list",
+          ""
+        ],
+        "cursor": [
+          0,
+          1
+        ],
+        "language": "text"
       },
       {
         "key": ":next",
-        "description": ":args displays project files, :argadd adds one, and :next or :previous navigates the list.",
-        "sequence": ":args<Enter>:next<Enter>"
+        "description": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
+        "sequence": ":next<Enter>",
+        "code": [
+          "[App.tsx] lessons.ts Trainer.tsx",
+          "-- argument list",
+          ""
+        ],
+        "cursor": [
+          0,
+          1
+        ],
+        "language": "text"
       },
       {
         "key": ":previous",
-        "description": ":args displays project files, :argadd adds one, and :next or :previous navigates the list.",
-        "sequence": ":args<Enter>:next<Enter>"
+        "description": ":args displays the argument list, :argadd adds a path, and :next or :previous navigates it. The list does not automatically contain every project file.",
+        "sequence": ":previous<Enter>",
+        "code": [
+          "[App.tsx] lessons.ts Trainer.tsx",
+          "-- argument list",
+          ""
+        ],
+        "cursor": [
+          0,
+          1
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+^",
         "description": "Ctrl+^ switches between the current file and the most recently visited alternate file.",
-        "sequence": "<C-^>"
+        "sequence": "<C-^>",
+        "code": [
+          "current: App.tsx",
+          "alternate: App.test.tsx",
+          "-- fast two-file loop"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Space fo",
         "description": "Use Space f o for a recent file, then :cd to establish the project root before opening more files.",
-        "sequence": "<Space>fo"
+        "sequence": "<Space>fo",
+        "code": [
+          "> Old Files",
+          "  project/src/App.tsx",
+          "  project/src/lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       }
-    ]
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   }
 ] satisfies readonly Lesson[];
 

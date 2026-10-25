@@ -1,4 +1,5 @@
 import { groups, lessonSummaries } from "./catalog.generated";
+import { enhanceLessonContent } from "./contentEnhancements";
 import type { CurriculumModule, Lesson, LessonSummary } from "./schema";
 
 const modules = import.meta.glob<CurriculumModule>("./categories/*.ts");
@@ -18,7 +19,7 @@ function loadCategory(moduleId: string) {
   if (!importer)
     return Promise.reject(new Error(`Unknown curriculum module: ${moduleId}`));
   const request = importer()
-    .then((module) => module.default)
+    .then((module) => module.default.map(enhanceLessonContent))
     .catch((error) => {
       categoryCache.delete(moduleId);
       throw error;
@@ -62,4 +63,12 @@ export async function loadAllLessons() {
 }
 
 export { groups, lessonSummaries };
-export type { Lesson, LessonKind, LessonSummary } from "./schema";
+export type {
+  Lesson,
+  LessonKind,
+  LessonPractice,
+  LessonSummary,
+  PracticeContext,
+  PracticeStep,
+  PracticeSurface,
+} from "./schema";

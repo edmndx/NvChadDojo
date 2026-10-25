@@ -15,30 +15,61 @@ const lessons = [
     "task": "Go to the next diagnostic.",
     "sequence": "]d",
     "code": [
-      "local total: string = 42",
-      "--              ^ type mismatch",
-      "return total"
+      "// @ts-check",
+      "/** @type {string} */",
+      "const total = 42;",
+      "console.log(total);"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "[d",
+        "description": "[d and ]d move between diagnostics in modern Neovim setups.",
+        "sequence": "[d"
+      },
+      {
+        "key": "]d",
+        "description": "[d and ]d move between diagnostics in modern Neovim setups.",
+        "sequence": "]d"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "javascript"
   },
   {
     "group": "Diagnostics & Quickfix",
     "id": "diagnostic-details",
     "title": "Inspect the current diagnostic",
     "eyebrow": "Diagnostics & Quickfix",
-    "summary": "vim.diagnostic.open_float() shows the complete message and source for the diagnostic under the cursor.",
-    "detail": "vim.diagnostic.open_float() shows the complete message and source for the diagnostic under the cursor.",
+    "summary": "vim.diagnostic.open_float() shows diagnostics for the current line by default; source display depends on diagnostic configuration.",
+    "detail": "vim.diagnostic.open_float() shows diagnostics for the current line by default; source display depends on diagnostic configuration.",
     "keys": [
       ":lua vim.diagnostic.open_float()"
     ],
     "task": "Open diagnostic details for the current line.",
     "sequence": ":lua vim.diagnostic.open_float()<Enter>",
     "code": [
-      "Diagnostics:",
-      "  error TS2322",
-      "  Type 'number' is not assignable to string"
+      "// @ts-check",
+      "/** @type {string} */",
+      "const total = 42;",
+      "console.log(total);"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":lua vim.diagnostic.open_float()",
+        "description": "vim.diagnostic.open_float() shows diagnostics for the current line by default; source display depends on diagnostic configuration.",
+        "sequence": ":lua vim.diagnostic.open_float()<Enter>"
+      }
+    ],
+    "cursor": [
+      2,
+      6
+    ],
+    "language": "javascript"
   },
   {
     "group": "Diagnostics & Quickfix",
@@ -46,7 +77,7 @@ const lessons = [
     "title": "Collect diagnostics in a location list",
     "eyebrow": "Diagnostics & Quickfix",
     "summary": "Space d s fills the current window's location list with diagnostics.",
-    "detail": "Space d s fills the current window's location list with diagnostics.",
+    "detail": "Space d s calls vim.diagnostic.setloclist(): it fills and opens the current window's location list with diagnostics from the current buffer.",
     "keys": [
       "Space ds"
     ],
@@ -54,18 +85,30 @@ const lessons = [
     "sequence": "<Space>ds",
     "code": [
       "mappings.lua | 12 | undefined global",
-      "plugins.lua  | 31 | missing field",
-      "-- location list"
+      "mappings.lua | 31 | missing field",
+      "-- current buffer diagnostics in this window's location list"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space ds",
+        "description": "Space d s fills the current window's location list with diagnostics.",
+        "sequence": "<Space>ds"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Diagnostics & Quickfix",
     "id": "quickfix-list",
     "title": "Navigate a quickfix list",
     "eyebrow": "Diagnostics & Quickfix",
-    "summary": ":copen displays project-wide results; :cnext and :cprev navigate; :cclose closes the list window.",
-    "detail": ":copen displays project-wide results; :cnext and :cprev navigate; :cclose closes the list window.",
+    "summary": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
+    "detail": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
     "keys": [
       ":copen",
       ":cnext",
@@ -79,7 +122,34 @@ const lessons = [
       "src/lessons.ts:42 error",
       "-- project-wide list"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":copen",
+        "description": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
+        "sequence": ":copen<Enter>"
+      },
+      {
+        "key": ":cnext",
+        "description": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
+        "sequence": ":cnext<Enter>"
+      },
+      {
+        "key": ":cprev",
+        "description": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
+        "sequence": ":cprev<Enter>"
+      },
+      {
+        "key": ":cclose",
+        "description": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
+        "sequence": ":cclose<Enter>"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Diagnostics & Quickfix",
@@ -101,7 +171,34 @@ const lessons = [
       "  line 8: unused local",
       "  line 21: unknown field"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":lopen",
+        "description": ":lopen displays the current window's results; :lnext, :lprev, and :lclose manage them.",
+        "sequence": ":lopen<Enter>"
+      },
+      {
+        "key": ":lnext",
+        "description": ":lopen displays the current window's results; :lnext, :lprev, and :lclose manage them.",
+        "sequence": ":lnext<Enter>"
+      },
+      {
+        "key": ":lprev",
+        "description": ":lopen displays the current window's results; :lnext, :lprev, and :lclose manage them.",
+        "sequence": ":lprev<Enter>"
+      },
+      {
+        "key": ":lclose",
+        "description": ":lopen displays the current window's results; :lnext, :lprev, and :lclose manage them.",
+        "sequence": ":lclose<Enter>"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Diagnostics & Quickfix",
@@ -117,11 +214,33 @@ const lessons = [
     "task": "Move to the next diagnostic and open its code actions.",
     "sequence": "]dgra",
     "code": [
-      "local total: string = 42",
-      "-- quick fix: change type to number",
-      "return total"
+      "// @ts-check",
+      "const total = 1;",
+      "console.log(totla);",
+      "console.log(total);"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "The JavaScript fixture intentionally misspells total as totla. A supporting JavaScript language server can diagnose it and offer a spelling fix.",
+    "reviewItems": [
+      {
+        "key": "]d",
+        "description": "Move to a diagnostic, inspect it, then reuse gra to request an LSP quick fix.",
+        "sequence": "]d"
+      },
+      {
+        "key": "gra",
+        "description": "With an available code action, type 1 and Enter in Neovim's default numbered action prompt.",
+        "sequence": "gra1<Enter>",
+        "cursor": [
+          2,
+          12
+        ]
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "javascript"
   },
   {
     "group": "Diagnostics & Quickfix",
@@ -140,7 +259,19 @@ const lessons = [
       "  status: loaded",
       "  command: Trouble"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": ":Lazy",
+        "description": "Trouble is optional. Add folke/trouble.nvim through lazy.nvim before using its suggested Space x mappings.",
+        "sequence": ":Lazy<Enter>"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Diagnostics & Quickfix",
@@ -160,7 +291,24 @@ const lessons = [
       "  src/App.tsx",
       "  src/lessons.ts"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space xx",
+        "description": "With Trouble installed and its suggested mappings configured: Space x x opens workspace diagnostics and Space x X limits the view to the current buffer.",
+        "sequence": "<Space>xx"
+      },
+      {
+        "key": "Space xX",
+        "description": "With Trouble installed and its suggested mappings configured: Space x x opens workspace diagnostics and Space x X limits the view to the current buffer.",
+        "sequence": "<Space>xX"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Diagnostics & Quickfix",
@@ -180,7 +328,24 @@ const lessons = [
       "  1 App.tsx:18",
       "  2 lessons.ts:42"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space xQ",
+        "description": "With Trouble installed and its suggested mappings configured: Space x Q opens quickfix and Space x L opens the location list in Trouble.",
+        "sequence": "<Space>xQ"
+      },
+      {
+        "key": "Space xL",
+        "description": "With Trouble installed and its suggested mappings configured: Space x Q opens quickfix and Space x L opens the location list in Trouble.",
+        "sequence": "<Space>xL"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "Diagnostics & Quickfix",
@@ -203,7 +368,39 @@ const lessons = [
       "  preview: type mismatch",
       "  source: tsserver"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Enter",
+        "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
+        "sequence": "<Enter>"
+      },
+      {
+        "key": "Ctrl+s",
+        "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
+        "sequence": "<C-s>"
+      },
+      {
+        "key": "Ctrl+v",
+        "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
+        "sequence": "<C-v>"
+      },
+      {
+        "key": "p",
+        "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
+        "sequence": "p"
+      },
+      {
+        "key": "q",
+        "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
+        "sequence": "q"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "Diagnostics & Quickfix",
@@ -240,9 +437,10 @@ const lessons = [
     "task": "",
     "sequence": "]d",
     "code": [
-      "local total: string = 42",
-      "--              ^ type mismatch",
-      "return total"
+      "// @ts-check",
+      "/** @type {string} */",
+      "const total = 42;",
+      "console.log(total);"
     ],
     "tip": "Return to any command in Diagnostics & Quickfix that still requires conscious recall.",
     "reviewOnly": true,
@@ -250,119 +448,358 @@ const lessons = [
       {
         "key": "[d",
         "description": "[d and ]d move between diagnostics in modern Neovim setups.",
-        "sequence": "]d"
+        "sequence": "[d",
+        "code": [
+          "// @ts-check",
+          "/** @type {string} */",
+          "const total = 42;",
+          "console.log(total);"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "javascript"
       },
       {
         "key": "]d",
         "description": "[d and ]d move between diagnostics in modern Neovim setups.",
-        "sequence": "]d"
+        "sequence": "]d",
+        "code": [
+          "// @ts-check",
+          "/** @type {string} */",
+          "const total = 42;",
+          "console.log(total);"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "javascript"
       },
       {
         "key": ":lua vim.diagnostic.open_float()",
-        "description": "vim.diagnostic.open_float() shows the complete message and source for the diagnostic under the cursor.",
-        "sequence": ":lua vim.diagnostic.open_float()<Enter>"
+        "description": "vim.diagnostic.open_float() shows diagnostics for the current line by default; source display depends on diagnostic configuration.",
+        "sequence": ":lua vim.diagnostic.open_float()<Enter>",
+        "code": [
+          "// @ts-check",
+          "/** @type {string} */",
+          "const total = 42;",
+          "console.log(total);"
+        ],
+        "cursor": [
+          2,
+          6
+        ],
+        "language": "javascript"
       },
       {
         "key": "Space ds",
         "description": "Space d s fills the current window's location list with diagnostics.",
-        "sequence": "<Space>ds"
+        "sequence": "<Space>ds",
+        "code": [
+          "mappings.lua | 12 | undefined global",
+          "mappings.lua | 31 | missing field",
+          "-- current buffer diagnostics in this window's location list"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":copen",
-        "description": ":copen displays project-wide results; :cnext and :cprev navigate; :cclose closes the list window.",
-        "sequence": ":copen<Enter>:cnext<Enter>:cclose<Enter>"
+        "description": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
+        "sequence": ":copen<Enter>",
+        "code": [
+          "src/App.tsx:18 warning",
+          "src/lessons.ts:42 error",
+          "-- project-wide list"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":cnext",
-        "description": ":copen displays project-wide results; :cnext and :cprev navigate; :cclose closes the list window.",
-        "sequence": ":copen<Enter>:cnext<Enter>:cclose<Enter>"
+        "description": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
+        "sequence": ":cnext<Enter>",
+        "code": [
+          "src/App.tsx:18 warning",
+          "src/lessons.ts:42 error",
+          "-- project-wide list"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":cprev",
-        "description": ":copen displays project-wide results; :cnext and :cprev navigate; :cclose closes the list window.",
-        "sequence": ":copen<Enter>:cnext<Enter>:cclose<Enter>"
+        "description": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
+        "sequence": ":cprev<Enter>",
+        "code": [
+          "src/App.tsx:18 warning",
+          "src/lessons.ts:42 error",
+          "-- project-wide list"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":cclose",
-        "description": ":copen displays project-wide results; :cnext and :cprev navigate; :cclose closes the list window.",
-        "sequence": ":copen<Enter>:cnext<Enter>:cclose<Enter>"
+        "description": ":copen opens the current quickfix list; :cnext and :cprev navigate its entries; :cclose closes the list window.",
+        "sequence": ":cclose<Enter>",
+        "code": [
+          "src/App.tsx:18 warning",
+          "src/lessons.ts:42 error",
+          "-- project-wide list"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": ":lopen",
         "description": ":lopen displays the current window's results; :lnext, :lprev, and :lclose manage them.",
-        "sequence": ":lopen<Enter>:lnext<Enter>:lclose<Enter>"
+        "sequence": ":lopen<Enter>",
+        "code": [
+          "current window diagnostics",
+          "  line 8: unused local",
+          "  line 21: unknown field"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": ":lnext",
         "description": ":lopen displays the current window's results; :lnext, :lprev, and :lclose manage them.",
-        "sequence": ":lopen<Enter>:lnext<Enter>:lclose<Enter>"
+        "sequence": ":lnext<Enter>",
+        "code": [
+          "current window diagnostics",
+          "  line 8: unused local",
+          "  line 21: unknown field"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": ":lprev",
         "description": ":lopen displays the current window's results; :lnext, :lprev, and :lclose manage them.",
-        "sequence": ":lopen<Enter>:lnext<Enter>:lclose<Enter>"
+        "sequence": ":lprev<Enter>",
+        "code": [
+          "current window diagnostics",
+          "  line 8: unused local",
+          "  line 21: unknown field"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": ":lclose",
         "description": ":lopen displays the current window's results; :lnext, :lprev, and :lclose manage them.",
-        "sequence": ":lopen<Enter>:lnext<Enter>:lclose<Enter>"
+        "sequence": ":lclose<Enter>",
+        "code": [
+          "current window diagnostics",
+          "  line 8: unused local",
+          "  line 21: unknown field"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "gra",
-        "description": "Move to a diagnostic, inspect it, then reuse gra to request an LSP quick fix.",
-        "sequence": "]dgra"
+        "description": "With an available code action, type 1 and Enter in Neovim's default numbered action prompt.",
+        "sequence": "gra1<Enter>",
+        "code": [
+          "// @ts-check",
+          "const total = 1;",
+          "console.log(totla);",
+          "console.log(total);"
+        ],
+        "cursor": [
+          2,
+          12
+        ],
+        "language": "javascript"
       },
       {
         "key": ":Lazy",
         "description": "Trouble is optional. Add folke/trouble.nvim through lazy.nvim before using its suggested Space x mappings.",
-        "sequence": ":Lazy<Enter>"
+        "sequence": ":Lazy<Enter>",
+        "code": [
+          "folke/trouble.nvim",
+          "  status: loaded",
+          "  command: Trouble"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Space xx",
-        "description": "Space x x opens workspace diagnostics and Space x X limits the view to the current buffer.",
-        "sequence": "<Space>xx"
+        "description": "With Trouble installed and its suggested mappings configured: Space x x opens workspace diagnostics and Space x X limits the view to the current buffer.",
+        "sequence": "<Space>xx",
+        "code": [
+          "Diagnostics",
+          "  src/App.tsx",
+          "  src/lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space xX",
-        "description": "Space x x opens workspace diagnostics and Space x X limits the view to the current buffer.",
-        "sequence": "<Space>xx"
+        "description": "With Trouble installed and its suggested mappings configured: Space x x opens workspace diagnostics and Space x X limits the view to the current buffer.",
+        "sequence": "<Space>xX",
+        "code": [
+          "Diagnostics",
+          "  src/App.tsx",
+          "  src/lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space xQ",
-        "description": "Space x Q opens quickfix and Space x L opens the location list in Trouble.",
-        "sequence": "<Space>xQ"
+        "description": "With Trouble installed and its suggested mappings configured: Space x Q opens quickfix and Space x L opens the location list in Trouble.",
+        "sequence": "<Space>xQ",
+        "code": [
+          "Quickfix",
+          "  1 App.tsx:18",
+          "  2 lessons.ts:42"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Space xL",
-        "description": "Space x Q opens quickfix and Space x L opens the location list in Trouble.",
-        "sequence": "<Space>xQ"
+        "description": "With Trouble installed and its suggested mappings configured: Space x Q opens quickfix and Space x L opens the location list in Trouble.",
+        "sequence": "<Space>xL",
+        "code": [
+          "Quickfix",
+          "  1 App.tsx:18",
+          "  2 lessons.ts:42"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Enter",
         "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
-        "sequence": "pq"
+        "sequence": "<Enter>",
+        "code": [
+          "Trouble result",
+          "  preview: type mismatch",
+          "  source: tsserver"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+s",
         "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
-        "sequence": "pq"
+        "sequence": "<C-s>",
+        "code": [
+          "Trouble result",
+          "  preview: type mismatch",
+          "  source: tsserver"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+v",
         "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
-        "sequence": "pq"
+        "sequence": "<C-v>",
+        "code": [
+          "Trouble result",
+          "  preview: type mismatch",
+          "  source: tsserver"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "p",
         "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
-        "sequence": "pq"
+        "sequence": "p",
+        "code": [
+          "Trouble result",
+          "  preview: type mismatch",
+          "  source: tsserver"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "q",
         "description": "Enter jumps, Ctrl+s opens a split, Ctrl+v opens a vertical split, p previews, and q closes Trouble.",
-        "sequence": "pq"
+        "sequence": "q",
+        "code": [
+          "Trouble result",
+          "  preview: type mismatch",
+          "  source: tsserver"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       }
-    ]
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "javascript"
   }
 ] satisfies readonly Lesson[];
 

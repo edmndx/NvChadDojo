@@ -13,55 +13,72 @@ const lessons = [
       "A",
       "Esc"
     ],
-    "task": "Use I, A, then Escape.",
-    "sequence": "IA<Esc>",
+    "task": "Use I to insert text at the first non-blank character; after Esc, use A to append text at line end.",
+    "sequence": "I// configured<Space><Esc>A<Space>// configured<Esc>",
     "code": [
-      "local greeting = 'hello'",
-      "print(greeting)",
-      "return greeting"
+      "const greeting = 'hello';",
+      "console.log(greeting);",
+      "showGreeting(greeting);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Use I, A, then Escape. · repetition 1 of 3",
+        "goal": "Use I to insert text at the first non-blank character; after Esc, use A to append text at line end. · repetition 1 of 3",
         "code": [
-          "local greeting = 'hello'",
-          "print(greeting)",
-          "return greeting"
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
         ]
       },
       {
-        "goal": "Use I, A, then Escape. · repetition 2 of 3",
+        "goal": "Use I to insert text at the first non-blank character; after Esc, use A to append text at line end. · repetition 2 of 3",
         "code": [
-          "local servers = { 'lua_ls' }",
-          "vim.lsp.enable(servers)",
-          "return servers"
+          "const servers = ['typescript'];",
+          "enableServers(servers);",
+          "console.log(servers);"
         ]
       },
       {
-        "goal": "Use I, A, then Escape. · repetition 3 of 3",
+        "goal": "Use I to insert text at the first non-blank character; after Esc, use A to append text at line end. · repetition 3 of 3",
         "code": [
-          "map('n', '<leader>w', save)",
-          "map('n', '<leader>q', close)",
-          "return map"
+          "bindKey('save', saveFile);",
+          "bindKey('close', closeFile);",
+          "console.log(bindings);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Use I, A, then Escape. Enter “ -- configured” where text is requested.",
-      "replacement": " -- configured",
+      "instruction": "Use I to insert text at the first non-blank character; after Esc, use A to append text at line end.",
+      "replacement": " // configured",
       "cursor": [
         1,
         0
       ],
       "hints": [
-        "Begin with I.",
-        "Use only the keys introduced in Insert Like a Pro.",
-        "Enter “ -- configured” before returning to Normal mode."
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
+        "Enter “ // configured” before returning to Normal mode."
       ],
-      "success": "The buffer now contains “ -- configured” in the intended location."
-    }
+      "success": "The buffer now contains “ // configured” in the intended location."
+    },
+    "reviewItems": [
+      {
+        "key": "I",
+        "description": "Insert // and a space at the first non-blank character.",
+        "sequence": "I//<Space><Esc>"
+      },
+      {
+        "key": "A",
+        "description": "Append a space and // at line end.",
+        "sequence": "A<Space>//<Esc>"
+      },
+      {
+        "key": "Esc",
+        "description": "Finish the append and return to Normal mode.",
+        "sequence": "A<Space>//<Esc>"
+      }
+    ]
   },
   {
     "group": "Insert Like a Pro",
@@ -69,60 +86,72 @@ const lessons = [
     "title": "Opening New Lines",
     "eyebrow": "Insert Like a Pro",
     "summary": "o opens a line below and O opens one above; both enter Insert mode.",
-    "detail": "o opens a line below and O opens one above; both enter Insert mode.",
+    "detail": "Both commands open a fresh line and enter Insert mode. Add a complete logging statement, then press Esc to return to Normal mode.",
     "keys": [
       "o",
       "O"
     ],
-    "task": "Open below, escape, open above, and escape.",
-    "sequence": "o<Esc>O<Esc>",
+    "task": "Open a new line below with o or above with O, type console.log('ready');, then press Esc.",
+    "sequence": "oconsole.log('ready');<Esc>Oconsole.log('ready');<Esc>",
     "code": [
-      "local greeting = 'hello'",
-      "print(greeting)",
-      "return greeting"
+      "const greeting = 'hello';",
+      "console.log(greeting);",
+      "showGreeting(greeting);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Open below, escape, open above, and escape. · repetition 1 of 3",
+        "goal": "Open a new line below with o or above with O, type console.log('ready');, then press Esc. · repetition 1 of 3",
         "code": [
-          "local greeting = 'hello'",
-          "print(greeting)",
-          "return greeting"
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
         ]
       },
       {
-        "goal": "Open below, escape, open above, and escape. · repetition 2 of 3",
+        "goal": "Open a new line below with o or above with O, type console.log('ready');, then press Esc. · repetition 2 of 3",
         "code": [
-          "local servers = { 'lua_ls' }",
-          "vim.lsp.enable(servers)",
-          "return servers"
+          "const servers = ['typescript'];",
+          "enableServers(servers);",
+          "console.log(servers);"
         ]
       },
       {
-        "goal": "Open below, escape, open above, and escape. · repetition 3 of 3",
+        "goal": "Open a new line below with o or above with O, type console.log('ready');, then press Esc. · repetition 3 of 3",
         "code": [
-          "map('n', '<leader>w', save)",
-          "map('n', '<leader>q', close)",
-          "return map"
+          "bindKey('save', saveFile);",
+          "bindKey('close', closeFile);",
+          "console.log(bindings);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Open below, escape, open above, and escape. Enter “theme = 'onedark'” where text is requested.",
-      "replacement": "theme = 'onedark'",
+      "instruction": "Open a new line below with o or above with O, type console.log('ready');, then press Esc.",
+      "replacement": "console.log('ready');",
       "cursor": [
         1,
         0
       ],
       "hints": [
-        "Begin with o.",
-        "Use only the keys introduced in Insert Like a Pro.",
-        "Enter “theme = 'onedark'” before returning to Normal mode."
+        "Start in Normal mode at the displayed statement.",
+        "Use o for a new line below or O for a new line above.",
+        "Type console.log('ready'); and press Esc."
       ],
-      "success": "The buffer now contains “theme = 'onedark'” in the intended location."
-    }
+      "success": "The new line contains a complete JavaScript logging statement."
+    },
+    "reviewItems": [
+      {
+        "key": "o",
+        "description": "Open a line below, type console.log('ready');, and return to Normal mode.",
+        "sequence": "oconsole.log('ready');<Esc>"
+      },
+      {
+        "key": "O",
+        "description": "Open a line above, type console.log('ready');, and return to Normal mode.",
+        "sequence": "Oconsole.log('ready');<Esc>"
+      }
+    ]
   },
   {
     "group": "Insert Like a Pro",
@@ -136,55 +165,72 @@ const lessons = [
       "x",
       "r"
     ],
-    "task": "Use s, Escape, x, then r.",
-    "sequence": "s<Esc>xr",
+    "task": "Substitute one character with n using s, press Esc, delete one character with x, then replace one with rn.",
+    "sequence": "sn<Esc>xrn",
     "code": [
-      "local greeting = 'hello'",
-      "print(greeting)",
-      "return greeting"
+      "const greeting = 'hello';",
+      "console.log(greeting);",
+      "showGreeting(greeting);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Use s, Escape, x, then r. · repetition 1 of 3",
+        "goal": "Substitute one character with n using s, press Esc, delete one character with x, then replace one with rn. · repetition 1 of 3",
         "code": [
-          "local greeting = 'hello'",
-          "print(greeting)",
-          "return greeting"
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
         ]
       },
       {
-        "goal": "Use s, Escape, x, then r. · repetition 2 of 3",
+        "goal": "Substitute one character with n using s, press Esc, delete one character with x, then replace one with rn. · repetition 2 of 3",
         "code": [
-          "local servers = { 'lua_ls' }",
-          "vim.lsp.enable(servers)",
-          "return servers"
+          "const servers = ['typescript'];",
+          "enableServers(servers);",
+          "console.log(servers);"
         ]
       },
       {
-        "goal": "Use s, Escape, x, then r. · repetition 3 of 3",
+        "goal": "Substitute one character with n using s, press Esc, delete one character with x, then replace one with rn. · repetition 3 of 3",
         "code": [
-          "map('n', '<leader>w', save)",
-          "map('n', '<leader>q', close)",
-          "return map"
+          "bindKey('save', saveFile);",
+          "bindKey('close', closeFile);",
+          "console.log(bindings);"
         ]
       }
     ],
     "commonMistake": "Make sure you are in Normal mode. If unsure, press Escape once and try the sequence again.",
     "challenge": {
-      "instruction": "Use s, Escape, x, then r. Enter “n” where text is requested.",
+      "instruction": "Substitute one character with n using s, press Esc, delete one character with x, then replace one with rn.",
       "replacement": "n",
       "cursor": [
         1,
         0
       ],
       "hints": [
-        "Begin with s.",
-        "Use only the keys introduced in Insert Like a Pro.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Enter “n” before returning to Normal mode."
       ],
       "success": "The buffer now contains “n” in the intended location."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "s",
+        "description": "Replace one character with n using Insert mode.",
+        "sequence": "sn<Esc>"
+      },
+      {
+        "key": "x",
+        "description": "Delete the character under the cursor.",
+        "sequence": "x"
+      },
+      {
+        "key": "r",
+        "description": "Replace the character under the cursor with n without entering Insert mode.",
+        "sequence": "rn"
+      }
+    ]
   },
   {
     "group": "Insert Like a Pro",
@@ -204,55 +250,131 @@ const lessons = [
       "r"
     ],
     "task": "",
-    "sequence": "IA<Esc>",
+    "sequence": "I//<Space><Esc>A<Space>//<Esc>",
     "code": [
-      "local greeting = 'hello'",
-      "print(greeting)",
-      "return greeting"
+      "const greeting = 'hello';",
+      "console.log(greeting);",
+      "showGreeting(greeting);"
     ],
     "tip": "Return to any command in Insert Like a Pro that still requires conscious recall.",
     "reviewOnly": true,
     "reviewItems": [
       {
         "key": "I",
-        "description": "I inserts at the first non-blank character; A appends at the end of the line.",
-        "sequence": "IA<Esc>"
+        "description": "Insert // and a space at the first non-blank character.",
+        "sequence": "I//<Space><Esc>",
+        "code": [
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "A",
-        "description": "I inserts at the first non-blank character; A appends at the end of the line.",
-        "sequence": "IA<Esc>"
+        "description": "Append a space and // at line end.",
+        "sequence": "A<Space>//<Esc>",
+        "code": [
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "Esc",
-        "description": "I inserts at the first non-blank character; A appends at the end of the line.",
-        "sequence": "IA<Esc>"
+        "description": "Finish the append and return to Normal mode.",
+        "sequence": "A<Space>//<Esc>",
+        "code": [
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "o",
-        "description": "o opens a line below and O opens one above; both enter Insert mode.",
-        "sequence": "o<Esc>O<Esc>"
+        "description": "Open a line below, type console.log('ready');, and return to Normal mode.",
+        "sequence": "oconsole.log('ready');<Esc>",
+        "code": [
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "O",
-        "description": "o opens a line below and O opens one above; both enter Insert mode.",
-        "sequence": "o<Esc>O<Esc>"
+        "description": "Open a line above, type console.log('ready');, and return to Normal mode.",
+        "sequence": "Oconsole.log('ready');<Esc>",
+        "code": [
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "s",
-        "description": "s substitutes a character, x deletes one, and r replaces one in place.",
-        "sequence": "s<Esc>xr"
+        "description": "Replace one character with n using Insert mode.",
+        "sequence": "sn<Esc>",
+        "code": [
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "x",
-        "description": "s substitutes a character, x deletes one, and r replaces one in place.",
-        "sequence": "s<Esc>xr"
+        "description": "Delete the character under the cursor.",
+        "sequence": "x",
+        "code": [
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "r",
-        "description": "s substitutes a character, x deletes one, and r replaces one in place.",
-        "sequence": "s<Esc>xr"
+        "description": "Replace the character under the cursor with n without entering Insert mode.",
+        "sequence": "rn",
+        "code": [
+          "const greeting = 'hello';",
+          "console.log(greeting);",
+          "showGreeting(greeting);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       }
+    ],
+    "cursor": [
+      1,
+      2
     ]
   }
 ] satisfies readonly Lesson[];

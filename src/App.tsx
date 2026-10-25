@@ -1,5 +1,11 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
-import { ArrowRight, BookOpen, Menu } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import {
   lessonSummaries,
   loadLesson,
@@ -50,9 +56,10 @@ function Course() {
   const [current, setCurrent] = useState(lessonIndexFromPath);
   const [sidebarOpen, setSidebarOpen] = useState(() => window.innerWidth > 900);
   const [searchQuery, setSearchQuery] = useState("");
-  const [lesson, setLesson] = useState<Lesson | null>(null);
+  const [loadedLesson, setLesson] = useState<Lesson | null>(null);
   const [loadError, setLoadError] = useState("");
   const summary = lessonSummaries[current];
+  const lesson = loadedLesson?.id === summary.id ? loadedLesson : null;
 
   const selectLesson = useCallback((index: number, replace = false) => {
     const safeIndex = Math.max(0, Math.min(lessonSummaries.length - 1, index));
@@ -98,25 +105,12 @@ function Course() {
 
   useEffect(requestLesson, [requestLesson]);
 
-  useEffect(() => {
-    const navigate = (event: KeyboardEvent) => {
-      if (
-        !event.ctrlKey ||
-        !["j", "k"].includes(event.key) ||
-        (event.target as HTMLElement)?.closest(".trainer, input, textarea")
-      )
-        return;
-      event.preventDefault();
-      selectLesson(event.key === "j" ? current + 1 : current - 1);
-    };
-    window.addEventListener("keydown", navigate);
-    return () => window.removeEventListener("keydown", navigate);
-  }, [current]);
-
   const isReference = summary.kind === "reference";
   const isReview = summary.kind === "review";
   return (
-    <div className="course">
+    <div
+      className={`course ${sidebarOpen ? "sidebar-open" : "sidebar-hidden"}`}
+    >
       {sidebarOpen && (
         <>
           <Sidebar
@@ -132,16 +126,21 @@ function Course() {
           <div className="side-scrim" onClick={() => setSidebarOpen(false)} />
         </>
       )}
+      <div className="sidebar-toggle-area">
+        <button
+          type="button"
+          className="sidebar-toggle"
+          aria-label={sidebarOpen ? "Hide lessons" : "Open lessons"}
+          title={sidebarOpen ? "Hide sidebar" : "Show sidebar"}
+          aria-expanded={sidebarOpen}
+          aria-controls={sidebarOpen ? "course-sidebar" : undefined}
+          onClick={() => setSidebarOpen((open) => !open)}
+        >
+          {sidebarOpen ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}
+        </button>
+      </div>
       <main className="lesson-main">
         <header className="course-head">
-          <button
-            type="button"
-            className="icon-btn"
-            aria-label="Open lessons"
-            onClick={() => setSidebarOpen(true)}
-          >
-            <Menu size={20} />
-          </button>
           <div className="course-brand">
             <Brand />
           </div>
@@ -222,11 +221,11 @@ function Course() {
               disabled={current === 0}
               onClick={() => selectLesson(current - 1)}
             >
+              <ArrowLeft size={18} aria-hidden="true" />
               <span className="nav-copy">
-                <small>← Previous</small>
+                <small>Previous lesson</small>
                 <b>{lessonSummaries[current - 1]?.title}</b>
               </span>
-              <kbd>Ctrl+k</kbd>
             </button>
             <button
               type="button"
@@ -238,8 +237,7 @@ function Course() {
                 <small>Next lesson</small>
                 <b>{lessonSummaries[current + 1]?.title}</b>
               </span>
-              <kbd>Ctrl+j</kbd>
-              <ArrowRight size={16} />
+              <ArrowRight size={18} aria-hidden="true" />
             </button>
           </nav>
         </article>

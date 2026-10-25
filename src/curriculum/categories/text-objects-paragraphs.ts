@@ -16,44 +16,58 @@ const lessons = [
     "task": "Practice delete inside paragraph.",
     "sequence": "dip",
     "code": [
-      "local ui = {}",
-      "ui.theme = 'onedark'",
+      "/*",
       "",
-      "local lsp = {}",
-      "lsp.enabled = true"
+      "Configure the interface.",
+      "Apply the selected theme.",
+      "",
+      "Configure the language server.",
+      "Enable diagnostics.",
+      "",
+      "*/"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Practice delete inside paragraph. · repetition 1 of 3",
         "code": [
-          "local ui = {}",
-          "ui.theme = 'onedark'",
+          "/*",
           "",
-          "local lsp = {}",
-          "lsp.enabled = true"
+          "Configure the interface.",
+          "Apply the selected theme.",
+          "",
+          "Configure the language server.",
+          "Enable diagnostics.",
+          "",
+          "*/"
         ]
       },
       {
         "goal": "Practice delete inside paragraph. · repetition 2 of 3",
         "code": [
-          "function configure_ui()",
-          "  return { border = true }",
-          "end",
+          "/*",
           "",
-          "function configure_lsp()",
-          "  return true",
-          "end"
+          "Configure the theme.",
+          "Keep the border enabled.",
+          "",
+          "Configure diagnostics.",
+          "Keep the server enabled.",
+          "",
+          "*/"
         ]
       },
       {
         "goal": "Practice delete inside paragraph. · repetition 3 of 3",
         "code": [
-          "-- first configuration block",
-          "require('options')",
+          "/*",
           "",
-          "-- second configuration block",
-          "require('mappings')"
+          "First configuration block.",
+          "Load the editor options.",
+          "",
+          "Second configuration block.",
+          "Load the key mappings.",
+          "",
+          "*/"
         ]
       }
     ],
@@ -61,24 +75,41 @@ const lessons = [
     "challenge": {
       "instruction": "Practice delete inside paragraph.",
       "cursor": [
-        1,
+        2,
         0
       ],
       "hints": [
-        "Begin with d.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: d, i, p."
       ],
       "success": "Delete Inside Paragraph produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "d",
+        "description": "dip deletes paragraph text while leaving surrounding blank-line structure.",
+        "sequence": "dip"
+      },
+      {
+        "key": "i",
+        "description": "dip deletes paragraph text while leaving surrounding blank-line structure.",
+        "sequence": "dip"
+      },
+      {
+        "key": "p",
+        "description": "dip deletes paragraph text while leaving surrounding blank-line structure.",
+        "sequence": "dip"
+      }
+    ]
   },
   {
     "group": "Text Objects - Paragraphs",
     "id": "delete-around-paragraph",
     "title": "Delete Around Paragraph",
     "eyebrow": "Text Objects - Paragraphs",
-    "summary": "dap deletes the paragraph and its surrounding separation.",
-    "detail": "dap deletes the paragraph and its surrounding separation.",
+    "summary": "dap deletes the current paragraph and adjacent blank lines, preferring the blank lines after it.",
+    "detail": "dap deletes the current paragraph and adjacent blank lines, preferring the blank lines after it.",
     "keys": [
       "d",
       "a",
@@ -87,44 +118,58 @@ const lessons = [
     "task": "Practice delete around paragraph.",
     "sequence": "dap",
     "code": [
-      "local ui = {}",
-      "ui.theme = 'onedark'",
+      "/*",
       "",
-      "local lsp = {}",
-      "lsp.enabled = true"
+      "Configure the interface.",
+      "Apply the selected theme.",
+      "",
+      "Configure the language server.",
+      "Enable diagnostics.",
+      "",
+      "*/"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Practice delete around paragraph. · repetition 1 of 3",
         "code": [
-          "local ui = {}",
-          "ui.theme = 'onedark'",
+          "/*",
           "",
-          "local lsp = {}",
-          "lsp.enabled = true"
+          "Configure the interface.",
+          "Apply the selected theme.",
+          "",
+          "Configure the language server.",
+          "Enable diagnostics.",
+          "",
+          "*/"
         ]
       },
       {
         "goal": "Practice delete around paragraph. · repetition 2 of 3",
         "code": [
-          "function configure_ui()",
-          "  return { border = true }",
-          "end",
+          "/*",
           "",
-          "function configure_lsp()",
-          "  return true",
-          "end"
+          "Configure the theme.",
+          "Keep the border enabled.",
+          "",
+          "Configure diagnostics.",
+          "Keep the server enabled.",
+          "",
+          "*/"
         ]
       },
       {
         "goal": "Practice delete around paragraph. · repetition 3 of 3",
         "code": [
-          "-- first configuration block",
-          "require('options')",
+          "/*",
           "",
-          "-- second configuration block",
-          "require('mappings')"
+          "First configuration block.",
+          "Load the editor options.",
+          "",
+          "Second configuration block.",
+          "Load the key mappings.",
+          "",
+          "*/"
         ]
       }
     ],
@@ -132,16 +177,33 @@ const lessons = [
     "challenge": {
       "instruction": "Practice delete around paragraph.",
       "cursor": [
-        1,
+        2,
         0
       ],
       "hints": [
-        "Begin with d.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: d, a, p."
       ],
       "success": "Delete Around Paragraph produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "d",
+        "description": "dap deletes the current paragraph and adjacent blank lines, preferring the blank lines after it.",
+        "sequence": "dap"
+      },
+      {
+        "key": "a",
+        "description": "dap deletes the current paragraph and adjacent blank lines, preferring the blank lines after it.",
+        "sequence": "dap"
+      },
+      {
+        "key": "p",
+        "description": "dap deletes the current paragraph and adjacent blank lines, preferring the blank lines after it.",
+        "sequence": "dap"
+      }
+    ]
   },
   {
     "group": "Text Objects - Paragraphs",
@@ -156,64 +218,95 @@ const lessons = [
       "p"
     ],
     "task": "Change inside a paragraph, then escape.",
-    "sequence": "cip<Esc>",
+    "sequence": "cipConfiguration updated.<Esc>",
     "code": [
-      "local ui = {}",
-      "ui.theme = 'onedark'",
+      "/*",
       "",
-      "local lsp = {}",
-      "lsp.enabled = true"
+      "Configure the interface.",
+      "Apply the selected theme.",
+      "",
+      "Configure the language server.",
+      "Enable diagnostics.",
+      "",
+      "*/"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Change inside a paragraph, then escape. · repetition 1 of 3",
         "code": [
-          "local ui = {}",
-          "ui.theme = 'onedark'",
+          "/*",
           "",
-          "local lsp = {}",
-          "lsp.enabled = true"
+          "Configure the interface.",
+          "Apply the selected theme.",
+          "",
+          "Configure the language server.",
+          "Enable diagnostics.",
+          "",
+          "*/"
         ]
       },
       {
         "goal": "Change inside a paragraph, then escape. · repetition 2 of 3",
         "code": [
-          "function configure_ui()",
-          "  return { border = true }",
-          "end",
+          "/*",
           "",
-          "function configure_lsp()",
-          "  return true",
-          "end"
+          "Configure the theme.",
+          "Keep the border enabled.",
+          "",
+          "Configure diagnostics.",
+          "Keep the server enabled.",
+          "",
+          "*/"
         ]
       },
       {
         "goal": "Change inside a paragraph, then escape. · repetition 3 of 3",
         "code": [
-          "-- first configuration block",
-          "require('options')",
+          "/*",
           "",
-          "-- second configuration block",
-          "require('mappings')"
+          "First configuration block.",
+          "Load the editor options.",
+          "",
+          "Second configuration block.",
+          "Load the key mappings.",
+          "",
+          "*/"
         ]
       }
     ],
     "commonMistake": "Keep the order operator → inside/around → object. For example: d + i + w.",
     "challenge": {
-      "instruction": "Change inside a paragraph, then escape. Enter “local configured = true” where text is requested.",
-      "replacement": "local configured = true",
+      "instruction": "Change inside a paragraph, then escape. Enter “Configuration updated.” where text is requested.",
+      "replacement": "Configuration updated.",
       "cursor": [
-        1,
+        2,
         0
       ],
       "hints": [
-        "Begin with c.",
-        "Read the command as operator, inside/around, then object.",
-        "Enter “local configured = true” before returning to Normal mode."
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
+        "Enter “Configuration updated.” before returning to Normal mode."
       ],
-      "success": "The buffer now contains “local configured = true” in the intended location."
-    }
+      "success": "The buffer now contains “Configuration updated.” in the intended location."
+    },
+    "reviewItems": [
+      {
+        "key": "c",
+        "description": "cip replaces paragraph contents and enters Insert mode.",
+        "sequence": "cipConfiguration updated.<Esc>"
+      },
+      {
+        "key": "i",
+        "description": "cip replaces paragraph contents and enters Insert mode.",
+        "sequence": "cipConfiguration updated.<Esc>"
+      },
+      {
+        "key": "p",
+        "description": "cip replaces paragraph contents and enters Insert mode.",
+        "sequence": "cipConfiguration updated.<Esc>"
+      }
+    ]
   },
   {
     "group": "Text Objects - Paragraphs",
@@ -227,55 +320,69 @@ const lessons = [
       "dap",
       "cip"
     ],
-    "task": "Run all three paragraph operations.",
-    "sequence": "dipdapcip<Esc>",
+    "task": "Practice each listed operation separately from a fresh copy of the fixture.",
+    "sequence": "dip",
     "code": [
-      "local ui = {}",
-      "ui.theme = 'onedark'",
+      "/*",
       "",
-      "local lsp = {}",
-      "lsp.enabled = true"
+      "Configure the interface.",
+      "Apply the selected theme.",
+      "",
+      "Configure the language server.",
+      "Enable diagnostics.",
+      "",
+      "*/"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Run all three paragraph operations. · repetition 1 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 1 of 3",
         "code": [
-          "local ui = {}",
-          "ui.theme = 'onedark'",
+          "/*",
           "",
-          "local lsp = {}",
-          "lsp.enabled = true"
+          "Configure the interface.",
+          "Apply the selected theme.",
+          "",
+          "Configure the language server.",
+          "Enable diagnostics.",
+          "",
+          "*/"
         ]
       },
       {
-        "goal": "Run all three paragraph operations. · repetition 2 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 2 of 3",
         "code": [
-          "function configure_ui()",
-          "  return { border = true }",
-          "end",
+          "/*",
           "",
-          "function configure_lsp()",
-          "  return true",
-          "end"
+          "Configure the theme.",
+          "Keep the border enabled.",
+          "",
+          "Configure diagnostics.",
+          "Keep the server enabled.",
+          "",
+          "*/"
         ]
       },
       {
-        "goal": "Run all three paragraph operations. · repetition 3 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 3 of 3",
         "code": [
-          "-- first configuration block",
-          "require('options')",
+          "/*",
           "",
-          "-- second configuration block",
-          "require('mappings')"
+          "First configuration block.",
+          "Load the editor options.",
+          "",
+          "Second configuration block.",
+          "Load the key mappings.",
+          "",
+          "*/"
         ]
       }
     ],
     "commonMistake": "Keep the order operator → inside/around → object. For example: d + i + w.",
     "challenge": {
-      "instruction": "Run all three paragraph operations.",
+      "instruction": "Practice each listed operation separately from a fresh copy of the fixture.",
       "cursor": [
-        1,
+        2,
         0
       ],
       "hints": [
@@ -285,7 +392,24 @@ const lessons = [
       ],
       "success": "Paragraphs Review produced the requested buffer and cursor state."
     },
-    "reviewOnly": true
+    "reviewOnly": true,
+    "reviewItems": [
+      {
+        "key": "dip",
+        "description": "Delete the indicated object.",
+        "sequence": "dip"
+      },
+      {
+        "key": "dap",
+        "description": "Delete the indicated object.",
+        "sequence": "dap"
+      },
+      {
+        "key": "cip",
+        "description": "Change the indicated object to updated.",
+        "sequence": "cipupdated<Esc>"
+      }
+    ]
   }
 ] satisfies readonly Lesson[];
 

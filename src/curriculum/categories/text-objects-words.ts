@@ -16,8 +16,8 @@ const lessons = [
     "task": "Practice delete inside word.",
     "sequence": "diw",
     "code": [
-      "local temporary_value = enabled",
-      "return enabled",
+      "const temporaryValue = enabled;",
+      "console.log(enabled);",
       ""
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
@@ -25,25 +25,25 @@ const lessons = [
       {
         "goal": "Practice delete inside word. · repetition 1 of 3",
         "code": [
-          "local temporary_value = enabled",
-          "return enabled",
+          "const temporaryValue = enabled;",
+          "console.log(enabled);",
           ""
         ]
       },
       {
         "goal": "Practice delete inside word. · repetition 2 of 3",
         "code": [
-          "local theme = outdated_theme_name",
-          "apply(theme)",
-          "return theme"
+          "const theme = outdatedThemeName;",
+          "apply(theme);",
+          "console.log(theme);"
         ]
       },
       {
         "goal": "Practice delete inside word. · repetition 3 of 3",
         "code": [
-          "local flags = alpha beta gamma",
-          "local chosen = beta",
-          "return chosen"
+          "const flags = [alpha, beta, gamma];",
+          "const chosen = beta;",
+          "console.log(flags, chosen);"
         ]
       }
     ],
@@ -55,20 +55,37 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with d.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: d, i, w."
       ],
       "success": "Delete Inside Word produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "d",
+        "description": "diw deletes the word under the cursor without consuming adjacent whitespace.",
+        "sequence": "diw"
+      },
+      {
+        "key": "i",
+        "description": "diw deletes the word under the cursor without consuming adjacent whitespace.",
+        "sequence": "diw"
+      },
+      {
+        "key": "w",
+        "description": "diw deletes the word under the cursor without consuming adjacent whitespace.",
+        "sequence": "diw"
+      }
+    ]
   },
   {
     "group": "Text Objects - Words",
     "id": "delete-around-word",
     "title": "Delete Around Word",
     "eyebrow": "Text Objects - Words",
-    "summary": "daw deletes the current word and helpful surrounding whitespace.",
-    "detail": "daw deletes the current word and helpful surrounding whitespace.",
+    "summary": "daw deletes the current word and adjacent whitespace, preferring whitespace after the word.",
+    "detail": "daw deletes the current word and adjacent whitespace, preferring whitespace after the word.",
     "keys": [
       "d",
       "a",
@@ -77,8 +94,8 @@ const lessons = [
     "task": "Practice delete around word.",
     "sequence": "daw",
     "code": [
-      "local temporary_value = enabled",
-      "return enabled",
+      "const temporaryValue = enabled;",
+      "console.log(enabled);",
       ""
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
@@ -86,25 +103,25 @@ const lessons = [
       {
         "goal": "Practice delete around word. · repetition 1 of 3",
         "code": [
-          "local temporary_value = enabled",
-          "return enabled",
+          "const temporaryValue = enabled;",
+          "console.log(enabled);",
           ""
         ]
       },
       {
         "goal": "Practice delete around word. · repetition 2 of 3",
         "code": [
-          "local theme = outdated_theme_name",
-          "apply(theme)",
-          "return theme"
+          "const theme = outdatedThemeName;",
+          "apply(theme);",
+          "console.log(theme);"
         ]
       },
       {
         "goal": "Practice delete around word. · repetition 3 of 3",
         "code": [
-          "local flags = alpha beta gamma",
-          "local chosen = beta",
-          "return chosen"
+          "const flags = [alpha, beta, gamma];",
+          "const chosen = beta;",
+          "console.log(flags, chosen);"
         ]
       }
     ],
@@ -116,12 +133,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with d.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: d, a, w."
       ],
       "success": "Delete Around Word produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "d",
+        "description": "daw deletes the current word and adjacent whitespace, preferring whitespace after the word.",
+        "sequence": "daw"
+      },
+      {
+        "key": "a",
+        "description": "daw deletes the current word and adjacent whitespace, preferring whitespace after the word.",
+        "sequence": "daw"
+      },
+      {
+        "key": "w",
+        "description": "daw deletes the current word and adjacent whitespace, preferring whitespace after the word.",
+        "sequence": "daw"
+      }
+    ]
   },
   {
     "group": "Text Objects - Words",
@@ -136,10 +170,10 @@ const lessons = [
       "w"
     ],
     "task": "Change inside a word, then escape.",
-    "sequence": "ciw<Esc>",
+    "sequence": "ciwenabled<Esc>",
     "code": [
-      "local temporary_value = enabled",
-      "return enabled",
+      "const temporaryValue = enabled;",
+      "console.log(enabled);",
       ""
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
@@ -147,25 +181,25 @@ const lessons = [
       {
         "goal": "Change inside a word, then escape. · repetition 1 of 3",
         "code": [
-          "local temporary_value = enabled",
-          "return enabled",
+          "const temporaryValue = enabled;",
+          "console.log(enabled);",
           ""
         ]
       },
       {
         "goal": "Change inside a word, then escape. · repetition 2 of 3",
         "code": [
-          "local theme = outdated_theme_name",
-          "apply(theme)",
-          "return theme"
+          "const theme = outdatedThemeName;",
+          "apply(theme);",
+          "console.log(theme);"
         ]
       },
       {
         "goal": "Change inside a word, then escape. · repetition 3 of 3",
         "code": [
-          "local flags = alpha beta gamma",
-          "local chosen = beta",
-          "return chosen"
+          "const flags = [alpha, beta, gamma];",
+          "const chosen = beta;",
+          "console.log(flags, chosen);"
         ]
       }
     ],
@@ -178,12 +212,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with c.",
-        "Read the command as operator, inside/around, then object.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Enter “enabled” before returning to Normal mode."
       ],
       "success": "The buffer now contains “enabled” in the intended location."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "c",
+        "description": "ciw replaces the word under the cursor from any position within it.",
+        "sequence": "ciwenabled<Esc>"
+      },
+      {
+        "key": "i",
+        "description": "ciw replaces the word under the cursor from any position within it.",
+        "sequence": "ciwenabled<Esc>"
+      },
+      {
+        "key": "w",
+        "description": "ciw replaces the word under the cursor from any position within it.",
+        "sequence": "ciwenabled<Esc>"
+      }
+    ]
   },
   {
     "group": "Text Objects - Words",
@@ -197,43 +248,43 @@ const lessons = [
       "daw",
       "ciw"
     ],
-    "task": "Run all three word operations.",
-    "sequence": "diwdawciw<Esc>",
+    "task": "Practice each listed operation separately from a fresh copy of the fixture.",
+    "sequence": "diw",
     "code": [
-      "local temporary_value = enabled",
-      "return enabled",
+      "const temporaryValue = enabled;",
+      "console.log(enabled);",
       ""
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
-        "goal": "Run all three word operations. · repetition 1 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 1 of 3",
         "code": [
-          "local temporary_value = enabled",
-          "return enabled",
+          "const temporaryValue = enabled;",
+          "console.log(enabled);",
           ""
         ]
       },
       {
-        "goal": "Run all three word operations. · repetition 2 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 2 of 3",
         "code": [
-          "local theme = outdated_theme_name",
-          "apply(theme)",
-          "return theme"
+          "const theme = outdatedThemeName;",
+          "apply(theme);",
+          "console.log(theme);"
         ]
       },
       {
-        "goal": "Run all three word operations. · repetition 3 of 3",
+        "goal": "Practice each listed operation separately from a fresh copy of the fixture. · repetition 3 of 3",
         "code": [
-          "local flags = alpha beta gamma",
-          "local chosen = beta",
-          "return chosen"
+          "const flags = [alpha, beta, gamma];",
+          "const chosen = beta;",
+          "console.log(flags, chosen);"
         ]
       }
     ],
     "commonMistake": "Keep the order operator → inside/around → object. For example: d + i + w.",
     "challenge": {
-      "instruction": "Run all three word operations.",
+      "instruction": "Practice each listed operation separately from a fresh copy of the fixture.",
       "cursor": [
         1,
         0
@@ -245,7 +296,24 @@ const lessons = [
       ],
       "success": "Words Review produced the requested buffer and cursor state."
     },
-    "reviewOnly": true
+    "reviewOnly": true,
+    "reviewItems": [
+      {
+        "key": "diw",
+        "description": "Delete the indicated object.",
+        "sequence": "diw"
+      },
+      {
+        "key": "daw",
+        "description": "Delete the indicated object.",
+        "sequence": "daw"
+      },
+      {
+        "key": "ciw",
+        "description": "Change the indicated object to updated.",
+        "sequence": "ciwupdated<Esc>"
+      }
+    ]
   }
 ] satisfies readonly Lesson[];
 

@@ -9,9 +9,7 @@ const lessons = [
     "summary": "Space t h opens the Base46 theme picker.",
     "detail": "Space t h opens the Base46 theme picker.",
     "keys": [
-      "Space",
-      "t",
-      "h"
+      "Space th"
     ],
     "task": "Open the NVChad theme picker.",
     "sequence": "<Space>th",
@@ -21,7 +19,19 @@ const lessons = [
       "  catppuccin",
       "  gruvchad"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space th",
+        "description": "Space t h opens the Base46 theme picker.",
+        "sequence": "<Space>th"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "NVChad Workflow",
@@ -31,9 +41,7 @@ const lessons = [
     "summary": "Space c h opens NvCheatsheet, generated from mappings that have descriptions.",
     "detail": "Space c h opens NvCheatsheet, generated from mappings that have descriptions.",
     "keys": [
-      "Space",
-      "c",
-      "h"
+      "Space ch"
     ],
     "task": "Open NvCheatsheet.",
     "sequence": "<Space>ch",
@@ -42,7 +50,19 @@ const lessons = [
       "│ Ctrl+n tree │ │ Spc ff files │",
       "╰─────────────╯ ╰──────────────╯"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Space ch",
+        "description": "Space c h opens NvCheatsheet, generated from mappings that have descriptions.",
+        "sequence": "<Space>ch"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "NVChad Workflow",
@@ -52,10 +72,8 @@ const lessons = [
     "summary": "Review every command introduced in NVChad Workflow before moving to the next category.",
     "detail": "Review every command introduced in NVChad Workflow before moving to the next category.",
     "keys": [
-      "Space",
-      "t",
-      "h",
-      "c"
+      "Space th",
+      "Space ch"
     ],
     "task": "",
     "sequence": "<Space>th",
@@ -69,26 +87,42 @@ const lessons = [
     "reviewOnly": true,
     "reviewItems": [
       {
-        "key": "Space",
+        "key": "Space th",
         "description": "Space t h opens the Base46 theme picker.",
-        "sequence": "<Space>th"
+        "sequence": "<Space>th",
+        "code": [
+          "> Themes",
+          "  onedark",
+          "  catppuccin",
+          "  gruvchad"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
-        "key": "t",
-        "description": "Space t h opens the Base46 theme picker.",
-        "sequence": "<Space>th"
-      },
-      {
-        "key": "h",
-        "description": "Space t h opens the Base46 theme picker.",
-        "sequence": "<Space>th"
-      },
-      {
-        "key": "c",
+        "key": "Space ch",
         "description": "Space c h opens NvCheatsheet, generated from mappings that have descriptions.",
-        "sequence": "<Space>ch"
+        "sequence": "<Space>ch",
+        "code": [
+          "╭─ General ───╮ ╭─ Telescope ─╮",
+          "│ Ctrl+n tree │ │ Spc ff files │",
+          "╰─────────────╯ ╰──────────────╯"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       }
-    ]
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   }
 ] satisfies readonly Lesson[];
 

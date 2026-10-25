@@ -6,8 +6,8 @@ const lessons = [
     "id": "file-tree",
     "title": "Toggle or focus the project tree",
     "eyebrow": "NvimTree Navigation",
-    "summary": "Ctrl+n toggles NvimTree while Space e focuses an already open tree.",
-    "detail": "Toggle changes visibility; focus moves into the tree without closing it.",
+    "summary": "Ctrl+n toggles NvimTree; Space e focuses it, opening the tree first if it is closed.",
+    "detail": "Ctrl+n toggles NvimTree; Space e focuses it, opening the tree first if it is closed.",
     "keys": [
       "Ctrl+n",
       "Space e"
@@ -20,7 +20,24 @@ const lessons = [
       "  mappings.lua",
       "init.lua"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Ctrl+n",
+        "description": "Ctrl+n toggles NvimTree; Space e focuses it, opening the tree first if it is closed.",
+        "sequence": "<C-n>"
+      },
+      {
+        "key": "Space e",
+        "description": "Ctrl+n toggles NvimTree; Space e focuses it, opening the tree first if it is closed.",
+        "sequence": "<Space>e"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "NvimTree Navigation",
@@ -42,7 +59,34 @@ const lessons = [
       "  App.tsx  <- cursor",
       "  lessons.ts"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Enter",
+        "description": "With NvimTree focused: Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
+        "sequence": "<Enter>"
+      },
+      {
+        "key": "o",
+        "description": "With NvimTree focused: Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
+        "sequence": "o"
+      },
+      {
+        "key": "P",
+        "description": "With NvimTree focused: Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
+        "sequence": "P"
+      },
+      {
+        "key": "-",
+        "description": "With NvimTree focused: Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
+        "sequence": "-"
+      }
+    ],
+    "cursor": [
+      1,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "NvimTree Navigation",
@@ -64,7 +108,34 @@ const lessons = [
       "  App.tsx",
       "  lessons.ts  <- cursor"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "Ctrl+v",
+        "description": "With NvimTree focused: Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
+        "sequence": "<C-v>"
+      },
+      {
+        "key": "Ctrl+x",
+        "description": "With NvimTree focused: Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
+        "sequence": "<C-x>"
+      },
+      {
+        "key": "Ctrl+t",
+        "description": "With NvimTree focused: Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
+        "sequence": "<C-t>"
+      },
+      {
+        "key": "Tab",
+        "description": "With NvimTree focused: Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
+        "sequence": "<Tab>"
+      }
+    ],
+    "cursor": [
+      2,
+      2
+    ],
+    "language": "text"
   },
   {
     "group": "NvimTree Navigation",
@@ -85,7 +156,29 @@ const lessons = [
       "  Enter  Open",
       "  a      Create"
     ],
-    "tip": "Keep your hands on the home row."
+    "tip": "Keep your hands on the home row.",
+    "reviewItems": [
+      {
+        "key": "f",
+        "description": "With NvimTree focused: f starts a live filter, F clears it, and g? shows the active NvimTree mappings.",
+        "sequence": "f"
+      },
+      {
+        "key": "F",
+        "description": "With NvimTree focused: f starts a live filter, F clears it, and g? shows the active NvimTree mappings.",
+        "sequence": "F"
+      },
+      {
+        "key": "g?",
+        "description": "With NvimTree focused: f starts a live filter, F clears it, and g? shows the active NvimTree mappings.",
+        "sequence": "g?"
+      }
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   },
   {
     "group": "NvimTree Navigation",
@@ -122,70 +215,207 @@ const lessons = [
     "reviewItems": [
       {
         "key": "Ctrl+n",
-        "description": "Ctrl+n toggles NvimTree while Space e focuses an already open tree.",
-        "sequence": "<Space>e"
+        "description": "Ctrl+n toggles NvimTree; Space e focuses it, opening the tree first if it is closed.",
+        "sequence": "<C-n>",
+        "code": [
+          "lua/",
+          "  chadrc.lua",
+          "  mappings.lua",
+          "init.lua"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Space e",
-        "description": "Ctrl+n toggles NvimTree while Space e focuses an already open tree.",
-        "sequence": "<Space>e"
+        "description": "Ctrl+n toggles NvimTree; Space e focuses it, opening the tree first if it is closed.",
+        "sequence": "<Space>e",
+        "code": [
+          "lua/",
+          "  chadrc.lua",
+          "  mappings.lua",
+          "init.lua"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "Enter",
-        "description": "Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
-        "sequence": "<Enter>"
+        "description": "With NvimTree focused: Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
+        "sequence": "<Enter>",
+        "code": [
+          "src/",
+          "  App.tsx  <- cursor",
+          "  lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "o",
-        "description": "Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
-        "sequence": "<Enter>"
+        "description": "With NvimTree focused: Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
+        "sequence": "o",
+        "code": [
+          "src/",
+          "  App.tsx  <- cursor",
+          "  lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "P",
-        "description": "Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
-        "sequence": "<Enter>"
+        "description": "With NvimTree focused: Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
+        "sequence": "P",
+        "code": [
+          "src/",
+          "  App.tsx  <- cursor",
+          "  lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "-",
-        "description": "Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
-        "sequence": "<Enter>"
+        "description": "With NvimTree focused: Enter or o opens a node, P moves to its parent, and - changes the tree root upward.",
+        "sequence": "-",
+        "code": [
+          "src/",
+          "  App.tsx  <- cursor",
+          "  lessons.ts"
+        ],
+        "cursor": [
+          1,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+v",
-        "description": "Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
-        "sequence": "<C-v>"
+        "description": "With NvimTree focused: Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
+        "sequence": "<C-v>",
+        "code": [
+          "src/",
+          "  App.tsx",
+          "  lessons.ts  <- cursor"
+        ],
+        "cursor": [
+          2,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+x",
-        "description": "Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
-        "sequence": "<C-v>"
+        "description": "With NvimTree focused: Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
+        "sequence": "<C-x>",
+        "code": [
+          "src/",
+          "  App.tsx",
+          "  lessons.ts  <- cursor"
+        ],
+        "cursor": [
+          2,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Ctrl+t",
-        "description": "Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
-        "sequence": "<C-v>"
+        "description": "With NvimTree focused: Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
+        "sequence": "<C-t>",
+        "code": [
+          "src/",
+          "  App.tsx",
+          "  lessons.ts  <- cursor"
+        ],
+        "cursor": [
+          2,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "Tab",
-        "description": "Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
-        "sequence": "<C-v>"
+        "description": "With NvimTree focused: Ctrl+v opens a vertical split, Ctrl+x a horizontal split, Ctrl+t a tab, and Tab a preview.",
+        "sequence": "<Tab>",
+        "code": [
+          "src/",
+          "  App.tsx",
+          "  lessons.ts  <- cursor"
+        ],
+        "cursor": [
+          2,
+          2
+        ],
+        "language": "text"
       },
       {
         "key": "f",
-        "description": "f starts a live filter, F clears it, and g? shows the active NvimTree mappings.",
-        "sequence": "g?"
+        "description": "With NvimTree focused: f starts a live filter, F clears it, and g? shows the active NvimTree mappings.",
+        "sequence": "f",
+        "code": [
+          "> NvimTree Help",
+          "  Enter  Open",
+          "  a      Create"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "F",
-        "description": "f starts a live filter, F clears it, and g? shows the active NvimTree mappings.",
-        "sequence": "g?"
+        "description": "With NvimTree focused: f starts a live filter, F clears it, and g? shows the active NvimTree mappings.",
+        "sequence": "F",
+        "code": [
+          "> NvimTree Help",
+          "  Enter  Open",
+          "  a      Create"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       },
       {
         "key": "g?",
-        "description": "f starts a live filter, F clears it, and g? shows the active NvimTree mappings.",
-        "sequence": "g?"
+        "description": "With NvimTree focused: f starts a live filter, F clears it, and g? shows the active NvimTree mappings.",
+        "sequence": "g?",
+        "code": [
+          "> NvimTree Help",
+          "  Enter  Open",
+          "  a      Create"
+        ],
+        "cursor": [
+          0,
+          0
+        ],
+        "language": "text"
       }
-    ]
+    ],
+    "cursor": [
+      0,
+      0
+    ],
+    "language": "text"
   }
 ] satisfies readonly Lesson[];
 

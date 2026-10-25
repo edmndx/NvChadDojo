@@ -15,34 +15,34 @@ const lessons = [
     "task": "Delete one character with x, then undo that edit.",
     "sequence": "xu",
     "code": [
-      "local theme = 'old-theme'",
-      "local contrast = 'high'",
-      "return theme"
+      "const theme = 'old-theme';",
+      "const contrast = 'high';",
+      "console.log(theme, contrast);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Delete one character with x, then undo that edit. · repetition 1 of 3",
         "code": [
-          "local theme = 'old-theme'",
-          "local contrast = 'high'",
-          "return theme"
+          "const theme = 'old-theme';",
+          "const contrast = 'high';",
+          "console.log(theme, contrast);"
         ]
       },
       {
         "goal": "Delete one character with x, then undo that edit. · repetition 2 of 3",
         "code": [
-          "vim.o.wrap = true",
-          "vim.o.number = true",
-          "return true"
+          "settings.wrap = true;",
+          "settings.lineNumbers = true;",
+          "console.log(settings);"
         ]
       },
       {
         "goal": "Delete one character with x, then undo that edit. · repetition 3 of 3",
         "code": [
-          "local server = 'lua_ls'",
-          "enable(server)",
-          "return server"
+          "const server = 'typescript';",
+          "enable(server);",
+          "console.log(server);"
         ]
       }
     ],
@@ -54,12 +54,24 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with x.",
-        "Use only the keys introduced in Editing Safety.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: x, u."
       ],
       "success": "Undo the Last Change produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "x",
+        "description": "Delete the character under the cursor.",
+        "sequence": "xu"
+      },
+      {
+        "key": "u",
+        "description": "Undo the latest change.",
+        "sequence": "xu"
+      }
+    ]
   },
   {
     "group": "Editing Safety",
@@ -76,34 +88,34 @@ const lessons = [
     "task": "Delete one character, undo it, then restore the deletion with redo.",
     "sequence": "xu<C-r>",
     "code": [
-      "local theme = 'old-theme'",
-      "local contrast = 'high'",
-      "return theme"
+      "const theme = 'old-theme';",
+      "const contrast = 'high';",
+      "console.log(theme, contrast);"
     ],
     "tip": "These are native Vim motions and work inside NVChad.",
     "drills": [
       {
         "goal": "Delete one character, undo it, then restore the deletion with redo. · repetition 1 of 3",
         "code": [
-          "local theme = 'old-theme'",
-          "local contrast = 'high'",
-          "return theme"
+          "const theme = 'old-theme';",
+          "const contrast = 'high';",
+          "console.log(theme, contrast);"
         ]
       },
       {
         "goal": "Delete one character, undo it, then restore the deletion with redo. · repetition 2 of 3",
         "code": [
-          "vim.o.wrap = true",
-          "vim.o.number = true",
-          "return true"
+          "settings.wrap = true;",
+          "settings.lineNumbers = true;",
+          "console.log(settings);"
         ]
       },
       {
         "goal": "Delete one character, undo it, then restore the deletion with redo. · repetition 3 of 3",
         "code": [
-          "local server = 'lua_ls'",
-          "enable(server)",
-          "return server"
+          "const server = 'typescript';",
+          "enable(server);",
+          "console.log(server);"
         ]
       }
     ],
@@ -115,12 +127,29 @@ const lessons = [
         0
       ],
       "hints": [
-        "Begin with x.",
-        "Use only the keys introduced in Editing Safety.",
+        "Start in Normal mode at the displayed cursor.",
+        "Follow the task, including any motion, target character, or replacement text.",
         "Compose the command from: x, u, Ctrl+r."
       ],
       "success": "Redo an Undo produced the requested buffer and cursor state."
-    }
+    },
+    "reviewItems": [
+      {
+        "key": "x",
+        "description": "Delete the character under the cursor.",
+        "sequence": "xu<C-r>"
+      },
+      {
+        "key": "u",
+        "description": "Undo the latest change.",
+        "sequence": "xu<C-r>"
+      },
+      {
+        "key": "Ctrl+r",
+        "description": "Redo the change most recently undone.",
+        "sequence": "xu<C-r>"
+      }
+    ]
   },
   {
     "group": "Editing Safety",
@@ -137,28 +166,59 @@ const lessons = [
     "task": "",
     "sequence": "xu",
     "code": [
-      "local theme = 'old-theme'",
-      "local contrast = 'high'",
-      "return theme"
+      "const theme = 'old-theme';",
+      "const contrast = 'high';",
+      "console.log(theme, contrast);"
     ],
     "tip": "Return to any command in Editing Safety that still requires conscious recall.",
     "reviewOnly": true,
     "reviewItems": [
       {
         "key": "x",
-        "description": "u reverses the latest change so experimentation stays safe.",
-        "sequence": "xu"
+        "description": "Delete the character under the cursor.",
+        "sequence": "xu",
+        "code": [
+          "const theme = 'old-theme';",
+          "const contrast = 'high';",
+          "console.log(theme, contrast);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "u",
-        "description": "u reverses the latest change so experimentation stays safe.",
-        "sequence": "xu"
+        "description": "Undo the latest change.",
+        "sequence": "xu",
+        "code": [
+          "const theme = 'old-theme';",
+          "const contrast = 'high';",
+          "console.log(theme, contrast);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       },
       {
         "key": "Ctrl+r",
-        "description": "Ctrl+r reapplies the change most recently removed by undo.",
-        "sequence": "xu<C-r>"
+        "description": "Redo the change most recently undone.",
+        "sequence": "xu<C-r>",
+        "code": [
+          "const theme = 'old-theme';",
+          "const contrast = 'high';",
+          "console.log(theme, contrast);"
+        ],
+        "cursor": [
+          1,
+          0
+        ]
       }
+    ],
+    "cursor": [
+      1,
+      2
     ]
   }
 ] satisfies readonly Lesson[];
