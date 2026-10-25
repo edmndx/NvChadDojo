@@ -13,7 +13,44 @@ type HighlightOptions = {
   lineIndex?: number;
   start?: number;
   end?: number;
+  highlight?: HighlightBuffer;
 };
+
+type HighlightBuffer = {
+  source: string;
+  offsets: number[];
+  tokens: { start: number; end: number; tone: string }[];
+};
+
+export function prepareHighlight(
+  lines: string[],
+  language: SnippetLanguage = "javascript",
+): HighlightBuffer {
+  const source = lines.join("\n");
+  const offsets: number[] = [];
+  let offset = 0;
+  for (const line of lines) {
+    offsets.push(offset);
+    offset += line.length + 1;
+  }
+  const tokens =
+    language === "text"
+      ? []
+      : Array.from(source.matchAll(patterns[language]), (match) => ({
+          start: match.index,
+          end: match.index + match[0].length,
+          tone: match[1]
+            ? "comment"
+            : match[2]
+              ? "string"
+              : match[3]
+                ? "number"
+                : match[4]
+                  ? "keyword"
+                  : "call",
+        }));
+  return { source, offsets, tokens };
+}
 
 // Tokenize with the whole buffer's context, then render only the requested range.
 // A cursor in a string/comment must not change the highlighting on either side.
@@ -27,35 +64,29 @@ export function syntaxLine(
     lineIndex = 0,
     start = 0,
     end = line.length,
+    highlight,
   } = options;
   if (language === "text") return [line.slice(start, end)];
-  const source = lines ? lines.join("\n") : line;
+  const { source, offsets, tokens } =
+    highlight || prepareHighlight(lines || [line], language);
   const offset = lines
-    ? lines.slice(0, lineIndex).reduce((sum, item) => sum + item.length + 1, 0)
+    ? (offsets[lineIndex] ??
+      lines.slice(0, lineIndex).reduce((sum, item) => sum + item.length + 1, 0))
     : 0;
   const rangeStart = offset + start;
   const rangeEnd = offset + end;
   const parts: ReactNode[] = [];
   let cursor = rangeStart;
-  for (const match of source.matchAll(patterns[language])) {
-    const index = match.index;
-    const tokenEnd = index + match[0].length;
+  for (const token of tokens) {
+    const index = token.start;
+    const tokenEnd = token.end;
     if (tokenEnd <= rangeStart) continue;
     if (index >= rangeEnd) break;
     const from = Math.max(index, rangeStart);
     const to = Math.min(tokenEnd, rangeEnd);
     if (from > cursor) parts.push(source.slice(cursor, from));
-    const tone = match[1]
-      ? "comment"
-      : match[2]
-        ? "string"
-        : match[3]
-          ? "number"
-          : match[4]
-            ? "keyword"
-            : "call";
     parts.push(
-      <span className={`code-token ${tone}`} key={`${from}-${to}`}>
+      <span className={`code-token ${token.tone}`} key={`${from}-${to}`}>
         {source.slice(from, to)}
       </span>,
     );

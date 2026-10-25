@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useMemo, type ReactNode } from "react";
 import { Command, RotateCcw } from "lucide-react";
 import type { Lesson } from "../curriculum";
 import { challengeInstruction, commandState } from "../lessonRuntime";
@@ -8,7 +8,7 @@ import { useTrainer } from "../trainer/useTrainer";
 import { lineNumber } from "../trainer/lineNumbers";
 import { TrainerClock } from "./trainer/TrainerClock";
 import { SettingsPanel } from "./trainer/SettingsPanel";
-import { syntaxLine } from "./CodeLine";
+import { prepareHighlight, syntaxLine } from "./CodeLine";
 function Keycaps({
   sequence,
   insertedText,
@@ -63,10 +63,19 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
     moreSteps,
     advance,
   } = useTrainer(lesson);
+  const highlighted = useMemo(
+    () => prepareHighlight(shownState.lines, language),
+    [shownState.lines, language],
+  );
   const renderLine = (line: string, index: number) => {
     const active = index === shownState.cursor.line;
-    const highlight = { language, lines: shownState.lines, lineIndex: index };
-    let content: ReactNode = syntaxLine(line, highlight);
+    const highlight = {
+      language,
+      lines: shownState.lines,
+      lineIndex: index,
+      highlight: highlighted,
+    };
+    let content: ReactNode;
     if (active) {
       const col = Math.min(shownState.cursor.col, line.length);
       content = (
@@ -83,7 +92,7 @@ export function Trainer({ lesson }: { lesson: Lesson }) {
             syntaxLine(line, { ...highlight, start: col + 1 })}
         </>
       );
-    }
+    } else content = syntaxLine(line, highlight);
     return (
       <div key={index} className={active ? "active-line" : ""}>
         {content}

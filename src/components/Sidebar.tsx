@@ -2,6 +2,11 @@ import { useMemo } from "react";
 import { X } from "lucide-react";
 import { groups, lessonSummaries, type LessonSummary } from "../curriculum";
 
+const searchableLessons = lessonSummaries.map((lesson) => ({
+  lesson,
+  text: `${lesson.title} ${lesson.group} ${lesson.keys.join(" ")} ${lesson.searchText || ""}`.toLowerCase(),
+}));
+
 export function Brand() {
   return (
     <div className="brand">
@@ -64,19 +69,13 @@ export function Sidebar({
 }) {
   const normalized = query.trim().toLowerCase();
   const groupedMatches = useMemo(() => {
-    const matches = lessonSummaries.filter(
-      (lesson) =>
-        !normalized ||
-        `${lesson.title} ${lesson.group} ${lesson.keys.join(" ")} ${lesson.searchText || ""}`
-          .toLowerCase()
-          .includes(normalized),
-    );
-    return new Map(
-      groups.map((group) => [
-        group,
-        matches.filter((lesson) => lesson.group === group),
-      ]),
-    );
+    const matches = new Map<string, LessonSummary[]>();
+    for (const group of groups) matches.set(group, []);
+    for (const { lesson, text } of searchableLessons) {
+      if (!normalized || text.includes(normalized))
+        matches.get(lesson.group)?.push(lesson);
+    }
+    return matches;
   }, [normalized]);
   return (
     <aside id="course-sidebar" className="sidebar" aria-label="Course lessons">

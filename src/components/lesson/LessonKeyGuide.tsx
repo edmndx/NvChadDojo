@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from "react";
+import { useMemo, useState, type CSSProperties } from "react";
 import type { Lesson } from "../../curriculum";
 import { applyVimCommand, applyVimTokens } from "../../vimEngine";
 import { getLessonExamples } from "../../lessonExamples";
@@ -10,7 +10,7 @@ import {
   runScenario,
   scenarioAsVimState,
 } from "../../practiceModel";
-import { syntaxLine } from "../CodeLine";
+import { prepareHighlight, syntaxLine } from "../CodeLine";
 import { describeKey } from "./keyGuideModel";
 function Example({
   lesson,
@@ -50,6 +50,14 @@ function Example({
       : result.message || "Command applied to the buffer.";
   const tokens = commandTokens(sequence, lesson.challenge?.replacement);
   const sequenceDelay = Math.min(3.2, 0.42 + tokens.length * 0.19);
+  const beforeHighlight = useMemo(
+    () => prepareHighlight(code, language),
+    [code, language],
+  );
+  const afterHighlight = useMemo(
+    () => prepareHighlight(result.lines, language),
+    [result.lines, language],
+  );
   return (
     <div
       className="inline-example visible"
@@ -102,6 +110,7 @@ function Example({
                     {syntaxLine(line, {
                       language,
                       lines: code,
+                      highlight: beforeHighlight,
                       lineIndex,
                       end: cursor.col,
                     })}
@@ -109,12 +118,18 @@ function Example({
                     {syntaxLine(line, {
                       language,
                       lines: code,
+                      highlight: beforeHighlight,
                       lineIndex,
                       start: cursor.col,
                     })}
                   </>
                 ) : (
-                  syntaxLine(line, { language, lines: code, lineIndex })
+                  syntaxLine(line, {
+                    language,
+                    lines: code,
+                    highlight: beforeHighlight,
+                    lineIndex,
+                  })
                 )}
               </code>
             </div>
@@ -134,6 +149,7 @@ function Example({
                         {syntaxLine(line, {
                           language,
                           lines: result.lines,
+                          highlight: afterHighlight,
                           lineIndex,
                           end: col,
                         })}
@@ -141,6 +157,7 @@ function Example({
                         {syntaxLine(line, {
                           language,
                           lines: result.lines,
+                          highlight: afterHighlight,
                           lineIndex,
                           start: col,
                         })}
@@ -149,6 +166,7 @@ function Example({
                       syntaxLine(line, {
                         language,
                         lines: result.lines,
+                        highlight: afterHighlight,
                         lineIndex,
                       })
                     )}
