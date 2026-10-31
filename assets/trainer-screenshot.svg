@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="724" height="479" viewBox="0 0 724 479" role="img" aria-labelledby="svg-title svg-desc">
+<title id="svg-title">NVIM learning challenge interface</title>
+<desc id="svg-desc">Editable vector SVG reconstruction using selectable text and separate UI shapes, with rounded transparent corners.</desc>
+<defs>
+ <linearGradient id="border-gradient" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+  <stop offset="0" stop-color="#5b9bee"/>
+  <stop offset=".1" stop-color="#518ad2"/>
+  <stop offset=".9" stop-color="#518ad2"/>
+  <stop offset="1" stop-color="#4a7ebf"/>
+ </linearGradient>
+ <clipPath id="frame-clip"><rect x="1" y="3" width="721" height="475" rx="10"/></clipPath>
+</defs>
+<style>
+ .mono {font-family:'DejaVu Sans Mono',monospace; font-variant-ligatures:none;}
+ .sans {font-family:Inter,Arial,Helvetica,sans-serif;}
+ .nav {font-size:11px;letter-spacing:.1px;}
+ .editor {font-size:13px;white-space:pre;}
+ .hint-mono {font-size:9px;}
+</style>
+<g id="app" clip-path="url(#frame-clip)">
+ <rect id="panel-background" x="1" y="3" width="721" height="475" rx="10" fill="#222331"/>
+ <g id="header">
+  <rect x="1" y="4" width="721" height="51" fill="#222331"/>
+  <rect x="13" y="14" width="89" height="33" rx="9" fill="#1e293b"/>
+  <text class="mono nav" x="27" y="34" fill="#e1ebfe" font-weight="700">Challenge</text>
+  <text class="mono nav" x="123" y="34" fill="#b5c7e0">Mini-Game</text>
+  <text class="mono nav" x="218" y="34" fill="#b5c7e0">Settings</text>
+  <text class="mono" x="593" y="34" font-size="10" fill="#a6c1e9">03:23</text>
+  <g id="restart-control" fill="none" stroke="#9dc7ff" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+   <path d="M653 26a5 5 0 1 1-6.5-.8"/>
+   <path d="M643.2 24.2v4.5h4.4"/>
+  </g>
+  <text class="mono" x="661" y="34" fill="#a8c6f4" font-size="10">restart</text>
+  <rect x="1" y="55" width="721" height="4" fill="#2d2f41"/>
+ </g>
+ <g id="code-editor">
+  <rect x="1" y="59" width="721" height="216" fill="#13141b"/>
+  <rect x="57" y="104" width="665" height="24" fill="#222331"/>
+  <g id="line-numbers" class="mono" font-size="13" fill="#617087">
+   <text x="30" y="94">1</text>
+   <text x="30" y="121">2</text>
+   <text x="30" y="147">1</text>
+  </g>
+  <g id="syntax-highlighted-code" class="mono editor">
+   <text x="62" y="95"><tspan fill="#758cff">const </tspan><tspan fill="#d8e8ff">items</tspan><tspan fill="#e4e9f5"> = [</tspan><tspan fill="#51fa91">&#x27;alpha&#x27;</tspan><tspan fill="#d8e8ff">, </tspan><tspan fill="#51fa91">&#x27;beta&#x27;</tspan><tspan fill="#d8e8ff">, </tspan><tspan fill="#51fa91">&#x27;gamma&#x27;</tspan><tspan fill="#e4e9f5">];</tspan></text>
+   <text x="62" y="121"><tspan fill="#758cff">const </tspan><tspan fill="#d8e8ff">result</tspan><tspan fill="#e4e9f5"> = </tspan><tspan fill="#378dff">transform</tspan><tspan fill="#e4e9f5">(</tspan><tspan fill="#d8e8ff">items</tspan><tspan fill="#e4e9f5">);</tspan></text>
+   <text x="62" y="147"><tspan fill="#c8e1ff">console</tspan><tspan fill="#f5b656">.</tspan><tspan fill="#478dff">log</tspan><tspan fill="#e4e9f5">(</tspan><tspan fill="#d8e8ff">result</tspan><tspan fill="#e4e9f5">);</tspan></text>
+  </g>
+  <rect id="block-cursor" x="63" y="107" width="8" height="20" fill="#93c5fd" fill-opacity=".91"/>
+  <text class="mono" x="63" y="121" font-size="13" fill="#2d2e43">c</text>
+  <g id="instruction-tooltip">
+   <rect x="483" y="68" width="225" height="25" rx="6" fill="#2b4936"/>
+   <text class="sans" x="493" y="84" font-size="9" fill="#a7ffc8">Click here, then type the sequence · Esc cancels</text>
+  </g>
+ </g>
+ <g id="status-line">
+  <rect x="1" y="275" width="721" height="25" fill="#222331"/>
+  <rect x="1" y="275" width="66" height="25" fill="#54bb78"/>
+  <text class="mono" x="15" y="291" font-size="10" font-weight="700" fill="#092d1d">NORMAL</text>
+  <text class="mono" x="84" y="291" font-size="10" fill="#9cc0ee">JavaScript</text>
+  <text class="mono" x="642" y="291" font-size="10" fill="#a5bde0">Ln 2, Col 1</text>
+  <rect x="1" y="300" width="721" height="1" fill="#2d2f41"/>
+ </g>
+ <g id="challenge-controls">
+  <rect x="1" y="301" width="721" height="142" fill="#222331"/>
+  <text class="mono hint-mono" x="66" y="333" font-weight="700" fill="#93c5fd" letter-spacing=".3">TARGET · 7 RETRIES</text>
+  <text class="sans" x="66" y="352" font-size="12.5" fill="#c9d5e5">Press v to begin a characterwise selection, then Esc to cancel it.</text>
+  <rect x="18" y="355" width="34" height="34" rx="9" fill="#1e293b"/>
+  <text x="35" y="379" text-anchor="middle" fill="#93c5fd" font-family="DejaVu Sans,sans-serif" font-size="20">⌘</text>
+  <rect x="66" y="365" width="564" height="29" rx="4" fill="#222331" stroke="#323448" stroke-width="1"/>
+  <text class="mono hint-mono" x="74" y="384" fill="#91acd1" letter-spacing=".3">KEYS</text>
+  <text class="mono hint-mono" x="115" y="384" fill="#9cbbe7">type command...</text>
+  <rect x="179" y="372" width="5" height="15" fill="#93c5fd"/>
+  <text class="mono" x="663" y="361" font-size="9" fill="#a7c4f1" letter-spacing=".3">SOLUTION</text>
+  <rect x="644" y="368" width="24" height="22" rx="3" fill="#222331" stroke="#444860"/>
+  <rect x="673" y="368" width="29" height="22" rx="3" fill="#222331" stroke="#444860"/>
+  <text class="mono" x="652" y="384" font-size="11" fill="#d3e3ff">v</text>
+  <text class="mono" x="679" y="384" font-size="10" fill="#d3e3ff">Esc</text>
+  <rect x="66" y="403" width="39" height="24" rx="4" fill="#222331" stroke="#44516b" stroke-width="1"/>
+  <text class="mono" x="74" y="419" fill="#9dc9ff" font-size="11">hint</text>
+ </g>
+ <g id="success-footer">
+  <rect x="1" y="443" width="721" height="34" fill="#20362e"/>
+  <rect x="1" y="443" width="721" height="1" fill="#273129"/>
+  <text class="mono" x="68" y="463" font-size="9.5" font-weight="700" fill="#54ec92">Visual Mode produced the requested buffer and cursor state.</text>
+ </g>
+</g>
+<rect id="outer-border" x="1" y="3" width="721" height="475" rx="10" stroke="url(#border-gradient)" stroke-width="2" fill="none"/>
+</svg>
